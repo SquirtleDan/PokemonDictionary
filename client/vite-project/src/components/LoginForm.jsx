@@ -3,7 +3,12 @@ import { useForm } from 'react-hook-form';
 import { DevTool } from "@hookform/devtools";
 
 export const LoginForm = () => {
-    const form = useForm();
+    const form = useForm({
+        defaultValues: {
+            username: "",
+            password: ""
+        }
+    });
     const { register, control, handleSubmit, formState } = form;
     const { errors } = formState;
 
