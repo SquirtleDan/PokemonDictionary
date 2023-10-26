@@ -11,6 +11,6 @@ app.use(cookieParser())
 app.listen(PORT, () => console.log(`server is listening on port ${PORT}`))
 
 //Login
-app.post("login", userController,checkUser)
+app.post("/login", userController,checkUser)
 //Create New Account
 app.post("/CreateNewAccount", userController.createNewAccount)
