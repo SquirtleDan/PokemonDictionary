@@ -1,6 +1,7 @@
 import React from 'react';
 import './LoginForm.css'
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 // import { DevTool } from "@hookform/devtools";
 
 export default function LoginForm() {
@@ -50,10 +51,10 @@ export default function LoginForm() {
                     />
                     <p className='error'>{errors.password?.message}</p>
                 </div>
-
+                        
                 <button type='submit'>Log In</button>
             </form>
-            <button>Submit</button>
+            <Link to="registration"><button>Register</button></Link>
         </div>
     );
 };
