@@ -4,7 +4,7 @@
  */
 exports.seed = async function(knex) {
   await knex("account").insert([
-    {
+    { id: 1,
       username: "usernameTest1",
       hash_salted_password: "hashSaltedPassword1",
       salt: "salt1",
@@ -12,7 +12,7 @@ exports.seed = async function(knex) {
       first_name: "firstName1",
       last_name: "lastName1",
     },
-    {
+    { id: 2,
       username: "usernameTest2",
       hash_salted_password: "hashSaltedPassword2",
       salt: "salt2",
@@ -20,7 +20,7 @@ exports.seed = async function(knex) {
       first_name: "firstName2",
       last_name: "lastName2",
     },
-    {
+    { id: 3,
       username: "usernameTest3",
       hash_salted_password: "hashSaltedPassword3",
       salt: "salt3",
