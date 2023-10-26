@@ -15,31 +15,35 @@ export const LoginForm = () => {
         <div>
             <h1>Login Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-                <label htmlFor='username'>Username</label>
-                <input 
-                    type='text' 
-                    id='username' 
-                    {...register("username", {
-                        required: {
-                            value: true,
-                            message: "Username is required."
-                        }
-                    })} 
-                />
-                <p className='error'>{errors.username?.message}</p>
+                <div className='form-control'>
+                    <label htmlFor='username'>Username</label>
+                    <input 
+                        type='text' 
+                        id='username' 
+                        {...register("username", {
+                            required: {
+                                value: true,
+                                message: "Username is required."
+                            }
+                        })} 
+                    />
+                    <p className='error'>{errors.username?.message}</p>
+                </div>
 
-                <label htmlFor='password'>Password</label>
-                <input 
-                    type='text' 
-                    id='password' 
-                    {...register("password", {
-                        required: {
-                            value: true,
-                            message: "Password is required."
-                        }
-                    })} 
-                />
-                <p className='error'>{errors.password?.message}</p>
+                <div className='form-control'>
+                    <label htmlFor='password'>Password</label>
+                    <input 
+                        type='text' 
+                        id='password' 
+                        {...register("password", {
+                            required: {
+                                value: true,
+                                message: "Password is required."
+                            }
+                        })} 
+                    />
+                    <p className='error'>{errors.password?.message}</p>
+                </div>
 
                 <button>Submit</button>
             </form>
