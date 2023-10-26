@@ -1,13 +1,14 @@
 const userModel = require("../userModel/userModel");
 const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
-const cors = require("cors")
 
+//helperFunction
 function generateSessionToken() {
   return crypto.randomBytes(16).toString("hex");
 }
 
 module.exports = {
+    //Log-in 
   async checkUser(req, res) {
     const username = req.body.username;
     const password = req.body.password;
@@ -38,7 +39,7 @@ module.exports = {
     const email = req.body.email;
     const first_name = req.body.first_name;
     const last_name = req.body.last_name;
-
+    
     const salt = crypto.randomBytes(6).toString("hex");
     const saltAndPassword = salt + password;
     const hash = crypto.createHash("sha256");

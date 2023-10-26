@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const cors = require("cors")
 
 const userController = require("../userController/userController");
 
@@ -13,4 +14,4 @@ app.listen(PORT, () => console.log(`server is listening on port ${PORT}`))
 //Login
 app.post("/login", userController,checkUser)
 //Create New Account
-app.post("/CreateNewAccount", userController.createNewAccount)
+app.post("/createNewAccount", userController.createNewAccount)
