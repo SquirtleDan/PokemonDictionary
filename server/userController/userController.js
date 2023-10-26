@@ -25,7 +25,7 @@ module.exports = {
     const hashedEnteredPassword = hash.update(saltAndEnteredPassword).digest("hex");
 
     if (hashedEnteredPassword !== userData.hash_salted_password) {
-      return res.status(404).json({ message: "Invalit Username or Password" });
+      return res.status(404).json({ message: "Invalid Username or Password" });
     }
     // if bothe correct give Token
     const sessionToken = generateSessionToken();
