@@ -7,4 +7,5 @@ exports.seed = async function(knex) {
   await knex("score").del();
   await knex("game_mode").del();
   await knex("account").del();
+  await knex("pokemon").del();
 };
