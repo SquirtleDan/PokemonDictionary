@@ -51,8 +51,9 @@ export const LoginForm = () => {
                     <p className='error'>{errors.password?.message}</p>
                 </div>
 
-                <button>Submit</button>
+                <button type='submit'>Log In</button>
             </form>
+            <button>Sign Up</button>
             <DevTool control={control} />
         </div>
     );
