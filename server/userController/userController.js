@@ -1,6 +1,7 @@
 const userModel = require("../userModel/userModel");
 const crypto = require("crypto");
 const cookieParser = require("cookie-parser");
+const cors = require("cors")
 
 function generateSessionToken() {
   return crypto.randomBytes(16).toString("hex");
@@ -20,9 +21,7 @@ module.exports = {
     //if password is wrong
     const saltAndEnteredPassword = password + userData.salt;
     const hash = crypto.createHash("sha256");
-    const hashedEnteredPassword = hash
-      .update(saltAndEnteredPassword)
-      .digest("hex");
+    const hashedEnteredPassword = hash.update(saltAndEnteredPassword).digest("hex");
 
     if (hashedEnteredPassword !== userData.hash_salted_password) {
       return res.status(404).json({ message: "Invalit Username or Password" });

@@ -5,11 +5,11 @@ const knex = require("../knex")
 module.exports ={
     //Search DB by Username 
     getDataByUsername(username){
-        return knex('user').where({ username: username }).first()
+        return knex('account').where({ username: username }).first()
     },
     //Create New Account
     createUser(username, hash_salted_password,salt,email,first_name,last_name){
-        return knex('user').insert({
+        return knex('account').insert({
             username:username,
             hash_salted_password:hash_salted_password,
             salt:salt,
