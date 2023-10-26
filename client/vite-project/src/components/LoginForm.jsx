@@ -53,7 +53,9 @@ export const LoginForm = () => {
 
                 <button type='submit'>Log In</button>
             </form>
-            <button><Link to="/register">Sign Up</Link></button>
+            <button>
+                <Link to="/register">Sign Up</Link>
+            </button>
             <DevTool control={control} />
         </div>
     );

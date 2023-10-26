@@ -7,7 +7,10 @@ export const RegistrationForm = () => {
     const form = useForm({
         defaultValues: {
             username: "",
-            password: ""
+            password: "",
+            email: "",
+            first_name: "",
+            last_name: ""
         }
     });
     const { register, control, handleSubmit, formState } = form;
