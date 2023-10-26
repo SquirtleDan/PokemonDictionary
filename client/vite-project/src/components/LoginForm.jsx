@@ -1,7 +1,7 @@
 import React from 'react';
 import './LoginForm.css'
 import { useForm } from 'react-hook-form';
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 
 export const LoginForm = () => {
     const form = useForm({

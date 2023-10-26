@@ -1,7 +1,7 @@
 import React from 'react';
 import './RegistrationForm.css'
 import { useForm } from 'react-hook-form';
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 
 export const RegistrationForm = () => {
     const form = useForm({
