@@ -20,3 +20,9 @@ input[type="text"] {
   color: #fff;
   background-image: none;
 }
+
+.error {
+  color: red;
+  font-size: 12px;
+  text-align: left;
+}
