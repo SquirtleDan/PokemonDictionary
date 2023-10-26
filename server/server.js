@@ -9,10 +9,6 @@ const userController = require("./userController/userController");
 const scoreController = require("./scoreController/scoreController");
 
 
-const userController = require("./userController/userController");
-
-
-
 const PORT = process.env.PORT || 8080;
 app.use(express.json())
 app.use(cookieParser())
