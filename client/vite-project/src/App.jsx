@@ -1,15 +1,21 @@
-import { useState } from 'react'
 import './App.css'
-import { LoginForm } from './components/LoginForm'
+import LoginForm from './components/LoginForm'
+import RegistrationForm from './components/RegistrationForm'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
-    <div>
-      <LoginForm />
-    </div>
-  )
+    <Router>
+      <Routes>
+      <Route path='/' element={ <LoginForm /> } />
+      <Route path="registration" element={ <RegistrationForm/> } />
+      </Routes>
+  </Router>
+  );
+  
 }
 
 export default App

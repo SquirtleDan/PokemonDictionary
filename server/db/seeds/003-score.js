@@ -4,52 +4,52 @@
  */
 exports.seed = async function(knex) {
   await knex("score").insert([
-    { id: 1,
+    { 
       account_id: 1,
       game_mode_id: 1,
       value: 5,
     },
-    { id: 2,
+    { 
       account_id: 1,
       game_mode_id: 1,
       value: 8,
     },
-    { id: 3,
+    { 
       account_id: 1,
       game_mode_id: 2,
       value: 9,
     },
-    { id: 4,
+    { 
       account_id: 1,
       game_mode_id: 2,
       value: 15,
     },
-    { id: 5,
+    { 
       account_id: 2,
       game_mode_id: 1,
       value: 3,
     },
-    { id: 6,
+    { 
       account_id: 2,
       game_mode_id: 1,
       value: 2,
     },
-    { id: 7,
+    { 
       account_id: 2,
       game_mode_id: 2,
       value: 15,
     },
-    { id: 8,
+    { 
       account_id: 2,
       game_mode_id: 2,
       value: 5,
     },
-    { id: 9,
+    { 
       account_id: 3,
       game_mode_id: 1,
       value: 9,
     },
-    { id: 10,
+    { 
       account_id: 3,
       game_mode_id: 1,
       value: 18,
@@ -59,7 +59,7 @@ exports.seed = async function(knex) {
       game_mode_id: 2,
       value: 16,
     },
-    { id: 11,
+    { 
       account_id: 3,
       game_mode_id: 2,
       value: 4,
