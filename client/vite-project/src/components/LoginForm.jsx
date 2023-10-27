@@ -1,9 +1,10 @@
 import React from 'react';
 import './LoginForm.css'
 import { useForm } from 'react-hook-form';
-import { DevTool } from "@hookform/devtools";
+import { Link } from 'react-router-dom';
+// import { DevTool } from "@hookform/devtools";
 
-export const LoginForm = () => {
+export default function LoginForm() {
     const form = useForm({
         defaultValues: {
             username: "",
@@ -50,11 +51,10 @@ export const LoginForm = () => {
                     />
                     <p className='error'>{errors.password?.message}</p>
                 </div>
-
+                        
                 <button type='submit'>Log In</button>
             </form>
-            <button>Submit</button>
-            <DevTool control={control} />
+            <Link to="registration"><button>Register</button></Link>
         </div>
     );
 };

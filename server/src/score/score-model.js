@@ -3,18 +3,28 @@ const knex = require("../knex");
 //for scoreBoard
 module.exports = {
   //get all score data(for leaderBoard)
-  getAllScores: () => {
-    return knex("score").select("value");
+  getHighestScore(accountId) {
+    return knex
+      .select(
+        knex.raw("MAX(value)"),
+        "game_mode_id"
+      )
+      .from("score")
+      .where({
+        account_id: accountId,
+      })
+      .groupByRaw('game_mode_id')
+      ;
   },
   //save score data
-  saveScore: (account_id, game_mode_id, value) => {
+  saveScore: (accountId, gameModeId, value) => {
     return knex("score").insert({
-      account_id: account_id,
-      game_mode_id: game_mode_id,
-      value: value,
+      account_id: accountId,
+      game_mode_id: gameModeId,
+      value: value
     });
   },
-  //get Ranking(get all data=> sort => get Arr[indexnum])
+  //get Ranking(get all data=> sort => get Arr[indexnum]), not yet verifed
   getRanking: async (value) => {
     const allScoreData = await knex("score").select("value");
     const allScoreDataArr = allScoreData.map((eachData) => eachData.value);

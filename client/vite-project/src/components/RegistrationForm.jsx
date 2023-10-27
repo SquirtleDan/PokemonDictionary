@@ -1,9 +1,9 @@
 import React from 'react';
 import './RegistrationForm.css'
 import { useForm } from 'react-hook-form';
-import { DevTool } from "@hookform/devtools";
+// import { DevTool } from "@hookform/devtools";
 
-export const RegistrationForm = () => {
+export default function RegistrationForm () {
     const form = useForm({
         defaultValues: {
             username: "",
@@ -101,7 +101,6 @@ export const RegistrationForm = () => {
 
                 <button type='submit'>Register</button>
             </form>
-            <DevTool control={control} />
         </div>
     );
 };
