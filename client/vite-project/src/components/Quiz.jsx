@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'React'
+import React, { useEffect, useState } from 'react'
 import './Quiz.css'
 'use strict';
 
@@ -10,6 +10,7 @@ export const Quiz = () => {
     const [singlePokeData, setSinglePokeData] = useState(false);
     const [englishNames, setEnglishNames] = useState(null);
     const [score, setScore] = useState(0);
+    const [lives, setLives] = useState(3)
     const [currentRound, setCurrentRound] = useState(0);
 
     //Use Effects
@@ -27,18 +28,24 @@ export const Quiz = () => {
     useEffect(() => {
         if (dataFetched) {
             let randPoke = getRandomPokemon();
-            setSinglePokemon(randPoke[0]);
+            setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
             setEnglishNames(randPoke);
             console.log("randPoke",randPoke)
             console.log("singlePokemon", singlePokemon)
         }
-    }, [dataFetched]);
+    }, [dataFetched, score, lives]);
 
     useEffect(() => {
         if (singlePokemon) {
             setSinglePokeData(true);
         }
     }, [singlePokemon]);
+
+   
+    // useEffect(() => {
+    //     console.log(score);
+    //     console.log(lives)
+    // }, [score, lives])
 
     //Gets array of Pokemon
     const getName = async function () {
@@ -107,7 +114,16 @@ export const Quiz = () => {
     //Handler Functions
     function handleClick(event) {
         console.log("event:",event)
+        if(lives > 0 && event === singlePokemon.pokeApiID){
+            setScore((prev)=> prev = prev + 1)
+        }
+        else if(lives > 0 && event !== singlePokemon.pokeApiID){
+            setLives((prev)=> prev = prev - 1)
+        }
+
+        //if lives = 0 >>>redirect to game over component
     }
+   
       
       
     return (
@@ -116,8 +132,8 @@ export const Quiz = () => {
         <h1>Quiz</h1>
 
         {/* Current Score */}
-        <h2>Current Score:</h2>
-        <h3>Round:</h3>
+        <h2>Current Score: {score}</h2>
+        <h3>HP: {lives}</h3>
 
         {/* Final Results */}
         {/* <div className='final-results'>
@@ -140,12 +156,12 @@ export const Quiz = () => {
 
             {/* Pokemon English Names Buttons */}
             {singlePokeData?
-            <div className='english'>
-                <button id='button1' key={englishNames[0].pokeApiID} onClick={() => handleClick(englishNames[0].pokeApiID)}>{englishNames[0].nameEnglish}</button>
-                <button id='button2' key={englishNames[1].pokeApiID} onClick={() => handleClick(englishNames[1].pokeApiID)}>{englishNames[1].nameEnglish}</button>
-                <button id='button3' key={englishNames[2].pokeApiID} onClick={() => handleClick(englishNames[2].pokeApiID)}>{englishNames[2].nameEnglish}</button>
-                <button id='button4' key={englishNames[3].pokeApiID} onClick={() => handleClick(englishNames[3].pokeApiID)}>{englishNames[3].nameEnglish}</button>
-            </div> 
+            <>
+                <button className='english' id='button1' key="1" onClick={() => handleClick(englishNames[0].pokeApiID)}>{englishNames[0].nameEnglish}</button>
+                <button className='english' id='button2' key="2" onClick={() => handleClick(englishNames[1].pokeApiID)}>{englishNames[1].nameEnglish}</button>
+                <button className='english' id='button3' key="3" onClick={() => handleClick(englishNames[2].pokeApiID)}>{englishNames[2].nameEnglish}</button>
+                <button className='english' id='button4' key="4" onClick={() => handleClick(englishNames[3].pokeApiID)}>{englishNames[3].nameEnglish}</button>
+            </> 
             : <div>No Names</div>}
         </div>
         </>
