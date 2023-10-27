@@ -1,5 +1,5 @@
 // IMPORTING POKEMON DATA FUNCTION
-const fetchFunction = require("../../pokemon-api/pokemon-api-controller")
+const fetchFunction = require("../../src/pokemon-api/pokemon-api-controller")
 
 /**
  * @param { import("knex").Knex } knex

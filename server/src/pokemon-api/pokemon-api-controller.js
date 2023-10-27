@@ -4,7 +4,7 @@ module.exports = {
   async insertPokemonDataToDatabase() {
 
     // SETTINGS
-    const noOfPokemon = 20;
+    const noOfPokemon = 101;
   
     // SETTING UP POKEMON
     const pokemonData = [];
