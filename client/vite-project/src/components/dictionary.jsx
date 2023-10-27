@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';  
-import './Dictionary.css';
+import './dictionary.css';
 import axios from 'axios';
 
 function Dictionary() {
