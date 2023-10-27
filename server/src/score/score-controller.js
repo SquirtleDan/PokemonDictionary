@@ -14,7 +14,7 @@ module.exports = {
       })
       res.status(200).send(sendScoreObject);
     } catch (error) {
-      res.status(500).json({ error: "Failed to get Scores" });
+      res.status(500).send("Failed to get Scores");
     }
   },
   //save scores
@@ -25,18 +25,18 @@ module.exports = {
         req.body.gameModeId,
         req.body.value
       );
-      res.json({ message: "Score Submitted!" });
+      res.send("Score Submitted!");
     } catch (error) {
-      res.status(500).json({ error: "Failed to save score" });
+      res.status(500).send("Failed to save score");
     }
   },
   //get rankings, not yet verified
   async getRanking(req, res) {
     try {
       const ranking = await scoreModel.getRanking(req.body.value);
-      res.json({ ranking: ranking });
+      res.send({ ranking: ranking });
     } catch (error) {
-      res.status(500).json({ error: "Failed to Get your Ranking" });
+      res.status(500).send("Failed to Get your Ranking");
     }
   },
 };
