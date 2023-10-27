@@ -2,6 +2,7 @@ import React from 'react';
 import './RegistrationForm.css'
 import { useForm } from 'react-hook-form';
 // import { DevTool } from "@hookform/devtools";
+import axios from "axios";
 
 export default function RegistrationForm () {
     const form = useForm({
@@ -16,8 +17,14 @@ export default function RegistrationForm () {
     const { register, control, handleSubmit, formState } = form;
     const { errors } = formState;
 
-    const onSubmit = (data) => {
-        console.log("form submitted ", data)
+    const onSubmit = async (data) => {
+        console.log("form submitted ", data);
+        const url = "https://pokedictionarygamedev.onrender.com/createNewAccount";
+        // const url = "http://localhost:8080/createNewAccount";
+        const returnedData = await axios.post(url, data);
+        console.log(returnedData);
+            // axios will return status code 200 for correct, 401 for incorrect
+            // you can use this to redirect
     }
 
     return (
