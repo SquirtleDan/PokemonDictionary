@@ -3,7 +3,7 @@ import './Quiz.css'
 import axios from 'axios'
 'use strict';
 
-export const Quiz = () => {
+export default function Quiz() {
     //State Variables
     const [data, setData] = useState(null);
     const [dataFetched, setDataFetched] = useState(false);

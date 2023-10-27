@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 
-export default function Home() {
+export default function Homepage() {
 //states
 const [dictionaryVisible, setDictionaryVisible] = useState(false);
 const [gameVisible, setGameVisible] = useState(false);
@@ -19,7 +19,7 @@ const [gameVisible, setGameVisible] = useState(false);
   
 return (
     <>
-    
+    <div>holder</div>
     
     </>
     )
