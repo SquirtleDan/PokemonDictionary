@@ -17,8 +17,8 @@ export default function LoginForm() {
 
     const onSubmit = async (data) => {
         console.log("form submitted ", data);
-        // const url = "https://pokedictionarygamedev.onrender.com/login";
-        const url = "http://localhost:8080/login";
+        const url = "https://pokedictionarygamedev.onrender.com/login";
+        // const url = "http://localhost:8080/login";
         const returnedData = await axios.post(url, data);
         console.log(returnedData);
             // axios will return status code 200 for correct, 401 for incorrect

@@ -19,8 +19,8 @@ export default function RegistrationForm () {
 
     const onSubmit = async (data) => {
         console.log("form submitted ", data);
-        // const url = "https://pokedictionarygamedev.onrender.com/createNewAccount";
-        const url = "http://localhost:8080/createNewAccount";
+        const url = "https://pokedictionarygamedev.onrender.com/createNewAccount";
+        // const url = "http://localhost:8080/createNewAccount";
         const returnedData = await axios.post(url, data);
         console.log(returnedData);
             // axios will return status code 200 for correct, 401 for incorrect
