@@ -1,9 +1,16 @@
 const accountModel = require("./account-model");
 const crypto = require("crypto");
 const session = require("express-session")
-const app = require("../../server")
+const express = require("express")
+const app = express()
 
 
+
+// Access the session as req.session
+app.get('/', function(req, res, next) {
+	console.log(req.session)
+  res.send('Hello World!')
+})
 //helperFunction
 function generateSessionToken() {
   return crypto.randomBytes(16).toString("hex");
@@ -42,18 +49,6 @@ module.exports = {
       console.log("success");
       res.status(200).send("success");
 
-
-        app.use(session ({
-        resave: false,
-        saveUnitialized: false,
-        secret: "session",
-        cookie: {
-          maxAge: 1000 * 60 * 60,
-          sameSite: "none",
-          secure: true,
-        }
-      })
-      );
       // const sessionToken = generateSessionToken();
       // console.log(sessionToken);
 
@@ -69,10 +64,7 @@ module.exports = {
     // const sessionToken = generateSessionToken();
     // console.log(sessionToken);
     // res.cookie("testtoken", sessionToken, {maxAge: 360000}).status(200).send('Cookie added!');
-    const username = req.body.username;
-    req.session.name = username;
-
-    res.status(200).send( {message: "saved"})
+    
 
     } catch (err) {
       res.status(401).send("Invalid Username or Password");
