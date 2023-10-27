@@ -2,6 +2,7 @@ import React from 'react';
 import './LoginForm.css'
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 // import { DevTool } from "@hookform/devtools";
 
 export default function LoginForm() {
@@ -14,8 +15,15 @@ export default function LoginForm() {
     const { register, control, handleSubmit, formState } = form;
     const { errors } = formState;
 
-    const onSubmit = (data) => {
-        console.log("form submitted ", data)
+    const onSubmit = async (data) => {
+        console.log("form submitted ", data);
+        const url = "http://localhost:8080/login";
+        const returnedData = await axios.post(url, data);
+        console.log(returnedData);
+
+        // document.cookie = "name=cookieContent; max-age=5";
+        // const allCookies = document.cookie;
+        // console.log(allCookies);
     }
 
     return (

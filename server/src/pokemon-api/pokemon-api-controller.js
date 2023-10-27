@@ -22,7 +22,7 @@ module.exports = {
     
     const pokemonApiFetchPicture = [];
     for (let i = 1; i <= noOfPokemon; i++) pokemonApiFetchPicture.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`);
-    console.log(pokemonApiFetchPicture);
+    // console.log(pokemonApiFetchPicture);
   
     // CREATING OBJECT DATA
     for (let i = 0; i < noOfPokemon; i++) pokemonData.push({
