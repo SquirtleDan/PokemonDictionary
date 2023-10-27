@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Quiz.css'
+import axios from 'axios'
 'use strict';
 
 export const Quiz = () => {
@@ -11,8 +12,8 @@ export const Quiz = () => {
     const [englishNames, setEnglishNames] = useState(null);
     const [score, setScore] = useState(0);
     const [lives, setLives] = useState(3)
-    const [currentRound, setCurrentRound] = useState(0);
-
+    const [imageUrl, setImageUrl] = useState(null);
+ 
     //Use Effects
     useEffect(() => {
         getName();
@@ -21,106 +22,95 @@ export const Quiz = () => {
     useEffect(() => {
         if (data){
             setDataFetched(true);
+            
         }
+       
         
     }, [data]);
 
     useEffect(() => {
         if (dataFetched) {
             let randPoke = getRandomPokemon();
+            
             setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
             setEnglishNames(randPoke);
-            console.log("randPoke",randPoke)
-            console.log("singlePokemon", singlePokemon)
-        }
+            // newData= data.filter(element => element.id !== 1);
+            // setData(newData);
+            console.log(data)
+          }
+          
+        
     }, [dataFetched, score, lives]);
 
     useEffect(() => {
         if (singlePokemon) {
+            let newData = [];
             setSinglePokeData(true);
+            newData= data.filter(element => element.id !== singlePokemon.id);
+            setData(newData);
         }
     }, [singlePokemon]);
 
+    useEffect(() => {
+        
+        if(singlePokeData){
+            
+        setImageUrl(singlePokemon.frontPicture)
+        }  
+    }, [singlePokeData, lives, score, singlePokemon])
+
+    
    
-    // useEffect(() => {
-    //     console.log(score);
-    //     console.log(lives)
-    // }, [score, lives])
 
-    //Gets array of Pokemon
+
+    //helper function
     const getName = async function () {
+        const pokemonData = await axios.get("https://pokedictionarygamedev.onrender.com/GetAllPokemon");
+        setData(pokemonData.data);
+    }
 
-        // SETTINGS
-        const noOfPokemon = 20;
-      
-        // SETTING UP POKEMON
-        const pokemonData = [];
-      
-        // RETRIEVING NAMES
-        const urlListNames = [];
-        for (let i = 1; i <= noOfPokemon; i++) urlListNames.push(`https://pokeapi.co/api/v2/pokemon-species/${i}/`);
-        const pokemonApiFetchName = await Promise.all(urlListNames.map((url) => fetch(url).then(res => res.json())));
-        // console.log(pokemonApiFetchName);
-      
-        // RETRIEVING PICTURE
-        const urlListPictures = [];
-        for (let i = 1; i <= noOfPokemon; i++) urlListPictures.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`);
-        const pokemonApiFetchPicture = await Promise.all(urlListPictures.map((url) => fetch(url).then(res => res.blob())));
-        // console.log(pokemonApiFetchPicture);
-      
-        // CREATING OBJECT DATA
-        for (let i = 0; i < noOfPokemon; i++) pokemonData.push({
-            pokeApiID: pokemonApiFetchName[i].id,
-            nameJapaneseHRKT: pokemonApiFetchName[i].names[0].name,
-            nameJapaneseRomaji: pokemonApiFetchName[i].names[1].name,
-            nameKorean: pokemonApiFetchName[i].names[2].name,
-            nameChineseTraditional: pokemonApiFetchName[i].names[3].name,
-            nameFrench: pokemonApiFetchName[i].names[4].name,
-            nameGerman: pokemonApiFetchName[i].names[5].name,
-            nameSpanish: pokemonApiFetchName[i].names[6].name,
-            nameItalian: pokemonApiFetchName[i].names[7].name,
-            nameEnglish: pokemonApiFetchName[i].names[8].name,
-            nameJapaneseNormal: pokemonApiFetchName[i].names[9].name,
-            nameChineseSimplified: pokemonApiFetchName[i].names[10].name,
-            frontPicture: pokemonApiFetchPicture[i], 
-          });
-        console.log(pokemonData);
-        setData(pokemonData);
-      
-        // HOW TO USE BLOB PICTURE ON HTML 
-        // for (let i = 0; i < 1; i++) {
-        //   const pokemonBody = document.querySelector('.pokemon');
-        //   console.log(pokemonBody);
-        //   const test = document.createElement('img');
-        //   const pictureData = URL.createObjectURL(pokemonData[Math.floor(Math.random() * pokemonData.length)].frontPicture)
-        //   test.src = pictureData;
-        //   pokemonBody.append(test);
-        //   console.log("rand 1", pokemonBody)
-        // }
-      }
-      //const pictureData = URL.createObjectURL(singlePokemon.frontPicture);
-      
+ 
+
     //Makes random array of 4 pokemon
     function getRandomPokemon () {
         const array = [];
-
-        for(let i = 0; i < 4; i++) {
-            array.push(data[Math.floor(Math.random() * data.length)]);
+        const dict = {};
+        let count = 0;
+       
+        
+        for(let j = 0; j < data.length; j++) {
+            dict[data[j].id] = false;
         }
-        console.log("random array", array)
-        return array;
-      }
 
+
+        while(count < 4){
+            let randomIndex = Math.floor(Math.random()* data.length);
+            if(!dict[data[randomIndex]]){
+                array.push(data[randomIndex]);
+                dict[data[randomIndex].id] = true;
+                count ++
+                console.log(randomIndex)
+    
+            }
+            
+        }
+      
+        return array
+    }
+        
+     
     //Handler Functions
     function handleClick(event) {
         console.log("event:",event)
-        if(lives > 0 && event === singlePokemon.pokeApiID){
+        if(lives > 0 && event === singlePokemon.id){
             setScore((prev)=> prev = prev + 1)
         }
-        else if(lives > 0 && event !== singlePokemon.pokeApiID){
+        else if(lives > 0 && event !== singlePokemon.id){
             setLives((prev)=> prev = prev - 1)
         }
-
+        else if(lives === 0){
+            axios.post("https://pokedictionarygamedev.onrender.com/")
+        }
         //if lives = 0 >>>redirect to game over component
     }
    
@@ -146,23 +136,23 @@ export const Quiz = () => {
             {/* Get Pokemon Image */}
             {singlePokeData? 
             <div>
-                <img src={`${URL.createObjectURL(singlePokemon.frontPicture)}`} />
+                <img src={imageUrl} alt=""/>
                 <br />
-                {singlePokemon.nameJapaneseNormal}
+                {singlePokemon.nameJapaneseHrkt}
                 <br />
                 {singlePokemon.nameJapaneseRomaji}
             </div> 
-            : <div>No Pic</div>}
+            : <div>Loading</div>}
 
             {/* Pokemon English Names Buttons */}
             {singlePokeData?
             <>
-                <button className='english' id='button1' key="1" onClick={() => handleClick(englishNames[0].pokeApiID)}>{englishNames[0].nameEnglish}</button>
-                <button className='english' id='button2' key="2" onClick={() => handleClick(englishNames[1].pokeApiID)}>{englishNames[1].nameEnglish}</button>
-                <button className='english' id='button3' key="3" onClick={() => handleClick(englishNames[2].pokeApiID)}>{englishNames[2].nameEnglish}</button>
-                <button className='english' id='button4' key="4" onClick={() => handleClick(englishNames[3].pokeApiID)}>{englishNames[3].nameEnglish}</button>
+                <button className='english' id='button1' key="1" onClick={() => handleClick(englishNames[0].id)}>{englishNames[0].nameEnglish}</button>
+                <button className='english' id='button2' key="2" onClick={() => handleClick(englishNames[1].id)}>{englishNames[1].nameEnglish}</button>
+                <button className='english' id='button3' key="3" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
+                <button className='english' id='button4' key="4" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
             </> 
-            : <div>No Names</div>}
+            : <div>Loading</div>}
         </div>
         </>
     );
