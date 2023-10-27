@@ -1,5 +1,8 @@
 const accountModel = require("./account-model");
 const crypto = require("crypto");
+const session = require("express-session")
+const app = require("../../server")
+
 
 //helperFunction
 function generateSessionToken() {
@@ -40,12 +43,22 @@ module.exports = {
       res.status(200).send("success");
 
 
-
+        app.use(session ({
+        resave: false,
+        saveUnitialized: false,
+        secret: "session",
+        cookie: {
+          maxAge: 1000 * 60 * 60,
+          sameSite: "none",
+          secure: true,
+        }
+      })
+      );
       // const sessionToken = generateSessionToken();
       // console.log(sessionToken);
 
     // const oneDay = 1000 * 60 * 60 * 24;
-    // app.use(sessions({
+    // app.use(session({
     //   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
     //   saveUninitialized:true,
     //   cookie: { maxAge: oneDay },
@@ -56,7 +69,10 @@ module.exports = {
     // const sessionToken = generateSessionToken();
     // console.log(sessionToken);
     // res.cookie("testtoken", sessionToken, {maxAge: 360000}).status(200).send('Cookie added!');
+    const username = req.body.username;
+    req.session.name = username;
 
+    res.status(200).send( {message: "saved"})
 
     } catch (err) {
       res.status(401).send("Invalid Username or Password");
@@ -68,7 +84,7 @@ module.exports = {
     try {
       // Destructuring req.body data
       const { username, password, email, firstName, lastName } = req.body;
-      // console.log(username);
+      // console.log(username, password, email, firstName, lastName);
       
       // Create salt
       const salt = crypto.randomBytes(6).toString("hex");

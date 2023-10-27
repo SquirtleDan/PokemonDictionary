@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors")
 const cookieParser = require('cookie-parser');
-const session = require('express-session');
+
 
 // IMPORTING DATABASE CONTROLLER
 const accountController = require("./src/account/account-controller");
