@@ -3,12 +3,16 @@ import './Quiz.css'
 'use strict';
 
 export const Quiz = () => {
+    //State Variables
     const [data, setData] = useState(null);
     const [dataFetched, setDataFetched] = useState(false);
     const [singlePokemon, setSinglePokemon] = useState(null);
     const [singlePokeData, setSinglePokeData] = useState(false);
     const [englishNames, setEnglishNames] = useState(null);
+    const [score, setScore] = useState(0);
+    const [currentRound, setCurrentRound] = useState(0);
 
+    //Use Effects
     useEffect(() => {
         getName();
     }, []);
@@ -36,6 +40,7 @@ export const Quiz = () => {
         }
     }, [singlePokemon]);
 
+    //Gets array of Pokemon
     const getName = async function () {
 
         // SETTINGS
@@ -88,7 +93,7 @@ export const Quiz = () => {
       }
       //const pictureData = URL.createObjectURL(singlePokemon.frontPicture);
       
-
+    //Makes random array of 4 pokemon
     function getRandomPokemon () {
         const array = [];
 
@@ -98,29 +103,51 @@ export const Quiz = () => {
         console.log("random array", array)
         return array;
       }
+
+    //Handler Functions
+    function handleClick(event) {
+        console.log("event:",event)
+    }
       
       
     return (
         <>
+        {/* Header */}
         <h1>Quiz</h1>
-        {singlePokeData? 
-        <div>
-            <img src={`${URL.createObjectURL(singlePokemon.frontPicture)}`} />
-            <br />
-            {singlePokemon.nameJapaneseNormal}
-            <br />
-            {singlePokemon.nameJapaneseRomaji}
-        </div> : <div>No Pic</div>}
-        {singlePokeData?
-        <div className='english'>
-            {englishNames[0].nameEnglish}
-            <br />
-            {englishNames[1].nameEnglish}
-            <br />
-            {englishNames[2].nameEnglish}
-            <br />
-            {englishNames[3].nameEnglish}
-        </div> : <div>No Names</div>}
+
+        {/* Current Score */}
+        <h2>Current Score:</h2>
+        <h3>Round:</h3>
+
+        {/* Final Results */}
+        {/* <div className='final-results'>
+            <h1>Final Results</h1>
+            <button>Restart Game?</button>
+        </div> */}
+
+        {/* Question Card */}
+        <div className='question-card'>
+            {/* Get Pokemon Image */}
+            {singlePokeData? 
+            <div>
+                <img src={`${URL.createObjectURL(singlePokemon.frontPicture)}`} />
+                <br />
+                {singlePokemon.nameJapaneseNormal}
+                <br />
+                {singlePokemon.nameJapaneseRomaji}
+            </div> 
+            : <div>No Pic</div>}
+
+            {/* Pokemon English Names Buttons */}
+            {singlePokeData?
+            <div className='english'>
+                <button id='button1' key={englishNames[0].pokeApiID} onClick={() => handleClick(englishNames[0].pokeApiID)}>{englishNames[0].nameEnglish}</button>
+                <button id='button2' key={englishNames[1].pokeApiID} onClick={() => handleClick(englishNames[1].pokeApiID)}>{englishNames[1].nameEnglish}</button>
+                <button id='button3' key={englishNames[2].pokeApiID} onClick={() => handleClick(englishNames[2].pokeApiID)}>{englishNames[2].nameEnglish}</button>
+                <button id='button4' key={englishNames[3].pokeApiID} onClick={() => handleClick(englishNames[3].pokeApiID)}>{englishNames[3].nameEnglish}</button>
+            </div> 
+            : <div>No Names</div>}
+        </div>
         </>
     );
 }
