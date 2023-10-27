@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors")
 const cookieParser = require('cookie-parser');
-const sessions = require('express-session');
+const session = require('express-session');
 
 // IMPORTING DATABASE CONTROLLER
 const accountController = require("./src/account/account-controller");
@@ -14,12 +14,7 @@ const pokemonController = require("./src/pokemon/pokemon-controller");
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-// app.use(sessions({
-//   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-//   saveUninitialized:true,
-//   cookie: { maxAge: oneDay },
-//   resave: false
-// }));
+
 
 // INITIATE SERVER
 const PORT = process.env.PORT || 8080;
@@ -32,11 +27,11 @@ app.listen(PORT, () => console.log(`server is listening on port ${PORT}`))
 app.post("/createNewAccount", accountController.createNewAccount);
   // to access: localhost:8080/createNewAccount
   // body, raw, json
-  // ex: {"username": "username back end test1", "password": "password back end test1", "email": "email@gmail.com back end test1", "firstName": "first name back end test1", "lastName": "last name back end test1" }
+  // ex: {"username": "usernametest1", "password": "passwordtest1", "email": "email@gmail.comtest1", "firstName": "firstnametest1", "lastName": "lastnametest1"}
 app.post("/login", accountController.login);
   // to access: localhost:8080/login
   // body, raw, json
-  // ex: {"username": "username back end test1", "password": "password back end test1"}
+  // ex: {"username": "usernametest1", "password": "passwordtest1"}
 
 // POKEMON CONTROLLER
 app.get("/getAllPokemon", pokemonController.getAllPokemon);
