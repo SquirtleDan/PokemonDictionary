@@ -3,7 +3,7 @@ import './Quiz.css'
 import axios from 'axios'
 'use strict';
 
-export default function Quiz() {
+export default function () {
     //State Variables
     const [data, setData] = useState(null);
     const [dataFetched, setDataFetched] = useState(false);
@@ -33,10 +33,7 @@ export default function Quiz() {
             let randPoke = getRandomPokemon();
             
             setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
-            setEnglishNames(randPoke);
-            // newData= data.filter(element => element.id !== 1);
-            // setData(newData);
-            console.log(data)
+            setEnglishNames(randPoke)
           }
           
         
@@ -48,6 +45,7 @@ export default function Quiz() {
             setSinglePokeData(true);
             newData= data.filter(element => element.id !== singlePokemon.id);
             setData(newData);
+            console.log(data)
         }
     }, [singlePokemon]);
 
@@ -58,8 +56,6 @@ export default function Quiz() {
         setImageUrl(singlePokemon.frontPicture)
         }  
     }, [singlePokeData, lives, score, singlePokemon])
-
-    
    
 
 
