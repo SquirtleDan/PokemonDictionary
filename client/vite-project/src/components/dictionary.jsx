@@ -43,6 +43,7 @@ function Dictionary() {
       <div>
         {pokemons.map((pokemon) => (
           <img
+            className='pokePic'
             key={pokemon.id}
             src={pokemon.frontPicture}
             alt={pokemon.nameJapaneseRomaji}
@@ -56,12 +57,12 @@ function Dictionary() {
   const PokemonDetail = ({ pokemon, back }) => {
     return (
       <div>
-        <img src={pokemon.frontPicture} alt={pokemon.nameJapaneseRomaji} />
-        <p>No.{String(pokemon.id).padStart(4, '0')}</p>
-        <p>JapaneseName: {pokemon.nameJapaneseHrkt}</p>
-        <p>Pronounce: {pokemon.nameJapaneseRomaji}</p>
-        <p>EnglishName: {pokemon.nameEnglish}</p>
-        <button onClick={back}>Back</button>
+        <img className='pokePic' src={pokemon.frontPicture} alt={pokemon.nameJapaneseRomaji} />
+        <p className='pokePara'>No.{String(pokemon.id).padStart(4, '0')}</p>
+        <p className='pokePara'>Japanese Name: {pokemon.nameJapaneseHrkt}</p>
+        <p className='pokePara'>Pronunciation: {pokemon.nameJapaneseRomaji}</p>
+        <p className='pokePara'>English Name: {pokemon.nameEnglish}</p>
+        <button className='link' onClick={back}>Back</button>
       </div>
     );
   };

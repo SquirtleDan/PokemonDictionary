@@ -44,10 +44,10 @@ export default function LoginForm() {
     }
 
     return (
-       <> 
+       <>
         {!correctStatusCode ?
         <div>
-            <h1>Login Form</h1>
+            <h1 className='loginHeader'>Login Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className='form-control'>
                     <label htmlFor='username'>Username</label>
@@ -79,9 +79,9 @@ export default function LoginForm() {
                     <p className='error'>{errors.password?.message}</p>
                 </div>
                         
-                <button type='submit'>Log In</button>
+                <button className='link 'type='submit'>Log In</button>
             </form>
-            <Link to="registration"><button>Register</button></Link>
+            <Link to="registration"><button  className='link' >Register</button></Link>
         </div>:
         <Homepage/> }
         </>
