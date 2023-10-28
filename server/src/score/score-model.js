@@ -25,10 +25,19 @@ module.exports = {
     });
   },
   //get Ranking(get all data=> sort => get Arr[indexnum]), not yet verifed
-  getRanking: async (value) => {
-    const allScoreData = await knex("score").select("value");
-    const allScoreDataArr = allScoreData.map((eachData) => eachData.value);
-    const ranking = allScoreDataArr.sort((a, b) => b - a);
-    return ranking.indexOf(value) + 1;
+  getRanking: async (gameModeId) => {
+    return knex
+      .select(
+
+      )
+      .from("score")
+      .where({
+        game_mode_id: gameModeId
+      })
+
+    // const allScoreData = await knex("score").select("value");
+    // const allScoreDataArr = allScoreData.map((eachData) => eachData.value);
+    // const ranking = allScoreDataArr.sort((a, b) => b - a);
+    // return ranking.indexOf(value) + 1;
   },
 };

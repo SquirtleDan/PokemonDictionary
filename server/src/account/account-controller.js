@@ -45,9 +45,16 @@ module.exports = {
         console.log("wrong password");
         throw new Error ();
       }
+
       // If password match, 
+      const sentAccountData = {
+        accountID: accountData.id,
+        firstName: accountData.first_name,
+        lastName: accountData.last_name,
+        email: accountData.email
+      }
       console.log("success");
-      res.status(200).send("success");
+      res.status(200).send(JSON.stringify(sentAccountData ));
 
       // const sessionToken = generateSessionToken();
       // console.log(sessionToken);
