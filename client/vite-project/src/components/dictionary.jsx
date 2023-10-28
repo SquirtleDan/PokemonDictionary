@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';  
 import './dictionary.css';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function Dictionary() {
   const [pokemons, setPokemons] = useState([]);
@@ -67,9 +68,7 @@ function Dictionary() {
 //Accessibility is not perfect  if we have time Fix this
   return (
     <div className="Dictionary">
-      {/* forgot to put the Back to Home Button */}
-      <button>Home</button>
-      
+      <Link to="/home"><button>Home</button></Link>
       <SearchBar value={searchWord} onChange={setSearchWord} onClear={handleClearSearch} />
       {selectedPokemon ? (
         <PokemonDetail pokemon={selectedPokemon} back={() => setSelectedPokemon(null)} />
@@ -82,6 +81,8 @@ function Dictionary() {
         )} onClick={setSelectedPokemon} />
       )}
     </div>
+
+    
   );
 }
 

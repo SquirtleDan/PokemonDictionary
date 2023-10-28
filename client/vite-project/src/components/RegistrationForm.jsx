@@ -1,7 +1,7 @@
 import React from 'react';
 import './RegistrationForm.css'
 import { useForm } from 'react-hook-form';
-// import { DevTool } from "@hookform/devtools";
+import { Link } from 'react-router-dom';
 import axios from "axios";
 
 export default function RegistrationForm () {
@@ -108,6 +108,7 @@ export default function RegistrationForm () {
 
                 <button type='submit'>Register</button>
             </form>
+            <Link to="/"><button>Back To Login</button></Link>
         </div>
     );
 };
