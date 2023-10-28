@@ -149,7 +149,13 @@ export default function Quiz() {
         // }
         //if lives = 0 >>>redirect to game over component
     }
-   
+    
+    //if timer is up
+    function handleTimeIsUp() {
+        if (lives > 0) {
+            setLives(prev => prev - 1);
+        }
+    }
       
       
     return (
@@ -191,6 +197,7 @@ export default function Quiz() {
 
             : <div>Loading</div>}
         </div> 
+        <Timer duration={10} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
         </>
         : <Gameover score={finalScore}/>}
 
