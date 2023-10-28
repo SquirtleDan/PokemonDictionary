@@ -3,7 +3,7 @@ import './Quiz.css'
 import axios from 'axios'
 'use strict';
 
-export default function () {
+export default function Quiz() {
     //State Variables
     const [data, setData] = useState(null);
     const [dataFetched, setDataFetched] = useState(false);
@@ -13,12 +13,17 @@ export default function () {
     const [score, setScore] = useState(0);
     const [lives, setLives] = useState(3)
     const [imageUrl, setImageUrl] = useState(null);
+    const [finalScore, setFinalScore] = useState(null);
+    const [quizResults, setQuizResults] = useState(null);
  
     //Use Effects
+
+    //Get Data
     useEffect(() => {
         getName();
     }, []);
 
+    //Check check if data is fetched
     useEffect(() => {
         if (data){
             setDataFetched(true);
@@ -28,6 +33,7 @@ export default function () {
         
     }, [data]);
 
+    //get random pokemon
     useEffect(() => {
         if (dataFetched) {
             let randPoke = getRandomPokemon();
@@ -39,16 +45,17 @@ export default function () {
         
     }, [dataFetched, score, lives]);
 
+    //get single pokemon
     useEffect(() => {
         if (singlePokemon) {
             let newData = [];
             setSinglePokeData(true);
             newData= data.filter(element => element.id !== singlePokemon.id);
             setData(newData);
-            console.log(data)
         }
     }, [singlePokemon]);
 
+    //get image
     useEffect(() => {
         
         if(singlePokeData){
@@ -56,6 +63,32 @@ export default function () {
         setImageUrl(singlePokemon.frontPicture)
         }  
     }, [singlePokeData, lives, score, singlePokemon])
+
+    //set final score
+    useEffect(() => {
+        if(lives === 0) {
+            setFinalScore(score);
+        }
+    }, [lives]);
+
+    //create quiz result object
+    useEffect(() => {
+        if(finalScore) {
+            const obj = {
+                accountId: 1,
+                gameModeId: 1,
+                value: finalScore
+            }
+            setQuizResults(obj);
+        }
+    }, [finalScore])
+
+    //send quiz result back to server
+    useEffect(() => {
+        if (quizResults) {
+            sendResults();
+        }
+    }, [quizResults]);
    
 
 
@@ -65,7 +98,11 @@ export default function () {
         setData(pokemonData.data);
     }
 
- 
+    //helper function to send data to server
+    const sendResults = async () => {
+        const url = "https://pokedictionarygamedev.onrender.com/score/save";
+            const returnedData = await axios.post(url, quizResults);
+    }
 
     //Makes random array of 4 pokemon
     function getRandomPokemon () {
@@ -85,8 +122,6 @@ export default function () {
                 array.push(data[randomIndex]);
                 dict[data[randomIndex].id] = true;
                 count ++
-                console.log(randomIndex)
-    
             }
             
         }
@@ -97,16 +132,15 @@ export default function () {
      
     //Handler Functions
     function handleClick(event) {
-        console.log("event:",event)
         if(lives > 0 && event === singlePokemon.id){
             setScore((prev)=> prev = prev + 1)
         }
         else if(lives > 0 && event !== singlePokemon.id){
             setLives((prev)=> prev = prev - 1)
         }
-        else if(lives === 0){
-            axios.post("https://pokedictionarygamedev.onrender.com/")
-        }
+        // else if(lives === 0){
+        //     axios.post("https://pokedictionarygamedev.onrender.com/")
+        // }
         //if lives = 0 >>>redirect to game over component
     }
    
