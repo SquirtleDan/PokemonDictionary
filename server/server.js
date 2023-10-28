@@ -1,9 +1,9 @@
 // IMPORTING MODULES
 const express = require("express");
-const app = express();
 const cors = require("cors")
-const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const cookieParser = require("cookie-parser");
+
 
 // IMPORTING DATABASE CONTROLLER
 const accountController = require("./src/account/account-controller");
@@ -11,9 +11,35 @@ const scoreController = require("./src/score/score-controller");
 const pokemonController = require("./src/pokemon/pokemon-controller");
 
 // USING MIDDLEWARE
+const app = express();
 app.use(express.json());
-app.use(cookieParser());
 app.use(cors());
+app.use(cookieParser());
+app.use(session({
+  path: "/login",
+  secret: 'test',
+  resave: false,
+  saveUninitialized:true,
+  cookie: { maxAge: 6000 },
+}));
+
+// SAMPLE CODE FOR SESSION
+// const session = require('express-session');
+// app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 6000 }}))
+// // Access the session as req.session
+// app.get('/', function(req, res, next) {
+//   if (req.session.views) {
+//     req.session.views++
+//     res.setHeader('Content-Type', 'text/html')
+//     res.write('<p>views: ' + req.session.views + '</p>')
+//     res.write('<p>expires in: ' + (req.session.cookie.maxAge / 1000) + 's</p>')
+//     res.end()
+//   } else {
+//     req.session.views = 1
+//     res.end('welcome to the session demo. refresh!')
+//   }
+//   console.log(req.session);
+// })
 
 
 // INITIATE SERVER

@@ -1,6 +1,7 @@
 const accountModel = require("./account-model");
 const crypto = require("crypto");
 
+
 //helperFunction
 function generateSessionToken() {
   return crypto.randomBytes(16).toString("hex");
@@ -9,58 +10,47 @@ function generateSessionToken() {
 module.exports = {
   // LOG IN
   async login(req, res) {
-    try {
-      // Destructuring req.body data
-      const { username: inputUsername, password: inputPassword } = req.body;
-  
-      // Retrive account data based on username
-      const accountData = await accountModel.getDataByUsername(inputUsername);
-      
-      // Throw error if username is wrong
-      if (!accountData) {
-        console.log("username wrong");
-        throw new Error ();
-      }
-  
-      // Create hash password
-      const saltedInputPassword = accountData.salt + inputPassword ;
-      // console.log(saltedInputPassword);
-      const hash = crypto.createHash("sha256");
-      const hashSaltedInputPassword = hash.update(saltedInputPassword).digest("hex");
-  
-      // Throw error if password is wrong
-      if (hashSaltedInputPassword !== accountData.hash_salted_password) {
-        // console.log(hashSaltedInputPassword);
-        // console.log(accountData.hash_salted_password);
-        console.log("wrong password");
-        throw new Error ();
-      }
-      // If password match, 
-      console.log("success");
-      res.status(200).send("success");
-
-
-
-      // const sessionToken = generateSessionToken();
-      // console.log(sessionToken);
-
-    // const oneDay = 1000 * 60 * 60 * 24;
-    // app.use(sessions({
-    //   secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
-    //   saveUninitialized:true,
-    //   cookie: { maxAge: oneDay },
-    //   resave: false 
-    // }));
-
-    // console.log(req.session);
-    // const sessionToken = generateSessionToken();
+    const sessionToken = generateSessionToken();
     // console.log(sessionToken);
-    // res.cookie("testtoken", sessionToken, {maxAge: 360000}).status(200).send('Cookie added!');
+    if (!req.session.sessionToken) req.session.sessionToken = sessionToken;
+    // req.session.sessionToken = sessionToken;
+    console.log(req.session); 
+    res.status(201).cookie("test", "sessionToken").send("Cookie added!");
 
 
-    } catch (err) {
-      res.status(401).send("Invalid Username or Password");
-    }
+
+    // try {
+    //   // Destructuring req.body data
+    //   const { username: inputUsername, password: inputPassword } = req.body;
+  
+    //   // Retrive account data based on username
+    //   const accountData = await accountModel.getDataByUsername(inputUsername);
+      
+    //   // Throw error if username is wrong
+    //   if (!accountData) {
+    //     console.log("username wrong");
+    //     throw new Error ();
+    //   }
+  
+    //   // Create hash password
+    //   const saltedInputPassword = accountData.salt + inputPassword ;
+    //   // console.log(saltedInputPassword);
+    //   const hash = crypto.createHash("sha256");
+    //   const hashSaltedInputPassword = hash.update(saltedInputPassword).digest("hex");
+  
+    //   // Throw error if password is wrong
+    //   if (hashSaltedInputPassword !== accountData.hash_salted_password) {
+    //     // console.log(hashSaltedInputPassword);
+    //     // console.log(accountData.hash_salted_password);
+    //     console.log("wrong password");
+    //     throw new Error ();
+    //   }
+    //   // If password match, 
+    //   console.log("success");
+    //   res.status(200).send("success");
+    // } catch (err) {
+    //   res.status(401).send("Invalid Username or Password");
+    // }
   },
 
   // CREATE ACCOUNT

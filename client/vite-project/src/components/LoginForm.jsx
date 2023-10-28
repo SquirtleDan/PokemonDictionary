@@ -17,9 +17,10 @@ export default function LoginForm() {
 
     const onSubmit = async (data) => {
         console.log("form submitted ", data);
-        const url = "https://pokedictionarygamedev.onrender.com/login";
-        // const url = "http://localhost:8080/login";
+        // const url = "https://pokedictionarygamedev.onrender.com/login";
+        const url = "http://localhost:8080/login";
         const returnedData = await axios.post(url, data);
+        // const returnedData = await fetch(url).then(res => res);
         console.log(returnedData);
             // axios will return status code 200 for correct, 401 for incorrect
             // you can use this to redirect
