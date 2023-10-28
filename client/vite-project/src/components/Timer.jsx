@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./Timer.css";
 
-export default function Timer({ duration = 10 ,onTimeUp}) {
- 
+export default function Timer(props) {
+  const duration = props.time;
+  const onTimeUp = props.onTimeUp;
+
   const [timeLeft, setTimeLeft] = useState(duration);
 
 
@@ -10,7 +12,6 @@ export default function Timer({ duration = 10 ,onTimeUp}) {
     //timeUP
     if (timeLeft <= 0) {
       setTimeout(() => {
-        // console.log("TIMEUP put Here HandlerFunc for(WrongAnswer/Timeup)");
         onTimeUp()
       }, 1000);
       return;

@@ -32,12 +32,12 @@ body {
     transition: transform 0.3s ease;
   }
   
-  div img:hover {
+  .pokePic:hover {
     transform: scale(1.3);
   }
   
   
-  div p {
+  .pokePara {
     font-size: 18px;
     margin-bottom: 10px;
   }

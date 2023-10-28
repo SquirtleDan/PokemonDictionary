@@ -1,0 +1,16 @@
+.homelink{
+    background-color: #3b4cca;
+    color: #649e37;
+    margin: 2%;
+  }
+
+  /* .homelink img{
+    
+  } */
+
+  .homedesign{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }

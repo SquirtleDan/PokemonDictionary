@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Quiz.css'
 import axios from 'axios'
 import Gameover from './Gameover';
@@ -13,16 +13,15 @@ export default function Quiz() {
     const [singlePokemon, setSinglePokemon] = useState(null);
     const [singlePokeData, setSinglePokeData] = useState(false);
     const [englishNames, setEnglishNames] = useState(null);
-    const [score, setScore] = useState(0);
+    const [score, setScore] = useState(null);
     const [lives, setLives] = useState(3)
     const [imageUrl, setImageUrl] = useState(null);
     const [finalScore, setFinalScore] = useState(null);
     const [quizResults, setQuizResults] = useState(null);
     const [quizResultsSent, setQuizResultsSent] = useState(false);
+    const [time, setTime] = useState(10);
+    const [timeCount, setTimeCount] = useState(0);
 
-    //Navigation
-    const navigate = useNavigate();
- 
     //Use Effects
 
     //Get Data
@@ -48,7 +47,7 @@ export default function Quiz() {
             setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
             setEnglishNames(randPoke)
           }
-          
+          console.log(timeCount)
         
     }, [dataFetched, score, lives]);
 
@@ -80,7 +79,7 @@ export default function Quiz() {
 
     //create quiz result object
     useEffect(() => {
-        if(finalScore) {
+        if(finalScore || timeCount === 3 || lives === 0) {
             const obj = {
                 accountId: 1,
                 gameModeId: 1,
@@ -88,7 +87,8 @@ export default function Quiz() {
             }
             setQuizResults(obj);
         }
-    }, [finalScore])
+        
+    }, [finalScore, timeCount, lives])
 
     //send quiz result back to server
     useEffect(() => {
@@ -99,7 +99,7 @@ export default function Quiz() {
     }, [quizResults]);
 
     useEffect(() =>{
-
+       
     }, [quizResultsSent])
 
    
@@ -149,37 +149,35 @@ export default function Quiz() {
         else if(lives > 0 && event !== singlePokemon.id){
             setLives((prev)=> prev = prev - 1)
         }
-        // else if(lives === 0){
-        //     axios.post("https://pokedictionarygamedev.onrender.com/")
-        // }
-        //if lives = 0 >>>redirect to game over component
+        
     }
     
     //if timer is up
     function handleTimeIsUp() {
         if (lives > 0) {
             setLives((prev) => prev -1);
+            setTimeCount((prev) => prev + 1)
         }
     }
-      
-      
+
+    
     return (
         <>
         {!quizResultsSent ?
          <>
      
-        <h1>Quiz</h1>
+        <h1 className='quiztext'>Quiz</h1>
 
         
-        <h2>Current Score: {score}</h2>
-        <h3>HP: {lives}</h3>
+        <h2 className='quiztext'>Current Score: {score}</h2>
+        <h3 className='quiztext'>HP: {lives}</h3>
 
 
         
         <div className='question-card'>
            
             {singlePokeData? 
-            <div>
+            <div className='quiztext'>
                 <img src={imageUrl} alt=""/>
                 <br />
                 {singlePokemon.nameJapaneseHrkt}
@@ -191,13 +189,13 @@ export default function Quiz() {
           
             {singlePokeData?
             <>
-                <button className='english' id='button1' key="1" onClick={() => handleClick(englishNames[0].id)}>{englishNames[0].nameEnglish}</button>
-                <button className='english' id='button2' key="2" onClick={() => handleClick(englishNames[1].id)}>{englishNames[1].nameEnglish}</button>
-                <button className='english' id='button3' key="3" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
-                <button className='english' id='button4' key="4" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
+                <button className='english' id='button1' key="first" onClick={() => handleClick(englishNames[0].id)}>{englishNames[0].nameEnglish}</button>
+                <button className='english' id='button2' key="second" onClick={() => handleClick(englishNames[1].id)}>{englishNames[1].nameEnglish}</button>
+                <button className='english' id='button3' key="third" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
+                <button className='english' id='button4' key="fourth" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
                 <br/>
                 <Link to="/home"><button>Give Up?</button></Link>
-                <Timer duration={10} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
+                <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
 
 
@@ -205,7 +203,7 @@ export default function Quiz() {
         </div> 
         
         </>
-        : <Gameover score={finalScore}/>}
+        : <Gameover score={finalScore} quizResults={quizResultsSent} quizResultsSent={setQuizResultsSent}/>}
 
             
         

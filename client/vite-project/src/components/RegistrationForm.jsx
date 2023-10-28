@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './RegistrationForm.css'
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import LoginForm from './LoginForm';
+
 
 export default function RegistrationForm () {
+    const [statusCode, setStatusCode] = useState(null);
+    const [correctStatusCode, setCorrectStatusCode] = useState(false);
+
+
+    useEffect(() => {
+        if(statusCode === 201){
+          console.log(statusCode)
+          setCorrectStatusCode(true);
+        }       
+    }, [statusCode])
+
     const form = useForm({
         defaultValues: {
             username: "",
@@ -14,6 +27,7 @@ export default function RegistrationForm () {
             last_name: ""
         }
     });
+
     const { register, control, handleSubmit, formState } = form;
     const { errors } = formState;
 
@@ -23,13 +37,20 @@ export default function RegistrationForm () {
         // const url = "http://localhost:8080/createNewAccount";
         const returnedData = await axios.post(url, data);
         console.log(returnedData);
+
+        if(returnedData){
+            setStatusCode(returnedData.status);
+        }
+        
             // axios will return status code 200 for correct, 401 for incorrect
             // you can use this to redirect
     }
 
     return (
-        <div>
-            <h1>Registration Form</h1>
+        <>
+        {!correctStatusCode ?
+            <div>
+            <h1 className='loginHeader'>Registration Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className='form-control'>
                     <label htmlFor='username'>Username</label>
@@ -108,7 +129,11 @@ export default function RegistrationForm () {
 
                 <button type='submit'>Register</button>
             </form>
-            <Link to="/"><button>Back To Login</button></Link>
-        </div>
+            <Link className="link "to="/"><button>Back To Login</button></Link>
+            </div> :
+
+            <LoginForm/>}
+
+        </>
     );
 };
