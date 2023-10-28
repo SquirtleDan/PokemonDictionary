@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import './Quiz.css'
 import axios from 'axios'
 import Gameover from './Gameover';
@@ -97,14 +97,7 @@ export default function Quiz() {
         }
     }, [quizResults]);
 
-    // useEffect(() => {
-    //     if (quizResultsSent) {
-    //         navigate("/gameover", {state:{score: finalScore}});
-    //     }
-    // }, [quizResultsSent]);
    
-
-
     //helper function
     const getName = async function () {
         const pokemonData = await axios.get("https://pokedictionarygamedev.onrender.com/GetAllPokemon");
@@ -191,7 +184,11 @@ export default function Quiz() {
                 <button className='english' id='button2' key="2" onClick={() => handleClick(englishNames[1].id)}>{englishNames[1].nameEnglish}</button>
                 <button className='english' id='button3' key="3" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
                 <button className='english' id='button4' key="4" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
+                <br/>
+                <Link to="/home"><button>Give Up?</button></Link>
             </> 
+
+
             : <div>Loading</div>}
         </div> 
         </>
