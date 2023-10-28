@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Timer.css";
 
 export default function Timer({ duration = 10 ,onTimeUp}) {
-  //pass the HandlerFunc after "duration =10"
+ 
   const [timeLeft, setTimeLeft] = useState(duration);
 
 
