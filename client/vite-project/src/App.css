@@ -19,4 +19,6 @@ input[type="text"] {
   line-height: 1.42857143;
   color: #3b4cca;
   background-image: none;
+  border: none;
+  outline: none;
 }
