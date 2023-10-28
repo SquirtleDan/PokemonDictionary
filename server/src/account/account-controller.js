@@ -54,7 +54,7 @@ module.exports = {
         email: accountData.email
       }
       console.log("success");
-      res.status(200).send(JSON.stringify(sentAccountData ));
+      res.status(200).send(JSON.stringify(sentAccountData));
 
       // const sessionToken = generateSessionToken();
       // console.log(sessionToken);

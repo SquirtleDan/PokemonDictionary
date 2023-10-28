@@ -1,3 +1,4 @@
+const { all } = require("axios");
 const scoreModel = require("./score-model");
 
 module.exports = {
@@ -30,11 +31,14 @@ module.exports = {
       res.status(500).send("Failed to save score");
     }
   },
-  //get rankings, not yet verified
-  async getRanking(req, res) {
+  //get rankings
+  async getAllRanking(req, res) {
     try {
-      const ranking = await scoreModel.getRanking(req.body.value);
-      res.send({ ranking: ranking });
+      const allRanking = await Promise.all([
+        scoreModel.getRanking(1),
+        scoreModel.getRanking(2)
+      ]);
+      res.send(allRanking);
     } catch (error) {
       res.status(500).send("Failed to Get your Ranking");
     }
