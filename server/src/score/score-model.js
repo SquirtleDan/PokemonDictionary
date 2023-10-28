@@ -24,11 +24,27 @@ module.exports = {
       value: value
     });
   },
-  //get Ranking(get all data=> sort => get Arr[indexnum]), not yet verifed
-  getRanking: async (value) => {
-    const allScoreData = await knex("score").select("value");
-    const allScoreDataArr = allScoreData.map((eachData) => eachData.value);
-    const ranking = allScoreDataArr.sort((a, b) => b - a);
-    return ranking.indexOf(value) + 1;
+  //get Ranking
+  getRanking: (gameModeId) => {
+    return knex("score")
+      .join("account", "account.id", "=", "score.account_id")
+      .select({
+        value: "value",
+        gameModeId: "game_mode_id",
+        accountId: "account_id",
+        username: "username"
+      })
+      .from("score")
+      .where({
+        game_mode_id: gameModeId
+      })
+      .orderBy("value", "desc")
+      .limit(10);
+      ;
   },
 };
+
+    // const allScoreData = await knex("score").select("value");
+    // const allScoreDataArr = allScoreData.map((eachData) => eachData.value);
+    // const ranking = allScoreDataArr.sort((a, b) => b - a);
+    // return ranking.indexOf(value) + 1;

@@ -49,10 +49,7 @@ app.post("/score/save", scoreController.saveScore);
   // to access: localhost:8080/score/save
   // body, raw, json
   // ex: {"accountId": 1, "gameModeId": 1, "value": 10}
+app.get("/score/getAllRanking", scoreController.getAllRanking);
+  // to access: localhost:8080/score/getAllRanking
 
 
-
-
-// UNVERIFIED END POINTS
-// LEADERBOARD
-app.get("/score/ranking", scoreController.getRanking)
