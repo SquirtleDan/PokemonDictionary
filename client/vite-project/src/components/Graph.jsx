@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './Graph.css'
-import { CategoryScale, Chart as ChartJS, LineElement, LinearScale, PointElement } from "chart.js";
+import { CategoryScale, Chart as ChartJS, LineElement, LinearScale, PointElement } from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 ChartJS.register(
