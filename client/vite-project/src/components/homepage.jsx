@@ -1,26 +1,16 @@
-import { useState } from "react"
+import { Link } from 'react-router-dom'
 import './Homepage.css'
 
 export default function Homepage() {
-//states
-const [dictionaryVisible, setDictionaryVisible] = useState(false);
-const [gameVisible, setGameVisible] = useState(false);
-  
-  
-//useEffect
-
-    
-  
-  
-//handler
-  
 
   
   
 return (
     <>
-    <div>holder</div>
-    
+    <div></div>
+    <Link to="/dictionary"><button>Dictionary</button></Link>
+    <Link to="/quiz"><button>Quiz</button></Link>
+    <Link to="/leaderboard"><button>Leaderboard</button></Link>
     </>
     )
 }

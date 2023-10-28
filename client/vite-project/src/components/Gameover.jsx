@@ -1,11 +1,17 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './Gameover.css'
 
-export default function Gameover() {
-const [placer, setPlace] = useState(null)
+export default function Gameover(props) {
+    const score = props.score;
 
 
     return(
-        <div></div>
+        <>
+        <div>Game Over</div>
+        <div>{score}</div>
+        <Link to="/home"><button>Home</button></Link>
+        <Link to="/leaderboard"><button>Leaderboard</button></Link>
+        </>
     )
 }
