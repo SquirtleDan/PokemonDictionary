@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './Quiz.css'
 import axios from 'axios'
+import Gameover from './Gameover';
 'use strict';
 
 export default function Quiz() {
@@ -15,6 +17,10 @@ export default function Quiz() {
     const [imageUrl, setImageUrl] = useState(null);
     const [finalScore, setFinalScore] = useState(null);
     const [quizResults, setQuizResults] = useState(null);
+    const [quizResultsSent, setQuizResultsSent] = useState(false);
+
+    //Navigation
+    const navigate = useNavigate();
  
     //Use Effects
 
@@ -87,8 +93,15 @@ export default function Quiz() {
     useEffect(() => {
         if (quizResults) {
             sendResults();
+            setQuizResultsSent(true)
         }
     }, [quizResults]);
+
+    // useEffect(() => {
+    //     if (quizResultsSent) {
+    //         navigate("/gameover", {state:{score: finalScore}});
+    //     }
+    // }, [quizResultsSent]);
    
 
 
@@ -148,22 +161,19 @@ export default function Quiz() {
       
     return (
         <>
-        {/* Header */}
+        {!quizResultsSent ?
+         <>
+     
         <h1>Quiz</h1>
 
-        {/* Current Score */}
+        
         <h2>Current Score: {score}</h2>
         <h3>HP: {lives}</h3>
 
-        {/* Final Results */}
-        {/* <div className='final-results'>
-            <h1>Final Results</h1>
-            <button>Restart Game?</button>
-        </div> */}
 
-        {/* Question Card */}
+        
         <div className='question-card'>
-            {/* Get Pokemon Image */}
+           
             {singlePokeData? 
             <div>
                 <img src={imageUrl} alt=""/>
@@ -174,7 +184,7 @@ export default function Quiz() {
             </div> 
             : <div>Loading</div>}
 
-            {/* Pokemon English Names Buttons */}
+          
             {singlePokeData?
             <>
                 <button className='english' id='button1' key="1" onClick={() => handleClick(englishNames[0].id)}>{englishNames[0].nameEnglish}</button>
@@ -183,7 +193,12 @@ export default function Quiz() {
                 <button className='english' id='button4' key="4" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
             </> 
             : <div>Loading</div>}
-        </div>
+        </div> 
+        </>
+        : <Gameover score={finalScore}/>}
+
+            
+        
         </>
     );
 }

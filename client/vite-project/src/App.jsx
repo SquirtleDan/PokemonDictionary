@@ -22,10 +22,10 @@ function App() {
       <Route path="home" element={ <Homepage/> }/>
       <Route path="/dictionary" element= { <Dictionary /> } />
       <Route path="/quiz" element= {<Quiz/>}  />
-      <Route path="gameover" element= {<Gameover />}/>
-      <Route path='graph' element={ <Graph/>}/>
-      <Route path='leaderboard' element={ <Leaderboard/>}/>
-      <Route path='timer' element= { <Timer/>}/>
+      <Route path="/gameover" element= {<Gameover />}/>
+      <Route path='/graph' element={ <Graph/>}/>
+      <Route path='/leaderboard' element={ <Leaderboard/>}/>
+      <Route path='/timer' element= { <Timer/>}/>
       </Routes>
   </Router>
   );
