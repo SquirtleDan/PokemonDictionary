@@ -98,6 +98,10 @@ export default function Quiz() {
         }
     }, [quizResults]);
 
+    useEffect(() =>{
+
+    }, [quizResultsSent])
+
    
     //helper function
     const getName = async function () {
@@ -193,12 +197,13 @@ export default function Quiz() {
                 <button className='english' id='button4' key="4" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
                 <br/>
                 <Link to="/home"><button>Give Up?</button></Link>
+                <Timer duration={10} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
 
 
             : <div>Loading</div>}
         </div> 
-        <Timer duration={10} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
+        
         </>
         : <Gameover score={finalScore}/>}
 
