@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import './Quiz.css'
 import axios from 'axios'
 import Gameover from './Gameover';
+import Timer from './Timer';
 'use strict';
 
 export default function Quiz() {
@@ -153,7 +154,7 @@ export default function Quiz() {
     //if timer is up
     function handleTimeIsUp() {
         if (lives > 0) {
-            setLives(prev => prev - 1);
+            setLives((prev) => prev -1);
         }
     }
       

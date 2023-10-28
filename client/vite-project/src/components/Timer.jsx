@@ -21,7 +21,7 @@ export default function Timer({ duration = 10 ,onTimeUp}) {
     }, 1000);
 
     return () => clearTimeout(timerId);
-  }, [timeLeft,onTimeUp]);
+  }, [timeLeft]);
 
   return (
     <div className="timer-container">
