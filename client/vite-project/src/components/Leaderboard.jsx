@@ -41,8 +41,8 @@ export default function Leaderboard() {
       <div> 
   
         <h2>Leaderboard (Game Mode {gameMode})</h2>
-        <button className="game-mode-button" onClick={() => setGameMode(1)}>Game Mode 1</button>
-        <button className="game-mode-button" onClick={() => setGameMode(2)}>Game Mode 2</button>
+        <button className="game-mode-button" onClick={() => setGameMode(1)}>Timer</button>
+        <button className="game-mode-button" onClick={() => setGameMode(2)}>Stock</button>
         <Link to="/home"><button className="leader-back-home"> Home</button></Link>
         <table className="score-table">
           <thead>
