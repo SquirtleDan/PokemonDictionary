@@ -18,7 +18,7 @@ module.exports = {
   },
 
   // Get score history
-  getScoreHistory(accountId, gameModeId) {
+  getScoreHistory(accountId, gameModeId, sessionDateTimeOldest) {
     return knex 
       .select({
         accountId: "account_id",
@@ -31,8 +31,9 @@ module.exports = {
         account_id: accountId,
         game_mode_id: gameModeId
       })
+      .where("session_date_time", ">=", sessionDateTimeOldest)
       .orderBy("session_date_time", "desc")
-      .limit(100);
+      ;
   },
 
   // Save score data
