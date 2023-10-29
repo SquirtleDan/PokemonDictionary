@@ -187,7 +187,7 @@ export default function QuizEtoKorean() {
          <>
      
         <h1 className='quiztext'>Quiz</h1>
-
+        <br/>
         
         <h2 className='quiztext'>Current Score: {score}</h2>
         <h3 className='quiztext'>HP: {lives}</h3>
@@ -205,6 +205,9 @@ export default function QuizEtoKorean() {
             </div> 
             : <div>Loading</div>}
 
+            <br/>
+            <br/>
+
           
             {singlePokeData?
             <>
@@ -213,7 +216,8 @@ export default function QuizEtoKorean() {
                 <button className='language' id='button3' key="third" onClick={() => handleClick(names[2].id)}>{names[2].nameKorean}</button>
                 <button className='language' id='button4' key="fourth" onClick={() => handleClick(names[3].id)}>{names[3].nameKorean}</button>
                 <br/>
-                
+                <br/>
+
                 <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
             
@@ -223,7 +227,7 @@ export default function QuizEtoKorean() {
             <br/>
           
         </div> 
-        <Link to="/home"><button>Give Up?</button></Link>
+        <Link to="/home"><button className='language'>Give Up?</button></Link>
             {answer ?
             <>
             <div className='quiztext'>{answerResult}</div>

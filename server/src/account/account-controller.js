@@ -8,7 +8,6 @@ const app = express()
 
 // Access the session as req.session
 app.get('/', function(req, res, next) {
-	console.log(req.session)
   res.send('Hello World!')
 })
 //helperFunction
@@ -28,21 +27,18 @@ module.exports = {
       
       // Throw error if username is wrong
       if (!accountData) {
-        console.log("username wrong");
+      
         throw new Error ();
       }
   
       // Create hash password
       const saltedInputPassword = accountData.salt + inputPassword ;
-      // console.log(saltedInputPassword);
+   
       const hash = crypto.createHash("sha256");
       const hashSaltedInputPassword = hash.update(saltedInputPassword).digest("hex");
   
       // Throw error if password is wrong
       if (hashSaltedInputPassword !== accountData.hash_salted_password) {
-        // console.log(hashSaltedInputPassword);
-        // console.log(accountData.hash_salted_password);
-        console.log("wrong password");
         throw new Error ();
       }
 
@@ -51,11 +47,11 @@ module.exports = {
         accountID: accountData.id,
         username: accountData.username,
       }
-      console.log("log in success");
+   
       res.status(200).send(JSON.stringify(sentAccountData));
 
       // const sessionToken = generateSessionToken();
-      // console.log(sessionToken);
+    
 
     // const oneDay = 1000 * 60 * 60 * 24;
     // app.use(session({
@@ -65,9 +61,9 @@ module.exports = {
     //   resave: false 
     // }));
 
-    // console.log(req.session);
+
     // const sessionToken = generateSessionToken();
-    // console.log(sessionToken);
+    
     // res.cookie("testtoken", sessionToken, {maxAge: 360000}).status(200).send('Cookie added!');
     
 
@@ -81,7 +77,7 @@ module.exports = {
     try {
       // Destructuring req.body data
       const { username, password, email, firstName, lastName } = req.body;
-      // console.log(username, password, email, firstName, lastName);
+     
       
 
       // Check if username and email is unique, if either already exist, throw error
@@ -89,27 +85,23 @@ module.exports = {
       const accountDataByEmail = await accountModel.getDataByEmail(email);
 
       if (accountDataByUsername) {
-        console.log(accountDataByUsername);
-        console.log("Username already exist");
+        
         throw new Error ("username already exist");
       }
 
       if (accountDataByEmail) {
-        console.log(accountDataByEmail);
-        console.log("Email already exist");
+      
         throw new Error ("email already exist");
       }
 
       // Create salt
       const salt = crypto.randomBytes(6).toString("hex");
       const saltedPassword = salt + password;
-      // console.log(saltedPassword);
-
+      
       // Hash-ing password
       const hash = crypto.createHash("sha256");
       const hashSaltedPassword = hash.update(saltedPassword).digest("hex");
-      // console.log(hashSaltedPassword);
-
+      
       // Create new account data
       const newAccountData = {
         username: username,
@@ -119,7 +111,7 @@ module.exports = {
         firstName: firstName,
         lastName: lastName,
       };
-      // console.log(newAccountData);
+     
 
       await accountModel.createNewAccount(newAccountData);
       res.status(201).send("Account created");

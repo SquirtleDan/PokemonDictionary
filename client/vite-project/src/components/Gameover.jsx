@@ -12,26 +12,35 @@ export default function Gameover(props) {
     }
 
     return(
-        <>
+    
+        <div className="completeContainer">
         <div className="gameoverContainer">
-
+        <br/>
+        <br/>
+        <br/>
         <div className="gameover">Game Over
-        <img src="https://i.ibb.co/L514Ttn/gameover.jpg" alt="GameOver" />
+        <br/>
+        <img className="gameover-pic" src="https://i.ibb.co/L514Ttn/gameover.jpg" alt="GameOver" />
         </div>
         </div>
-
-        
+        <br/>
+        <br/>
         <div className="gameover">Final Score: {score}
-        <img src="https://i.ibb.co/7JgMBZC/xpup.jpg" alt="FinalScore" />
+        <br/>
+        <br/>
+        <img className="gameover-pic" src="https://i.ibb.co/7JgMBZC/xpup.jpg" alt="FinalScore" />
         </div>
-
+        <br/>
+        <br/>
         <div className="gameover">
         <Link  to="/home"><button className='link'>Home</button></Link>
+        <br/>
         <Link  to="/leaderboard"><button className='link'>Leaderboard</button></Link>
+        <br/>
         <button className='link'onClick={handleClick}>Play Again?</button>
         </div>
 
+        </div>
         
-        </>
     )
 }

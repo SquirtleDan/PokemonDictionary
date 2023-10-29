@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom';
-import './QuizEtoJ.css'
 import axios from 'axios'
 import Gameover from './Gameover';
 import Timer from './Timer';
@@ -187,7 +186,7 @@ export default function QuizEtoJ() {
          <>
      
         <h1 className='quiztext'>Quiz</h1>
-
+        <br/>
         
         <h2 className='quiztext'>Current Score: {score}</h2>
         <h3 className='quiztext'>HP: {lives}</h3>
@@ -205,7 +204,7 @@ export default function QuizEtoJ() {
             </div> 
             : <div>Loading</div>}
 
-          
+            <br/>
             {singlePokeData?
             <>
                 <button className='language' id='button1' key="first" onClick={() => handleClick(names[0].id)}>{names[0].nameJapaneseHrkt}</button>
@@ -213,7 +212,7 @@ export default function QuizEtoJ() {
                 <button className='language' id='button3' key="third" onClick={() => handleClick(names[2].id)}>{names[2].nameJapaneseHrkt}</button>
                 <button className='language' id='button4' key="fourth" onClick={() => handleClick(names[3].id)}>{names[3].nameJapaneseHrkt}</button>
                 <br/>
-                
+                <br/>
                 <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
             
@@ -223,7 +222,7 @@ export default function QuizEtoJ() {
             <br/>
           
         </div> 
-        <Link to="/home"><button>Give Up?</button></Link>
+        <Link to="/home"><button className='language'>Give Up?</button></Link>
             {answer ?
             <>
             <div className='quiztext'>{answerResult}</div>

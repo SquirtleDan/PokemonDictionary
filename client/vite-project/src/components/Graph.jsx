@@ -36,20 +36,19 @@ export default function Graph() {
     // Retrieve player ID
     const playerId = useContext(playerInfo);
     // const playerId = 1;
-    // console.log(playerId);
+    
 
     // Retrieve player scores data
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
     const sessionDateTimeOldest = new Date(currentYear, currentMonth).toISOString();
-    // console.log(sessionDateTimeOldest);
+   
 
     const url = `https://pokedictionarygamedev.onrender.com/score/getScoreHistory/${playerId}/${sessionDateTimeOldest}`;
-    // const url = `http://localhost:8080/score/getScoreHistory/${playerId}/${sessionDateTimeOldest}`;
     const returnedData = await axios.get(url);
     const returnedScores = returnedData.data[gameMode];
-    // console.log(returnedScores);
+
 
     // Create empty month data object
     const monthDataObject = {};
@@ -64,12 +63,12 @@ export default function Graph() {
       if (monthDataObject[date] < score.value) monthDataObject[date] = score.value;
         // this will only take larger value if there is duplicate in the same date
     })
-    // console.log(monthDataObject);
+   
 
     // Extract the values
     const values = [];
     for (let i = 1; i <= 31; i++) values.push(monthDataObject[i]);
-    // console.log(values);
+   
     setScores(values);
 
     // Set month
@@ -131,11 +130,11 @@ export default function Graph() {
   return(
     <div className="graph-body">
       <div className="graph-header">
-        <Link  to="/home"><button className='link'>Home</button></Link>
+        <Link  to="/home"><button className="link">Home</button></Link>
         <p className="graph-game_mode_title">Game Mode:</p>
         <div className="graph-game_mode_div">
           <button className="graph-game_mode_button" onClick={gameModeToSuddenDeath}>Sudden Death</button>
-          <button className="graph-game_mode_button" onClick={gameModeToTimer}>Timer</button>
+          <button className="graph-game_mode_button_timer" onClick={gameModeToTimer}>Timer</button>
         </div>
       </div>
       <h2 className="graph-chart_title">Scores in {currentMonth}:</h2>

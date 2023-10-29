@@ -1,0 +1,16 @@
+.language {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    box-sizing: border-box;
+    line-height: 0px;
+  }
+
+  .quiztext{
+    color: #FFDE00;
+  }

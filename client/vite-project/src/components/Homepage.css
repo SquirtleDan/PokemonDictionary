@@ -2,8 +2,18 @@
     background-color: #3b4cca;
     color: #ffffff;
     margin: 2%;
-    width: 200px;
-    height: 70px;
+   
+    height: fit-content;
+    width: fit-content;
+  }
+
+  .homelinkback{
+    background-color: #3b4cca;
+    color: #FFDE00;
+    margin: 2%;
+   
+    height: fit-content;
+    width: fit-content;
   }
 
   /* .homelink img{

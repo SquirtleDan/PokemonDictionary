@@ -188,7 +188,7 @@ export default function QuizEtoChinese() {
          <>
      
         <h1 className='quiztext'>Quiz</h1>
-
+        <br/>
         
         <h2 className='quiztext'>Current Score: {score}</h2>
         <h3 className='quiztext'>HP: {lives}</h3>
@@ -205,7 +205,7 @@ export default function QuizEtoChinese() {
                 <br />
             </div> 
             : <div>Loading</div>}
-
+     <br/>
           
             {singlePokeData?
             <>
@@ -214,7 +214,7 @@ export default function QuizEtoChinese() {
                 <button className='language' id='button3' key="third" onClick={() => handleClick(names[2].id)}>{names[2].nameChineseTraditional}</button>
                 <button className='language' id='button4' key="fourth" onClick={() => handleClick(names[3].id)}>{names[3].nameChineseTraditional}</button>
                 <br/>
-                
+                <br/>
                 <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
             
@@ -224,7 +224,7 @@ export default function QuizEtoChinese() {
             <br/>
           
         </div> 
-        <Link to="/home"><button>Give Up?</button></Link>
+        <Link to="/home"><button className='language'>Give Up?</button></Link>
             {answer ?
             <>
             <div className='quiztext'>{answerResult}</div>

@@ -40,7 +40,7 @@ export default function Leaderboard() {
     return (
       <div> 
   
-        <h2>Leaderboard (Game Mode {gameMode})</h2>
+        <h2 className="leadBanner">Leaderboard (Game Mode {gameMode})</h2>
         <button className="game-mode-button" onClick={() => setGameMode(1)}>Timer</button>
         <button className="game-mode-button" onClick={() => setGameMode(2)}>Stock</button>
         <Link to="/home"><button className="leader-back-home"> Home</button></Link>

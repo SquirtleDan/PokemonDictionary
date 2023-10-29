@@ -30,7 +30,6 @@ export default function RegistrationForm () {
     const { errors } = formState;
 
     const onSubmit = async (data) => {
-        console.log(data)
         const url = "https://pokedictionarygamedev.onrender.com/createNewAccount";
         const returnedData = await axios.post(url, data).catch(error => {
             window.alert(error.response.data);
@@ -49,7 +48,7 @@ export default function RegistrationForm () {
         {!correctStatusCode ?
             <div>
             <h1 className='loginHeader'>Registration Form</h1>
-            <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <form className="registrationForm" onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className='form-control'>
                     <label htmlFor='username'>Username</label>
                     <input 
@@ -126,10 +125,10 @@ export default function RegistrationForm () {
                     <p className='error'>{errors.last_name?.message}</p>
                 </div>
 
-                <button type='submit'>Register</button>
+                <button className="link" type='submit'>Register</button>
             </form>
 
-            <Link className="link "to="/"><button>Back To Login</button></Link>
+            <Link to="/"><button className="link" >Back To Login</button></Link>
             </div> :
 
             <LoginForm/>}

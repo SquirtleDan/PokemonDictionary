@@ -29,6 +29,10 @@
   .score-table tr:hover {
     background-color: #f1f1f1;
   }
+
+  .leadBanner{
+    color:  yellow;
+  }
   
   .rank-1 {
     color: red;

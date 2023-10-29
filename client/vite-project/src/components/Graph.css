@@ -44,9 +44,7 @@
     /* width: 70%; */
 }
 
-.graph-game_mode_button {
-    margin: 3px;
-}
+
 
 .graph-game_mode_button:hover {
     background-color: yellow;
@@ -64,4 +62,21 @@
     font-weight: bold;
     margin: 15px;
 }
+.graph-game_mode_button{
+        background-color: #3b4cca;
+        color: #FFDE00;
+        margin: 2%;
+        height: fit-content;
+        width: fit-content;
+        
+}
+
+.graph-game_mode_button_timer{
+    background-color: #3b4cca;
+        color: #FFDE00;
+        margin: 2%;
+        height: 113.19px;
+        width: fit-content;
+}
+
 

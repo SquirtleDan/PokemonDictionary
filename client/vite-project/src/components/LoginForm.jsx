@@ -85,7 +85,7 @@ export default function LoginForm() {
                 </div>         
                 <button className='link 'type='submit'>Log In</button>
             </form>
-            <Link to="registration"><button  className='link' >Register</button></Link>
+            <Link to="/registration"><button  className='link' >Register</button></Link>
         </div>:
         <Homepage playerId={playerId}/> }
         </>

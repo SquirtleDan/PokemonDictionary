@@ -4,3 +4,21 @@
     flex-direction: column;
 }
 
+.gameover-pic {
+    height: 150px;
+    width: 150px;
+    object-fit: contain;
+    border-radius: 50%;
+  }
+
+  .completeContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .link {
+    line-height: 0px;
+  }
