@@ -8,7 +8,7 @@ label {
   .loginHeader{margin:40px;
     color: #FFDE00
   }
-  
+
   input[type="text"] {
     display: block;
     width: 400px;
@@ -16,6 +16,7 @@ label {
     font-size: 14px;
     line-height: 1.42857143;
     color: #FFDE00;
+
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -29,6 +30,7 @@ label {
     color: red;
     font-size: 12px;
     text-align: left;
+
   }
 
   button.link {
@@ -51,4 +53,5 @@ label {
   button {
     width: 150px;
     height: 50px;
+
   }

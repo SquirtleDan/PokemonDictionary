@@ -16,7 +16,6 @@ export default function RegistrationForm () {
           setCorrectStatusCode(true);
         }       
     }, [statusCode])
-
     const form = useForm({
         defaultValues: {
             username: "",
@@ -112,11 +111,12 @@ export default function RegistrationForm () {
                 </div>
 
                 <div className='form-control'>
-                    <label htmlFor='lastName'>Last Name</label>
+                  <label htmlFor='lastName'>Last Name</label>
                     <input 
                         type='text' 
                         id='lastName' 
                         {...register("lastName", {
+
                             required: {
                                 value: true,
                                 message: "Last name is required."
@@ -128,6 +128,7 @@ export default function RegistrationForm () {
 
                 <button type='submit'>Register</button>
             </form>
+
             <Link className="link "to="/"><button>Back To Login</button></Link>
             </div> :
 
@@ -136,3 +137,4 @@ export default function RegistrationForm () {
         </>
     );
 };
+

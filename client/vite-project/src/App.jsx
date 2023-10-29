@@ -1,3 +1,4 @@
+<<<<<<< development
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoginForm from './components/LoginForm';
@@ -19,12 +20,11 @@ import QuizEtoSpanish from './components/QuiztoSpanish';
 import QuizEtoItalian from './components/QuiztoItallian';
 
 
-
-
 function App() {
  
 
   return (
+
     <Router>
       <Routes>
   
@@ -48,7 +48,6 @@ function App() {
       </Routes>
   </Router>
   );
-  
 }
 
 export default App
