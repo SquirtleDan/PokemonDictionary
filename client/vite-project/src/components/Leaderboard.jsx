@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import './Leaderboard.css'
 import axios from 'axios';
+import { Link } from 'react-router-dom'
+
 import { playerInfo } from "./LoginForm";
 
 export default function Leaderboard() {
@@ -36,10 +38,12 @@ export default function Leaderboard() {
   
   
     return (
-      <div>
+      <div> 
+  
         <h2>Leaderboard (Game Mode {gameMode})</h2>
-        <button onClick={() => setGameMode(1)}>Game Mode 1</button>
-        <button onClick={() => setGameMode(2)}>Game Mode 2</button>
+        <button className="game-mode-button" onClick={() => setGameMode(1)}>Game Mode 1</button>
+        <button className="game-mode-button" onClick={() => setGameMode(2)}>Game Mode 2</button>
+        <Link to="/home"><button className="leader-back-home"> Home</button></Link>
         <table className="score-table">
           <thead>
             <tr>
@@ -58,6 +62,7 @@ export default function Leaderboard() {
             ))}
           </tbody>
         </table>
-      </div>
+        </div>
+ 
     );
 }
