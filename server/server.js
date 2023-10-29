@@ -55,10 +55,11 @@ app.get("/score/getAllRanking", scoreController.getAllRanking);
   // to access: localhost:8080/score/getAllRanking
   // will return an array of array (based on gameModeId) of objects {value, gameModeId, accountId, username}
 
-app.get("/score/getScoreHistory/:id", scoreController.getScoreHistory);
+app.get("/score/getScoreHistory/:id/:sessionDateTimeOldest", scoreController.getScoreHistory);
   // this has parameter "id" that must be specified
+  // this has parameter "session date time oldest" in ISO string that must be specified
   // will return an array of array (based on gameModeId) of objects {accountId, value, gameModeId, sessionDateTime}
     // note that the date and time is ISOstring and if it want to be used, you need newDate(dateSaved)
-    // it will return the first 100 scores only and ordered by the latest first
-  // to access: localhost:8080/score/getScoreHistory/3
+    // it will return the scores ordered by the latest first
+  // to access: localhost:8080/score/getScoreHIstory/1/2023-10-15T01:31:58.577Z
 

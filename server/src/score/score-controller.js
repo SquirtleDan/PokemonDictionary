@@ -47,10 +47,11 @@ module.exports = {
 
   async getScoreHistory(req, res) {
     try {
+      const sessionDateTimeOldest = req.params.sessionDateTimeOldest;
       const accountId = Number(req.params.id);
       const retrievedScoreHistory = await Promise.all([
-        scoreModel.getScoreHistory(accountId, 1),
-        scoreModel.getScoreHistory(accountId, 2)
+        scoreModel.getScoreHistory(accountId, 1, sessionDateTimeOldest),
+        scoreModel.getScoreHistory(accountId, 2, sessionDateTimeOldest)
       ]);
       res.status(200).send(JSON.stringify(retrievedScoreHistory));
     } catch (error) {
