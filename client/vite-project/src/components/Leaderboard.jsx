@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import './Leaderboard.css'
 import axios from 'axios';
+import { playerInfo } from "./LoginForm";
 
 export default function Leaderboard() {
     const [rankings, setRankings] = useState({ 1: [], 2: [] });
     const [gameMode, setGameMode] = useState(1);
+
+    const accountId = useContext(playerInfo);
   
   const createRanking = (data) => {
     const wholeData = data.filter(score => score.value !== null);
