@@ -31,9 +31,9 @@ function Dictionary() {
 
   const SearchBar = ({ value, onChange, onClear }) => {
     return (
-      <div>
-        <input ref={inputRef} type="text" value={value} placeholder="Search Pokemon" onChange={(event) => onChange(event.target.value)} />
-        <button onClick={onClear}>Clear</button>
+      <div className="dictionary-search-bar-container">
+        <input className="dictionary-search-bar" ref={inputRef} type="text" value={value} placeholder="Search Pokemon" onChange={(event) => onChange(event.target.value)} />
+        <button className="dictionary-search-clear" onClick={onClear}>Clear</button>
       </div>
     );
   };
@@ -43,7 +43,7 @@ function Dictionary() {
       <div>
         {pokemons.map((pokemon) => (
           <img
-            className='pokePic'
+            className='dictionary-poke-pic'
             key={pokemon.id}
             src={pokemon.frontPicture}
             alt={pokemon.nameJapaneseRomaji}
@@ -57,34 +57,43 @@ function Dictionary() {
   const PokemonDetail = ({ pokemon, back }) => {
     return (
       <div>
-        <img className='pokePic' src={pokemon.frontPicture} alt={pokemon.nameJapaneseRomaji} />
+        <img className='single-poke-pic' src={pokemon.frontPicture} alt={pokemon.nameJapaneseRomaji} />
         <p className='pokePara'>No.{String(pokemon.id).padStart(4, '0')}</p>
         <p className='pokePara'>Japanese Name: {pokemon.nameJapaneseHrkt}</p>
         <p className='pokePara'>Pronunciation: {pokemon.nameJapaneseRomaji}</p>
         <p className='pokePara'>English Name: {pokemon.nameEnglish}</p>
+        <p className='pokePara'>Korean Name: {pokemon.nameKorean}</p>
+      <p className='pokePara'>Chinese Traditional Name: {pokemon.nameChineseTraditional}</p>
+      <p className='pokePara'>French Name: {pokemon.nameFrench}</p>
+      <p className='pokePara'>German Name: {pokemon.nameGerman}</p>
+      <p className='pokePara'>Spanish Name: {pokemon.nameSpanish}</p>
+      <p className='pokePara'>Italian Name: {pokemon.nameItalian}</p>
         <button className='link' onClick={back}>Back</button>
       </div>
     );
   };
 //Accessibility is not perfect  if we have time Fix this
-  return (
-    <div className="Dictionary">
-      <Link to="/home"><button>Home</button></Link>
-      <SearchBar value={searchWord} onChange={setSearchWord} onClear={handleClearSearch} />
-      {selectedPokemon ? (
-        <PokemonDetail pokemon={selectedPokemon} back={() => setSelectedPokemon(null)} />
-      ) : (
-        <PokemonList pokemons={pokemons.filter(pokemon => 
-          
-          String(pokemon.id).includes(searchWord) ||
-          pokemon.nameJapaneseRomaji.toLowerCase().includes(searchWord.toLowerCase())||
-          pokemon.nameEnglish.toLowerCase().includes(searchWord.toLowerCase())
-        )} onClick={setSelectedPokemon} />
-      )}
-    </div>
-
-    
-  );
+return (
+  <div className="dictionary-container">
+    <Link to="/home"><button className='dictionary-home-button'>Home</button></Link>
+    <SearchBar value={searchWord} onChange={setSearchWord} onClear={handleClearSearch} />
+    {selectedPokemon ? (
+      <PokemonDetail pokemon={selectedPokemon} back={() => setSelectedPokemon(null)} />
+    ) : (
+      <PokemonList pokemons={pokemons.filter(pokemon => 
+        String(pokemon.id).includes(searchWord) ||
+        pokemon.nameJapaneseRomaji.toLowerCase().includes(searchWord.toLowerCase()) ||
+        pokemon.nameEnglish.toLowerCase().includes(searchWord.toLowerCase())||
+        pokemon.nameKorean?.toLowerCase().includes(searchWord.toLowerCase()) ||
+        pokemon.nameChineseTraditional?.toLowerCase().includes(searchWord.toLowerCase()) ||
+        pokemon.nameFrench?.toLowerCase().includes(searchWord.toLowerCase()) ||
+        pokemon.nameGerman?.toLowerCase().includes(searchWord.toLowerCase()) ||
+        pokemon.nameSpanish?.toLowerCase().includes(searchWord.toLowerCase()) ||
+        pokemon.nameItalian?.toLowerCase().includes(searchWord.toLowerCase())
+      )} onClick={setSelectedPokemon} />
+    )}
+  </div>
+);
 }
 
 export default Dictionary;

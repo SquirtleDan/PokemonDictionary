@@ -14,18 +14,25 @@ return (
     <>
     
     <div className='homedesign'>
+    <br />
+    <br />
     <Avatar></Avatar>
     <br />
     <Link to="/dictionary"><button className='homelink'>Dictionary</button></Link>
-    <img src="https://i.ibb.co/bN1GVf7/pokedic.png" alt="pokedictionary" />
+    <img className='home-pic' src="https://i.ibb.co/bN1GVf7/pokedic.png" alt="pokedictionary" />
     </div>
     <br />
     <br />
     <br />
     <br />
     <div className='homedesign'>
+
+    <Link to='/quiz' ><button className='homelink'>Quiz</button>
+    <img className='home-pic' src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
+
     <Link to='/quiztime' ><button className='homelink'>Timed Quiz</button>
     <img src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
+
     </Link>
     </div>
     <br />
@@ -37,6 +44,12 @@ return (
 
     {hamburger ?
     <div className='homedesign'>
+
+    <Link to='/quiztime' ><button className='homelink'>Timed Quiz</button>
+    <img className='home-pic' src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
+    </Link>
+    </div>
+
     <Link to='/quizJ-E' ><button className='homelink'>Japanese to English</button></Link>
     <Link to='/quizE-Kor' ><button className='homelink'>English to Korean</button></Link>
     <Link to='/quizE-J' ><button className='homelink'>English to Japanese</button></Link>
@@ -53,13 +66,14 @@ return (
     <img src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" /></div>
     }
 
+
     <br />
     <br />
     <br />
     <br />
     <div className='homedesign'>
     <Link to="/leaderboard"><button className='homelink'>Leaderboard</button></Link>
-    <img src="https://i.ibb.co/72wCKVs/highscoreupdated.png" alt="pokedictionary" />
+    <img className='home-pic' src="https://i.ibb.co/72wCKVs/highscoreupdated.png" alt="pokedictionary" />
     </div>
     </>
     )

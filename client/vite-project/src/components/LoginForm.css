@@ -5,7 +5,7 @@ label {
     margin-bottom: 5px;
   }
 
-  .loginHeader{
+  .loginHeader{margin:40px;
     color: #FFDE00
   }
   
@@ -29,4 +29,26 @@ label {
     color: red;
     font-size: 12px;
     text-align: left;
+  }
+
+  button.link {
+    background-color: #6da2db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  button.link:hover {
+    background-color: #0056b3;
+  }
+  
+  button {
+    width: 150px;
+    height: 50px;
   }
