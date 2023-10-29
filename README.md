@@ -128,6 +128,4 @@ Project Link: [https://github.com/SquirtleDan/PokemonDictionary](https://github.
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [Code Chrysalis](https://www.codechrysalis.io/)
