@@ -27,12 +27,10 @@ return (
     <br />
     <div className='homedesign'>
 
-    <Link to='/quiz' ><button className='homelink'>Quiz</button>
-    <img className='home-pic' src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
+    
 
     <Link to='/quiztime' ><button className='homelink'>Timed Quiz</button>
     <img src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
-
     </Link>
     </div>
     <br />
@@ -40,16 +38,13 @@ return (
     <br />
     <br />
 
-
-
-    {hamburger ?
+    {!hamburger ?
     <div className='homedesign'>
-
-    <Link to='/quiztime' ><button className='homelink'>Timed Quiz</button>
+    <button className='homelink'onClick={handleClick}>Language Quiz</button>
     <img className='home-pic' src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
-    </Link>
     </div>
-
+    :
+    <div className='homedesign'>
     <Link to='/quizJ-E' ><button className='homelink'>Japanese to English</button></Link>
     <Link to='/quizE-Kor' ><button className='homelink'>English to Korean</button></Link>
     <Link to='/quizE-J' ><button className='homelink'>English to Japanese</button></Link>
@@ -59,11 +54,7 @@ return (
     <Link to='/quizE-Span' ><button className='homelink'>English to Spanish</button></Link>
     <Link to='/quizE-Ital' ><button className='homelink'>English to Italian</button></Link>
     <button className='homelink' onClick={handleClick}>Back to Home</button>
-    </div> :
-    
-    <div>
-        <button className='homelink' onClick={handleClick}>Quiz: Language</button>
-    <img src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" /></div>
+    </div>
     }
 
 
