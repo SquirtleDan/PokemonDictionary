@@ -4,8 +4,8 @@
  */
 exports.up = function(knex) {
   return knex.schema.alterTable('account', function(table) {
-    table.string("username", 255).unique().alter();
-    table.string("email", 255).unique().alter();
+    table.string("username", 255).alter().unique;
+    table.string("email", 255).alter().unique;
   });
 };
 

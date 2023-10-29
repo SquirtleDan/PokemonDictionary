@@ -80,10 +80,12 @@ export default function Quiz() {
     //create quiz result object
     useEffect(() => {
         if(finalScore || timeCount === 3 || lives === 0) {
+            let date = new Date();
             const obj = {
                 accountId: playerId,
                 gameModeId: 1,
-                value: finalScore
+                value: finalScore,
+                sessionDateTime: date.toISOString()
             }
             setQuizResults(obj);
         }
@@ -100,7 +102,7 @@ export default function Quiz() {
     }, [quizResults]);
 
     useEffect(() =>{
-        console.log(quizResults)
+        
     }, [quizResultsSent])
 
    
