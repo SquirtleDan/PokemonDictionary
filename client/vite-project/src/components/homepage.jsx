@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Homepage.css'
 import { useState } from 'react'
+import Avatar from './Avatar';
 
 export default function Homepage() {
   const [hamburger, setHamburger] = useState(false);
@@ -11,13 +12,9 @@ export default function Homepage() {
   
 return (
     <>
+    
     <div className='homedesign'>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+    <Avatar></Avatar>
     <br />
     <Link to="/dictionary"><button className='homelink'>Dictionary</button></Link>
     <img src="https://i.ibb.co/bN1GVf7/pokedic.png" alt="pokedictionary" />

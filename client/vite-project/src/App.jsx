@@ -18,12 +18,14 @@ import QuizEtoGerman from './components/QuizEtoGerman';
 
 
 
+
 function App() {
  
 
   return (
     <Router>
       <Routes>
+  
       <Route path='/' element={ <LoginForm /> } />
       <Route path="registration" element={ <RegistrationForm/> } />
       <Route path="home" element={ <Homepage/> }/>
