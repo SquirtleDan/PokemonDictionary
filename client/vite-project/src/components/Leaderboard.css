@@ -1,0 +1,52 @@
+.score-table {
+  font-size: 20px;
+
+    width: 600px;
+    background-color:white;
+    border-collapse: collapse;
+  }
+  
+  .score-table th,
+  .score-table td {
+    font-style: bold;
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  .game-mode-button{
+    width: 250px;
+    background-color: lightblue;
+  }
+
+  .score-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .score-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .score-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .rank-1 {
+    color: red;
+    animation: blinkingBackground 1.5s linear infinite;
+  }
+  
+  .rank-2 {
+    color: blue;
+    animation: blinkingBackground 1.5s linear infinite;
+  }
+  
+  @keyframes blinkingBackground {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+  }
+  
+  .leader-back-home {
+    width: 100px;
+    background-color:rgb(255, 119, 141) ;
+  }

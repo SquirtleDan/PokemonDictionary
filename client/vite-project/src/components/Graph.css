@@ -1,0 +1,67 @@
+/* 
+*,*::before,*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+} */
+
+
+.graph-body {
+    /* background-color: white; */
+    width: 50vw;
+    height: 90vh;
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+}
+
+.graph-header{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* background-color: red; */
+    justify-content: center;
+    align-items: center;
+}
+
+.graph-game_mode_title {
+    font-size: 1.5em;
+    color: yellow;
+    font-weight: bold;
+}
+
+.graph-game_mode_div {
+    margin: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 20px;
+    /* border: white 2px solid; */
+    /* margin: 0; */
+    /* width: 70%; */
+}
+
+.graph-game_mode_button {
+    margin: 3px;
+}
+
+.graph-game_mode_button:hover {
+    background-color: yellow;
+}
+
+.graph-chart_container{
+    background-color: white;
+    width: 100%;
+    border-radius: 3%;
+}
+
+.graph-chart_title {
+    font-size: 1.5em;
+    color: yellow;
+    font-weight: bold;
+    margin: 15px;
+}
+

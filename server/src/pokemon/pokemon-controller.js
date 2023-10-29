@@ -1,0 +1,27 @@
+const pokemonModel = require('./pokemon-model');
+
+module.exports = {
+  async getAllPokemon(req, res) {
+    try {
+      // Process the amount query
+      let amount;
+      if (req.query.amount) {
+        const specifiedAmount = Number(req.query.amount);
+        // console.log(specifiedAmount);
+        // console.log(typeof specifiedAmount);
+
+        // If query is invalid throw error
+        if (isNaN(specifiedAmount)) throw new Error ('Invalid query');
+        amount = specifiedAmount;
+      } else amount = 100;
+        // assign 100 pokemon if no amount is specified
+
+      // Fetch pokemon data
+      const allPokemon = await pokemonModel.getAllPokemon(amount);
+      // console.log(allPokemon);
+      res.status(200).send(JSON.stringify(allPokemon));
+    } catch (error) {
+      res.status(500).send(`Failed to get pokemon: ${error.message}`);
+    }
+  }
+}

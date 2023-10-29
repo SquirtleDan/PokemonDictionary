@@ -1,28 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './RegistrationForm.css'
 import { useForm } from 'react-hook-form';
-import { DevTool } from "@hookform/devtools";
+import { Link } from 'react-router-dom';
+import axios from "axios";
+import LoginForm from './LoginForm';
 
-export const RegistrationForm = () => {
+
+export default function RegistrationForm () {
+    const [statusCode, setStatusCode] = useState(null);
+    const [correctStatusCode, setCorrectStatusCode] = useState(false);
+
+
+    useEffect(() => {
+        if(statusCode === 201){
+          setCorrectStatusCode(true);
+        }       
+    }, [statusCode])
     const form = useForm({
         defaultValues: {
             username: "",
             password: "",
             email: "",
-            first_name: "",
-            last_name: ""
+            firstName: "",
+            lastName: ""
         }
     });
+
     const { register, control, handleSubmit, formState } = form;
     const { errors } = formState;
 
-    const onSubmit = (data) => {
-        console.log("form submitted ", data)
+    const onSubmit = async (data) => {
+        console.log(data)
+        const url = "https://pokedictionarygamedev.onrender.com/createNewAccount";
+        const returnedData = await axios.post(url, data).catch(error => {
+            window.alert(error.response.data);
+        });
+        
+        
+
+        if(returnedData){
+            setStatusCode(returnedData.status);
+            window.alert(returnedData.data)
+        }
     }
 
     return (
-        <div>
-            <h1>Registration Form</h1>
+        <>
+        {!correctStatusCode ?
+            <div>
+            <h1 className='loginHeader'>Registration Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className='form-control'>
                     <label htmlFor='username'>Username</label>
@@ -70,11 +96,11 @@ export const RegistrationForm = () => {
                 </div>
 
                 <div className='form-control'>
-                    <label htmlFor='first_name'>First Name</label>
+                    <label htmlFor='firstName'>First Name</label>
                     <input 
                         type='text' 
-                        id='first_name' 
-                        {...register("first_name", {
+                        id='firstName' 
+                        {...register("firstName", {
                             required: {
                                 value: true,
                                 message: "First name is required."
@@ -85,11 +111,12 @@ export const RegistrationForm = () => {
                 </div>
 
                 <div className='form-control'>
-                    <label htmlFor='last_name'>Last Name</label>
+                  <label htmlFor='lastName'>Last Name</label>
                     <input 
                         type='text' 
-                        id='last_name' 
-                        {...register("last_name", {
+                        id='lastName' 
+                        {...register("lastName", {
+
                             required: {
                                 value: true,
                                 message: "Last name is required."
@@ -101,7 +128,13 @@ export const RegistrationForm = () => {
 
                 <button type='submit'>Register</button>
             </form>
-            <DevTool control={control} />
-        </div>
+
+            <Link className="link "to="/"><button>Back To Login</button></Link>
+            </div> :
+
+            <LoginForm/>}
+
+        </>
     );
 };
+
