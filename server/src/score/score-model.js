@@ -2,7 +2,7 @@ const knex = require("../knex");
 
 //for scoreBoard
 module.exports = {
-  //get all score data(for leaderBoard)
+  // Get all score data(for leaderBoard)
   getHighestScore(accountId) {
     return knex
       .select(
@@ -16,23 +16,45 @@ module.exports = {
       .groupByRaw('game_mode_id')
       ;
   },
-  //save score data
-  saveScore: (accountId, gameModeId, value) => {
+
+  // Get score history
+  getScoreHistory(accountId, gameModeId) {
+    return knex 
+      .select({
+        accountId: "account_id",
+        value: "value", 
+        gameModeId: "game_mode_id",
+        sessionDateTime: "session_date_time"
+      })
+      .from("score")
+      .where({
+        account_id: accountId,
+        game_mode_id: gameModeId
+      })
+      .orderBy("session_date_time", "desc")
+      .limit(100);
+  },
+
+  // Save score data
+  saveScore: (accountId, gameModeId, value, sessionDateTime) => {
     return knex("score").insert({
       account_id: accountId,
       game_mode_id: gameModeId,
-      value: value
+      value: value,
+      session_date_time: sessionDateTime
     });
   },
-  //get Ranking
+
+  // Get Ranking
   getRanking: (gameModeId) => {
     return knex("score")
       .join("account", "account.id", "=", "score.account_id")
       .select({
-        value: "value",
-        gameModeId: "game_mode_id",
         accountId: "account_id",
-        username: "username"
+        gameModeId: "game_mode_id",
+        value: "value",
+        username: "username",
+        sessionDateTime: "session_date_time"
       })
       .from("score")
       .where({
@@ -43,8 +65,3 @@ module.exports = {
       ;
   },
 };
-
-    // const allScoreData = await knex("score").select("value");
-    // const allScoreDataArr = allScoreData.map((eachData) => eachData.value);
-    // const ranking = allScoreDataArr.sort((a, b) => b - a);
-    // return ranking.indexOf(value) + 1;

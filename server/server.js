@@ -43,13 +43,22 @@ app.get("/getAllPokemon", pokemonController.getAllPokemon);
 
 // SCORE CONTROLLER
 app.get("/score/highestScore/:id", scoreController.getHighestScore);
+  // this has parameter "id" that must be specified
   // will return an array of objects containing the highest score of the player based on game mode
   // ex: [{"gameModeId": 1,"highestScore": 10}, {"gameModeId": 2, "highestScore": 15}]
 app.post("/score/save", scoreController.saveScore);
   // to access: localhost:8080/score/save
   // body, raw, json
-  // ex: {"accountId": 1, "gameModeId": 1, "value": 10}
+  // ex: {"accountId": 1, "gameModeId": 1, "value": 10, "sessionDateTime: "sessionDateTime": "2000-10-31T01:30:00.000-05:00""}
+    // note that sessionDateTime must already be in ISOstring
 app.get("/score/getAllRanking", scoreController.getAllRanking);
   // to access: localhost:8080/score/getAllRanking
+  // will return an array of array (based on gameModeId) of objects {value, gameModeId, accountId, username}
 
+app.get("/score/getScoreHistory/:id", scoreController.getScoreHistory);
+  // this has parameter "id" that must be specified
+  // will return an array of array (based on gameModeId) of objects {accountId, value, gameModeId, sessionDateTime}
+    // note that the date and time is ISOstring and if it want to be used, you need newDate(dateSaved)
+    // it will return the first 100 scores only and ordered by the latest first
+  // to access: localhost:8080/score/getScoreHistory/3
 

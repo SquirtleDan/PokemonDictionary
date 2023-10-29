@@ -7,6 +7,12 @@ module.exports ={
     getDataByUsername(username){
         return knex('account').where({ username: username }).first()
     },
+
+    // Search DB by email
+    getDataByEmail(email){
+        return knex('account').where({ email: email }).first()
+    },
+
     //Create Account
     createNewAccount(newAccountData){
         return knex('account').insert({

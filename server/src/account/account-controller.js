@@ -49,11 +49,9 @@ module.exports = {
       // If password match, 
       const sentAccountData = {
         accountID: accountData.id,
-        firstName: accountData.first_name,
-        lastName: accountData.last_name,
-        email: accountData.email
+        username: accountData.username,
       }
-      console.log("success");
+      console.log("log in success");
       res.status(200).send(JSON.stringify(sentAccountData));
 
       // const sessionToken = generateSessionToken();
@@ -85,6 +83,23 @@ module.exports = {
       const { username, password, email, firstName, lastName } = req.body;
       // console.log(username, password, email, firstName, lastName);
       
+
+      // Check if username and email is unique, if either already exist, throw error
+      const accountDataByUsername = await accountModel.getDataByUsername(username);
+      const accountDataByEmail = await accountModel.getDataByEmail(email);
+
+      if (accountDataByUsername) {
+        console.log(accountDataByUsername);
+        console.log("Username already exist");
+        throw new Error ("username already exist");
+      }
+
+      if (accountDataByEmail) {
+        console.log(accountDataByEmail);
+        console.log("Email already exist");
+        throw new Error ("email already exist");
+      }
+
       // Create salt
       const salt = crypto.randomBytes(6).toString("hex");
       const saltedPassword = salt + password;
@@ -109,7 +124,7 @@ module.exports = {
       await accountModel.createNewAccount(newAccountData);
       res.status(201).send("Account created");
     } catch (error) {
-      res.status(401).send("failed to create Account");
+      res.status(409).send(`Failed to create account: ${error.message}`);
     }
   },
 };
