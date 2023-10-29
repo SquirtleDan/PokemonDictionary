@@ -91,7 +91,7 @@ export default function QuizEtoChinese() {
             setFinalSendScore(finalScore);
             const obj = {
                 accountId: playerId,
-                gameModeId: 1,
+                gameModeId: 2,
                 value: finalScore,
                 sessionDateTime: date
             }

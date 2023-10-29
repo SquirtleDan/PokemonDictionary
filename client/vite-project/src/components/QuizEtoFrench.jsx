@@ -93,7 +93,7 @@ export default function QuizEtoFrench() {
             setFinalSendScore(finalScore);
             const obj = {
                 accountId: playerId,
-                gameModeId: 1,
+                gameModeId: 2,
                 value: finalScore,
                 sessionDateTime: date
             }
