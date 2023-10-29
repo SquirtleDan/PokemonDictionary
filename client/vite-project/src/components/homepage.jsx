@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import './Homepage.css'
 
-export default function Homepage(props) {
-const playerId = props.playerId
+export default function Homepage() {
   
   
 return (

@@ -7,20 +7,23 @@ import Homepage from './homepage';
 import { createContext } from 'react';
 
 export let playerInfo = createContext();
+export let username = createContext();
 
 
 export default function LoginForm() {
     const [playerId, setPlayerId] = useState(null)
     const [statusCode, setStatusCode] = useState(null);
     const [correctStatusCode, setCorrectStatusCode] = useState(false);
+    const [playerUsername, setPlayerUsername] = useState(null)
 
      playerInfo = createContext(playerId);
+     username = createContext(playerUsername)
 
     useEffect(() => {
         if(statusCode === 200){
           setCorrectStatusCode(true);
         }       
-      console.log(playerId)
+      
     }, [statusCode])
 
 
@@ -40,6 +43,7 @@ export default function LoginForm() {
         if(returnedData){
             setStatusCode(returnedData.status);
             setPlayerId(returnedData.data.accountID)
+            setPlayerUsername(returnedData.data.username);
         }            
     }
 

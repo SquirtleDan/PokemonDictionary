@@ -4,7 +4,7 @@ import './Quiz.css'
 import axios from 'axios'
 import Gameover from './Gameover';
 import Timer from './Timer';
-import { playerInfo } from './LoginForm';
+import { playerInfo, username } from './LoginForm';
 'use strict';
 
 export default function Quiz() {
@@ -25,6 +25,8 @@ export default function Quiz() {
 
     //Use Effects
     const playerId = useContext(playerInfo)
+    const playerUsername = useContext(username)
+    
     //Get Data
     useEffect(() => {
         getName();
@@ -44,7 +46,6 @@ export default function Quiz() {
     useEffect(() => {
         if (dataFetched) {
             let randPoke = getRandomPokemon();
-            
             setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
             setEnglishNames(randPoke)
           }
