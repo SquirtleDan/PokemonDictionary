@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <h3 align="center">Pokemon Game Dictionary</h3>
+    <h3 align="center">PokeTalk Master</h3>
 
   <p align="center">
     The best way to study Pokemon names from all around the world! Great for people planning to visit countries all over the world!
