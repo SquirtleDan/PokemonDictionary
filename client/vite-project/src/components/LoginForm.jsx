@@ -39,7 +39,8 @@ export default function LoginForm() {
 
     const onSubmit = async (data) => {
         const url = "https://pokedictionarygamedev.onrender.com/login";
-        const returnedData = await axios.post(url, data);
+        const returnedData = await axios.post(url, data).catch(error => {
+            window.alert(error.response.data)});
         if(returnedData){
             setStatusCode(returnedData.status);
             setPlayerId(returnedData.data.accountID)
