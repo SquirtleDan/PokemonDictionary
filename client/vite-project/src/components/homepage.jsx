@@ -30,7 +30,7 @@ return (
     
 
     <Link to='/quiztime' ><button className='homelink'>Timed Quiz</button>
-    <img src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
+    <img className='home-pic' src="https://i.ibb.co/ZV0zg0k/for-upload.png" alt="pokedictionary" />
     </Link>
     </div>
     <br />
@@ -41,7 +41,7 @@ return (
     {!hamburger ?
     <div className='homedesign'>
     <button className='homelink'onClick={handleClick}>Language Quiz</button>
-    <img className='home-pic' src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
+    <img className='home-pic' src="https://i.ibb.co/ZV0zg0k/for-upload.png" alt="pokedictionary" />
     </div>
     :
     <div className='homedesign'>
@@ -60,8 +60,8 @@ return (
 
     <br />
     <br />
-    <Link to="/graph"><button className='homelink'>Personal Tracker</button></Link>
-
+    <Link to="/graph"><button className='homelink'>Tracker</button></Link>
+    <br/>
     <br />
     <br />
     <div className='homedesign'>
