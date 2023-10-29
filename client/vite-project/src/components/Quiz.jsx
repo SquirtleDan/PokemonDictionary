@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom';
-import './Quiz.css'
+import './QuizTimed.css'
 import axios from 'axios'
 import Gameover from './Gameover';
 import Timer from './Timer';
@@ -207,15 +207,18 @@ export default function Quiz() {
                 {singlePokemon.nameJapaneseRomaji}
             </div> 
             : <div>Loading</div>}
-
+            <br/>
+            <br/>
           
             {singlePokeData?
             <>
-                <button className='english' id='button1' key="first" onClick={() => handleClick(englishNames[0].id)}>{englishNames[0].nameEnglish}</button>
-                <button className='english' id='button2' key="second" onClick={() => handleClick(englishNames[1].id)}>{englishNames[1].nameEnglish}</button>
-                <button className='english' id='button3' key="third" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
-                <button className='english' id='button4' key="fourth" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
+                <button className='language' id='button1' key="first" onClick={() => handleClick(englishNames[0].id)}>{englishNames[0].nameEnglish}</button>
+                <button className='language' id='button2' key="second" onClick={() => handleClick(englishNames[1].id)}>{englishNames[1].nameEnglish}</button>
+                <button className='language' id='button3' key="third" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
+                <button className='language' id='button4' key="fourth" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
                 <br/>
+                <br/>
+               
                 <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
             : <div>Loading</div>}
@@ -223,7 +226,7 @@ export default function Quiz() {
         </div> 
         <br/>
             <br/>
-            <Link to="/home"><button>Give Up?</button></Link>
+            <Link to="/home"><button className='language'>Give Up?</button></Link>
             {answer ?
             <>
             <div className='quiztext'>{answerResult}</div>

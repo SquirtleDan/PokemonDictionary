@@ -4,6 +4,7 @@ import axios from 'axios'
 import Gameover from './Gameover';
 import Timer from './Timer';
 import { playerInfo, username } from './LoginForm';
+import "./QuizTimed.css"
 'use strict';
 
 export default function QuizTimed() {
@@ -199,7 +200,8 @@ export default function QuizTimed() {
             </div> 
             : <div>Loading</div>}
 
-          
+            <br/>
+            <br/>
             {singlePokeData?
             <>
                 <button className='english' id='button1' key="first" onClick={() => handleClick(names[0].id)}>{names[0].nameEnglish}</button>
@@ -213,10 +215,11 @@ export default function QuizTimed() {
 
             : <div>Loading</div>}
         </div> 
+        <br/>
         <Timer time={time} onTimeUp={handleTimeIsUp} key="timerforthis" />
         <br/>
             <br/>
-            <Link to="/home"><button>Give Up?</button></Link>
+            <Link to="/home"><button className='english'>Give Up?</button></Link>
             {answer ?
             <>
             <div className='quiztext'>{answerResult}</div>

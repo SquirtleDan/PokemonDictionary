@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
-
-
 import axios from 'axios'
 import Gameover from './Gameover';
 import Timer from './Timer';
@@ -188,7 +186,7 @@ export default function QuizEtoItalian() {
          <>
      
         <h1 className='quiztext'>Quiz</h1>
-
+        <br/>
         
         <h2 className='quiztext'>Current Score: {score}</h2>
         <h3 className='quiztext'>HP: {lives}</h3>
@@ -205,7 +203,7 @@ export default function QuizEtoItalian() {
                 <br />
             </div> 
             : <div>Loading</div>}
-
+             <br/>
           
             {singlePokeData?
             <>
@@ -214,7 +212,7 @@ export default function QuizEtoItalian() {
                 <button className='language' id='button3' key="third" onClick={() => handleClick(names[2].id)}>{names[2].nameItalian}</button>
                 <button className='language' id='button4' key="fourth" onClick={() => handleClick(names[3].id)}>{names[3].nameItalian}</button>
                 <br/>
-                
+                <br/>
                 <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
             
@@ -224,7 +222,7 @@ export default function QuizEtoItalian() {
             <br/>
           
         </div> 
-        <Link to="/home"><button>Give Up?</button></Link>
+        <Link to="/home"><button className='language'>Give Up?</button></Link>
             {answer ?
             <>
             <div className='quiztext'>{answerResult}</div>

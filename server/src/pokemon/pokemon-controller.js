@@ -7,8 +7,7 @@ module.exports = {
       let amount;
       if (req.query.amount) {
         const specifiedAmount = Number(req.query.amount);
-        // console.log(specifiedAmount);
-        // console.log(typeof specifiedAmount);
+      
 
         // If query is invalid throw error
         if (isNaN(specifiedAmount)) throw new Error ('Invalid query');
@@ -18,7 +17,7 @@ module.exports = {
 
       // Fetch pokemon data
       const allPokemon = await pokemonModel.getAllPokemon(amount);
-      // console.log(allPokemon);
+   
       res.status(200).send(JSON.stringify(allPokemon));
     } catch (error) {
       res.status(500).send(`Failed to get pokemon: ${error.message}`);

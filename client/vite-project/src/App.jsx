@@ -28,7 +28,7 @@ function App() {
       <Routes>
   
       <Route path='/' element={ <LoginForm /> } />
-      <Route path="registration" element={ <RegistrationForm/> } />
+      <Route path="/registration" element={ <RegistrationForm/> } />
       <Route path="home" element={ <Homepage/> }/>
       <Route path="/dictionary" element= { <Dictionary /> } />
       <Route path="/quizJ-E" element= {<Quiz/>}  />

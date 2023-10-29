@@ -13,7 +13,7 @@ module.exports = {
     const urlListNames = [];
     for (let i = 1; i <= noOfPokemon; i++) urlListNames.push(`https://pokeapi.co/api/v2/pokemon-species/${i}/`);
     const pokemonApiFetchName = await Promise.all(urlListNames.map((url) => fetch(url).then(res => res.json())));
-    // console.log(pokemonApiFetchName);
+   
   
     // RETRIEVING PICTURE
     // const urlListPictures = [];
@@ -22,7 +22,7 @@ module.exports = {
     
     const pokemonApiFetchPicture = [];
     for (let i = 1; i <= noOfPokemon; i++) pokemonApiFetchPicture.push(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png`);
-    // console.log(pokemonApiFetchPicture);
+    
   
     // CREATING OBJECT DATA
     for (let i = 0; i < noOfPokemon; i++) pokemonData.push({
@@ -41,12 +41,12 @@ module.exports = {
       name_chinese_simplified: pokemonApiFetchName[i].names[10].name,
       front_picture: pokemonApiFetchPicture[i], 
     });
-    // console.log(pokemonData);
+   
     return pokemonData;
   
     // HOW TO USE BLOB PICTURE ON HTML 
     // const pokemonBody = document.querySelector('.pokemon');
-    // console.log(pokemonBody);
+   
     // const test = document.createElement('img');
     // const pictureData = URL.createObjectURL(pokemonData[0].frontPicture)
     // test.src = pictureData;

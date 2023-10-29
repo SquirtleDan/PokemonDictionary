@@ -15,7 +15,7 @@ return (
     
     <div className='homedesign'>
     <br />
-    <br />
+    
     <Avatar></Avatar>
     <br />
     <Link to="/dictionary"><button className='homelink'>Dictionary</button></Link>
@@ -23,8 +23,7 @@ return (
     </div>
     <br />
     <br />
-    <br />
-    <br />
+    
     <div className='homedesign'>
 
     
@@ -35,8 +34,7 @@ return (
     </div>
     <br />
     <br />
-    <br />
-    <br />
+   
 
     {!hamburger ?
     <div className='homedesign'>
@@ -53,7 +51,7 @@ return (
     <Link to='/quizE-Germ' ><button className='homelink'>English to German</button></Link>
     <Link to='/quizE-Span' ><button className='homelink'>English to Spanish</button></Link>
     <Link to='/quizE-Ital' ><button className='homelink'>English to Italian</button></Link>
-    <button className='homelink' onClick={handleClick}>Back to Home</button>
+    <button className='homelinkback' onClick={handleClick}>Close Menu</button>
     </div>
     }
 
@@ -63,7 +61,7 @@ return (
     <Link to="/graph"><button className='homelink'>Tracker</button></Link>
     <br/>
     <br />
-    <br />
+    
     <div className='homedesign'>
     <Link to="/leaderboard"><button className='homelink'>Leaderboard</button></Link>
     <img className='home-pic' src="https://i.ibb.co/72wCKVs/highscoreupdated.png" alt="pokedictionary" />

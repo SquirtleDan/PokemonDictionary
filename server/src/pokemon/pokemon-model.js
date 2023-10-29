@@ -20,7 +20,7 @@ module.exports = {
       })
       .from("pokemon")
       .limit(limit)
-      // .then(res => console.log(res))
+   
       ;
   }
 }

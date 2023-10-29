@@ -21,9 +21,31 @@ label {
   .form-control {
     margin-bottom: 20px;
   }
+
+  button.link {
+    background-color: #6da2db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
+    margin: 15px;
+    transition: background-color 0.3s;
+    width: fit-content;
+  }
+  
   
   .error {
     color: red;
     font-size: 12px;
     text-align: left;
+  }
+
+  .registrationForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
