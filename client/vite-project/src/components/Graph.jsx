@@ -34,8 +34,8 @@ export default function Graph() {
   // Contruct Data
   async function constructData() {
     // Retrieve player ID
-    // const playerId = useContext(playerInfo);
-    const playerId = 1;
+    const playerId = useContext(playerInfo);
+    // const playerId = 1;
     // console.log(playerId);
 
     // Retrieve player scores data

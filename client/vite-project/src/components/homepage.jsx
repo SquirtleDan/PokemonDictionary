@@ -60,6 +60,8 @@ return (
 
     <br />
     <br />
+    <Link to="/graph"><button className='homelink'>Personal Tracker</button></Link>
+
     <br />
     <br />
     <div className='homedesign'>

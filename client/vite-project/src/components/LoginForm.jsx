@@ -17,7 +17,7 @@ export default function LoginForm() {
     const [playerUsername, setPlayerUsername] = useState(null)
 
      playerInfo = createContext(playerId);
-     username = createContext(playerUsername)
+     username = createContext(playerUsername);
 
     useEffect(() => {
         if(statusCode === 200){

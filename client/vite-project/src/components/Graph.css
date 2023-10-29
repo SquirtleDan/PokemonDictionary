@@ -3,13 +3,13 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-*/
+} */
+
 
 .graph-body {
     /* background-color: white; */
-    width: 80vw;
-    height: 80vh;
+    width: 50vw;
+    height: 90vh;
     border: 0;
     display: flex;
     flex-direction: column;
@@ -55,8 +55,7 @@
 .graph-chart_container{
     background-color: white;
     width: 100%;
-    /* display: flex; */
-    /* justify-content: center; */
+    border-radius: 3%;
 }
 
 .graph-chart_title {
@@ -66,7 +65,3 @@
     margin: 15px;
 }
 
-.graph-chart {
-    /* width: 70%; */
-    /* margin-top: 20%; */
-}
