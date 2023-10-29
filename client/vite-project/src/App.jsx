@@ -15,6 +15,8 @@ import QuizEtoKorean from './components/QuizEtoKorean';
 import QuizEtoChinese from './components/QuizEtoChinese';
 import QuizEtoFrench from './components/QuizEtoFrench';
 import QuizEtoGerman from './components/QuizEtoGerman';
+import QuizEtoSpanish from './components/QuiztoSpanish';
+import QuizEtoItalian from './components/QuiztoItallian';
 
 
 
@@ -36,6 +38,8 @@ function App() {
       <Route path="/quizE-Chinese" element= {<QuizEtoChinese/>}  />
       <Route path="/quizE-Fre" element= {<QuizEtoFrench/>}  />
       <Route path="/quizE-Germ" element= {<QuizEtoGerman/>}  />
+      <Route path="/quizE-Span" element= {<QuizEtoSpanish/>}  />
+      <Route path="/quizE-Ital" element= {<QuizEtoItalian/>}  />
       <Route path="/gameover" element= {<Gameover />}/>
       <Route path='/graph' element={ <Graph/>}/>
       <Route path='/leaderboard' element={ <Leaderboard/>}/>
