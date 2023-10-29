@@ -7,10 +7,10 @@ import { playerInfo } from "./LoginForm";
 import axios from "axios";
 
 ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    LineElement,
-    PointElement
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
 )
 
 
@@ -19,8 +19,19 @@ export default function Graph() {
   const [labels, setLabels] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]);
   const [scores, setScores] = useState([1 ,2 ,3]);
   const [gameMode, setGameMode] = useState(0);
+  const [currentMonth, setCurrentMonth] = useState("");
 
   // HELPER FUNCTION 
+  // Change game mode 
+  function gameModeToSuddenDeath() {
+    setGameMode(0);
+  }
+
+  function gameModeToTimer() {
+    setGameMode(1);
+  }
+
+  // Contruct Data
   async function constructData() {
     // Retrieve player ID
     // const playerId = useContext(playerInfo);
@@ -34,8 +45,8 @@ export default function Graph() {
     const sessionDateTimeOldest = new Date(currentYear, currentMonth).toISOString();
     // console.log(sessionDateTimeOldest);
 
-    // const url = `https://pokedictionarygamedev.onrender.com/score/getScoreHistory/${playerId}/${sessionDateTimeOldest}`;
-    const url = `http://localhost:8080/score/getScoreHistory/${playerId}/${sessionDateTimeOldest}`;
+    const url = `https://pokedictionarygamedev.onrender.com/score/getScoreHistory/${playerId}/${sessionDateTimeOldest}`;
+    // const url = `http://localhost:8080/score/getScoreHistory/${playerId}/${sessionDateTimeOldest}`;
     const returnedData = await axios.get(url);
     const returnedScores = returnedData.data[gameMode];
     // console.log(returnedScores);
@@ -60,64 +71,82 @@ export default function Graph() {
     for (let i = 1; i <= 31; i++) values.push(monthDataObject[i]);
     // console.log(values);
     setScores(values);
+
+    // Set month
+    const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const monthName = month[currentMonth];
+    setCurrentMonth(monthName);
   }
 
-  // Retrieve data at the start
+  // INTIAL STATE
   useEffect(() => {
     constructData();
   }, []);
 
+  useEffect(() => {
+    constructData();
+  }, [gameMode]);
 
 
-    const data = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Rainfall',
-            fill: false,
-            lineTension: 0.5,
-            backgroundColor: 'rgba(255, 203, 5,1)',
-            borderColor: 'rgba(60, 90, 166 ,1)',
-            borderWidth: 2,
-            data: scores
-          }
-        ]
+  // SETTINGS FOR GRAPH
+  const data = {
+    labels: labels,
+    // label: "test",
+    datasets: [
+      {
+        label: 'Rainfall',
+        fill: false,
+        lineTension: 0.5,
+        backgroundColor: 'yellow',
+        borderColor: 'black',
+        pointBorderColor: 'black',
+        borderWidth: 2,
+        data: scores
       }
+    ]
+  }
     
-      const config = {
-        type: 'line',
-        data: data,
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'top',
-            },
-            title: {
-              display: true,
-              text: 'Chart.js Line Chart'
-            }
-          }
-        },
-      };
+  const config = {
+    type: 'line',
+    data: data,
+    responsive: true,
+    scales: {
+      x: {
+        title: { display: true, text: 'Day' }
+      },
+      y: {
+        title: { display: true, text: 'Highest Score'}
+      }
+    },   
+    plugins: {
+      legend: true,
+      title: {
+        display: true,
+        text: 'Chart.js Line Chart'
+      }
+    }
+  };
     
-
-    return(
-      <>
+  // RENDERING PAGE
+  return(
+    <div className="graph-body">
+      <div className="graph-header">
         <Link  to="/home"><button className='link'>Home</button></Link>
-        <div>
-          <p>Game Mode: </p>
-          <button>Sudden Death</button>
-          <button>Timer</button>
+        <p className="graph-game_mode_title">Game Mode:</p>
+        <div className="graph-game_mode_div">
+          <button className="graph-game_mode_button" onClick={gameModeToSuddenDeath}>Sudden Death</button>
+          <button className="graph-game_mode_button" onClick={gameModeToTimer}>Timer</button>
         </div>
-        <div className="lineContainer">
-          <div className="lineChart">
-              <Line
-                  data={data}
-                  options={config}
-              />
-          </div>
+      </div>
+      <h2 className="graph-chart_title">Scores in {currentMonth}:</h2>
+      <div className="graph-chart_container">
+        <div className="graph-chart">
+            <Line
+                data={data}
+                options={config}
+            />
         </div>
-      </>
-    )
+      </div>
+    </div>
+  )
 }
