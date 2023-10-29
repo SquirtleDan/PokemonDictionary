@@ -85,9 +85,6 @@ export default function QuizTimed() {
 
     //create quiz result object
     useEffect(() => {
-        if(!finalScore) {
-            setFinalSendScore(0);
-        }
         if(finalScore || timeCount === 1) {
             let date = new Date().toISOString();
             setFinalSendScore(finalScore);

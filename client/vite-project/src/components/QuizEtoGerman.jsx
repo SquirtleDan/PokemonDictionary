@@ -88,9 +88,6 @@ export default function QuizEtoGerman() {
 
     //create quiz result object
     useEffect(() => {
-        if(!finalScore) {
-            setFinalSendScore(0);
-        }
         if(finalScore || timeCount === 3 || lives === 0) {
             let date = new Date().toISOString();
             setFinalSendScore(finalScore);
