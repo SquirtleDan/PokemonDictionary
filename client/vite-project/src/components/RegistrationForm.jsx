@@ -68,7 +68,7 @@ export default function RegistrationForm () {
                 <div className='form-control'>
                     <label htmlFor='password'>Password</label>
                     <input 
-                        type='text' 
+                        type='password' 
                         id='password' 
                         {...register("password", {
                             required: {
