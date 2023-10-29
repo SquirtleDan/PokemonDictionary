@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import './Homepage.css'
 
-export default function Homepage() {
-
+export default function Homepage(props) {
+const playerId = props.playerId
   
   
 return (
@@ -23,7 +23,7 @@ return (
     <br />
     <br />
     <div className='homedesign'>
-    <Link to="/quiz"><button className='homelink'>Quiz</button>
+    <Link to='/quiz' ><button className='homelink'>Quiz</button>
     <img src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
     </Link>
     </div>

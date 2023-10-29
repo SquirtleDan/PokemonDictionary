@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './LoginForm.css'
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Homepage from './homepage';
+import { createContext } from 'react';
+
+export let playerInfo = createContext();
+
 
 export default function LoginForm() {
-    // const navigate = Navigate();
-
+    const [playerId, setPlayerId] = useState(null)
     const [statusCode, setStatusCode] = useState(null);
     const [correctStatusCode, setCorrectStatusCode] = useState(false);
 
+     playerInfo = createContext(playerId);
+
     useEffect(() => {
         if(statusCode === 200){
-          console.log(statusCode)
           setCorrectStatusCode(true);
         }       
+      console.log(playerId)
     }, [statusCode])
 
 
@@ -30,23 +35,19 @@ export default function LoginForm() {
     const { errors } = formState;
 
     const onSubmit = async (data) => {
-        console.log("form submitted ", data);
         const url = "https://pokedictionarygamedev.onrender.com/login";
-        // const url = "http://localhost:8080/login";
         const returnedData = await axios.post(url, data);
         if(returnedData){
             setStatusCode(returnedData.status);
-        }
-        
-            // axios will return status code 200 for correct, 401 for incorrect
-            // you can use this to redirect
-        
+            setPlayerId(returnedData.data.accountID)
+        }            
     }
 
-    return (
+    return (  
        <>
         {!correctStatusCode ?
         <div>
+          
             <h1 className='loginHeader'>Login Form</h1>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 <div className='form-control'>
@@ -63,7 +64,6 @@ export default function LoginForm() {
                     />
                     <p className='error'>{errors.username?.message}</p>
                 </div>
-
                 <div className='form-control'>
                     <label htmlFor='password'>Password</label>
                     <input 
@@ -77,13 +77,12 @@ export default function LoginForm() {
                         })} 
                     />
                     <p className='error'>{errors.password?.message}</p>
-                </div>
-                        
+                </div>         
                 <button className='link 'type='submit'>Log In</button>
             </form>
             <Link to="registration"><button  className='link' >Register</button></Link>
         </div>:
-        <Homepage/> }
+        <Homepage playerId={playerId}/> }
         </>
     );
 };

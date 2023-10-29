@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react'
+import { Link, useLocation } from 'react-router-dom';
 import './Quiz.css'
 import axios from 'axios'
 import Gameover from './Gameover';
 import Timer from './Timer';
+import { playerInfo } from './LoginForm';
 'use strict';
 
 export default function Quiz() {
@@ -23,7 +24,7 @@ export default function Quiz() {
     const [timeCount, setTimeCount] = useState(0);
 
     //Use Effects
-
+    const playerId = useContext(playerInfo)
     //Get Data
     useEffect(() => {
         getName();
@@ -47,7 +48,6 @@ export default function Quiz() {
             setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
             setEnglishNames(randPoke)
           }
-          console.log(timeCount)
         
     }, [dataFetched, score, lives]);
 
@@ -81,7 +81,7 @@ export default function Quiz() {
     useEffect(() => {
         if(finalScore || timeCount === 3 || lives === 0) {
             const obj = {
-                accountId: 1,
+                accountId: playerId,
                 gameModeId: 1,
                 value: finalScore
             }
@@ -96,10 +96,11 @@ export default function Quiz() {
             sendResults();
             setQuizResultsSent(true)
         }
+        
     }, [quizResults]);
 
     useEffect(() =>{
-       
+        console.log(quizResults)
     }, [quizResultsSent])
 
    

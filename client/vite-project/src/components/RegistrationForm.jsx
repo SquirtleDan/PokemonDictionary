@@ -13,7 +13,6 @@ export default function RegistrationForm () {
 
     useEffect(() => {
         if(statusCode === 201){
-          console.log(statusCode)
           setCorrectStatusCode(true);
         }       
     }, [statusCode])
@@ -23,8 +22,8 @@ export default function RegistrationForm () {
             username: "",
             password: "",
             email: "",
-            first_name: "",
-            last_name: ""
+            firstName: "",
+            lastName: ""
         }
     });
 
@@ -32,11 +31,13 @@ export default function RegistrationForm () {
     const { errors } = formState;
 
     const onSubmit = async (data) => {
+        console.log(data)
         console.log("form submitted ", data);
         const url = "https://pokedictionarygamedev.onrender.com/createNewAccount";
         // const url = "http://localhost:8080/createNewAccount";
         const returnedData = await axios.post(url, data);
         console.log(returnedData);
+        
 
         if(returnedData){
             setStatusCode(returnedData.status);
@@ -98,11 +99,11 @@ export default function RegistrationForm () {
                 </div>
 
                 <div className='form-control'>
-                    <label htmlFor='first_name'>First Name</label>
+                    <label htmlFor='firstName'>First Name</label>
                     <input 
                         type='text' 
-                        id='first_name' 
-                        {...register("first_name", {
+                        id='firstName' 
+                        {...register("firstName", {
                             required: {
                                 value: true,
                                 message: "First name is required."
@@ -113,11 +114,11 @@ export default function RegistrationForm () {
                 </div>
 
                 <div className='form-control'>
-                    <label htmlFor='last_name'>Last Name</label>
+                    <label htmlFor='lastName'>Last Name</label>
                     <input 
                         type='text' 
-                        id='last_name' 
-                        {...register("last_name", {
+                        id='lastName' 
+                        {...register("lastName", {
                             required: {
                                 value: true,
                                 message: "Last name is required."

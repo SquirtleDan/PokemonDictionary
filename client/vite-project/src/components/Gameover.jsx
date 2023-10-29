@@ -7,11 +7,7 @@ export default function Gameover(props) {
     const refresh = props.setQuizResultsSent;
     const results = props.quizResultsSent;
 
-    function handleClick() {
-        window.location.reload()
-    }
 
-    console.log(refresh);
     return(
         <>
         <div className="gameoverContainer">
@@ -29,7 +25,7 @@ export default function Gameover(props) {
         <div className="gameover">
         <Link  to="/home"><button className='link'>Home</button></Link>
         <Link  to="/leaderboard"><button className='link'>Leaderboard</button></Link>
-        <Link  to="/quiz"><button className='link' onClick={handleClick}>Play Again?</button></Link>
+        <Link  to="/quiz"><button className='link'>Play Again?</button></Link>
         </div>
 
         
