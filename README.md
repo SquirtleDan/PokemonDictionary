@@ -70,7 +70,7 @@ To get this project locally follow these simple instructions.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+This needs to be run before installation to ensure everything is working properly.
 * npm
   ```sh
   npm install npm@latest -g
