@@ -22,15 +22,22 @@ export default function Quiz() {
     const [quizResultsSent, setQuizResultsSent] = useState(false);
     const [time, setTime] = useState(10);
     const [timeCount, setTimeCount] = useState(0);
+    const [finalSendScore, setFinalSendScore] = useState(null);
+   
 
     //Use Effects
     const playerId = useContext(playerInfo)
-    const playerUsername = useContext(username)
+    // const playerUsername = useContext(username)
     
+   
     //Get Data
     useEffect(() => {
         getName();
-    }, []);
+        setLives(3)
+        setScore(null)
+        setQuizResults(null)
+        setFinalScore(null);
+    }, [quizResultsSent]);
 
     //Check check if data is fetched
     useEffect(() => {
@@ -80,13 +87,17 @@ export default function Quiz() {
 
     //create quiz result object
     useEffect(() => {
+        if(!finalScore) {
+            setFinalSendScore(0);
+        }
         if(finalScore || timeCount === 3 || lives === 0) {
-            let date = new Date();
+            let date = new Date().toISOString();
+            setFinalSendScore(finalScore);
             const obj = {
                 accountId: playerId,
                 gameModeId: 1,
                 value: finalScore,
-                sessionDateTime: date.toISOString()
+                sessionDateTime: date
             }
             setQuizResults(obj);
         }
@@ -207,7 +218,7 @@ export default function Quiz() {
         </div> 
         
         </>
-        : <Gameover score={finalScore} quizResults={quizResultsSent} quizResultsSent={setQuizResultsSent}/>}
+        : <Gameover score={finalSendScore} quizResultsSent={setQuizResultsSent}/>}
 
             
         

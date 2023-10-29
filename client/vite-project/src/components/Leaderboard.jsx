@@ -7,7 +7,7 @@ export default function Leaderboard() {
     const [rankings, setRankings] = useState({ 1: [], 2: [] });
     const [gameMode, setGameMode] = useState(1);
 
-    let accountId = useContext(playerInfo);
+    // let accountId = useContext(playerInfo);
   
   const createRanking = (data) => {
     const wholeData = data.filter(score => score.value !== null);

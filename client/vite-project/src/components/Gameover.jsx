@@ -4,9 +4,12 @@ import './Gameover.css'
 
 export default function Gameover(props) {
     const score = props.score;
-    const refresh = props.setQuizResultsSent;
-    const results = props.quizResultsSent;
-
+    const refresh = props.quizResultsSent;
+    
+    // handler
+    function handleClick() {
+        refresh(false)
+    }
 
     return(
         <>
@@ -25,7 +28,7 @@ export default function Gameover(props) {
         <div className="gameover">
         <Link  to="/home"><button className='link'>Home</button></Link>
         <Link  to="/leaderboard"><button className='link'>Leaderboard</button></Link>
-        <Link  to="/quiz"><button className='link'>Play Again?</button></Link>
+        <button className='link'onClick={handleClick}>Play Again?</button>
         </div>
 
         

@@ -9,6 +9,7 @@ import Gameover from './components/Gameover';
 import Graph from './components/Graph';
 import Leaderboard from './components/Leaderboard';
 import Timer from './components/Timer';
+import QuizTimed from './components/QuizTimed';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
       <Route path='/graph' element={ <Graph/>}/>
       <Route path='/leaderboard' element={ <Leaderboard/>}/>
       <Route path='/timer' element= { <Timer/>}/>
+      <Route path="/quiztime" element= {<QuizTimed/>}  />
       </Routes>
   </Router>
   );

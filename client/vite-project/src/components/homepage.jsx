@@ -31,6 +31,15 @@ return (
     <br />
     <br />
     <div className='homedesign'>
+    <Link to='/quiztime' ><button className='homelink'>Timed Quiz</button>
+    <img src="https://i.ibb.co/CBBZfW5/eveehuh.png" alt="pokedictionary" />
+    </Link>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div className='homedesign'>
     <Link to="/leaderboard"><button className='homelink'>Leaderboard</button></Link>
     <img src="https://i.ibb.co/72wCKVs/highscoreupdated.png" alt="pokedictionary" />
     </div>
