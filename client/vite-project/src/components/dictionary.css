@@ -1,43 +1,89 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f3ffc7;
-  }
-  
-  .Dictionary {
-    max-width: 800px;
-    margin: 50px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  
-  input[type="text"] {
-    width: 90%;
-    padding: 10px 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    margin-bottom: 20px;
-    font-size: 20px;
-  }
-  
-  
-  div img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin: 10px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .pokePic:hover {
-    transform: scale(1.3);
-  }
-  
-  
-  .pokePara {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
+/* dictionary.css */
+.dictionary-container {
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.dictionary-home-button {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.dictionary-search-bar-container {
+  margin-top: 60px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%; 
+  padding: 20px 0; 
+}
+
+.dictionary-search-bar {
+  flex-grow: 1;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+  height: 40px;
+  border: 1px solid hsl(0, 0%, 87%);
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.dictionary-search-clear {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+  box-sizing: border-box;
+}
+
+.dictionary-poke-pic {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.dictionary-poke-pic:hover {
+  transform: scale(1.3);
+}
+
+.pokePara {
+  color:black;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.dictionary-pokemon-detail, .dictionary-pokemon-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-height: 400px;
+  margin-top: 20px;
+}
+
+.single-poke-pic{
+  width: 300px;
+  height: 300px;
+  object-fit: contain
+
+}

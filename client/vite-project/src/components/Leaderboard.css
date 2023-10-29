@@ -1,15 +1,23 @@
 .score-table {
-    width: 100%;
+  font-size: 20px;
+
+    width: 600px;
+    background-color:white;
     border-collapse: collapse;
   }
   
   .score-table th,
   .score-table td {
+    font-style: bold;
     padding: 10px;
     border: 1px solid #ddd;
     text-align: left;
   }
-  
+  .game-mode-button{
+    width: 250px;
+    background-color: lightblue;
+  }
+
   .score-table th {
     background-color: #f4f4f4;
   }
@@ -38,3 +46,7 @@
     100% { opacity: 1; }
   }
   
+  .leader-back-home {
+    width: 100px;
+    background-color:rgb(255, 119, 141) ;
+  }

@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { Link, useLocation } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import './QuizEtoJ.css'
 import axios from 'axios'
 import Gameover from './Gameover';
 import Timer from './Timer';
 import { playerInfo, username } from './LoginForm';
 'use strict';
 
-export default function QuizTimed() {
+export default function QuizEtoKorean() {
     //State Variables
     const [data, setData] = useState(null);
     const [dataFetched, setDataFetched] = useState(false);
@@ -14,12 +15,12 @@ export default function QuizTimed() {
     const [singlePokeData, setSinglePokeData] = useState(false);
     const [names, setNames] = useState(null);
     const [score, setScore] = useState(null);
+    const [lives, setLives] = useState(3)
     const [imageUrl, setImageUrl] = useState(null);
     const [finalScore, setFinalScore] = useState(null);
     const [quizResults, setQuizResults] = useState(null);
     const [quizResultsSent, setQuizResultsSent] = useState(false);
-    const [time, setTime] = useState(120);
-    const [wrongCount, setWrongCount] = useState(0)
+    const [time, setTime] = useState(10);
     const [timeCount, setTimeCount] = useState(0);
     const [finalSendScore, setFinalSendScore] = useState(null);
     const [answerResult, setAnswerResult] = useState("");
@@ -30,23 +31,21 @@ export default function QuizTimed() {
     // const playerUsername = useContext(username)
     
    
-  
+    //Get Data
     useEffect(() => {
         getName();
+        setLives(3)
         setScore(null)
         setQuizResults(null)
         setFinalScore(null);
         setAnswer(false);
     }, [quizResultsSent]);
 
-   
-
-
     //Check check if data is fetched
     useEffect(() => {
         if (data){
-            setDataFetched(true);   
-        } 
+            setDataFetched(true);
+        }
     }, [data]);
 
     //get random pokemon
@@ -56,7 +55,9 @@ export default function QuizTimed() {
             setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
             setNames(randPoke)
           }
-    }, [dataFetched, score, wrongCount]);
+         
+        
+    }, [dataFetched, score, lives]);
 
     //get single pokemon
     useEffect(() => {
@@ -70,24 +71,26 @@ export default function QuizTimed() {
 
     //get image
     useEffect(() => {
+        
         if(singlePokeData){
+            
         setImageUrl(singlePokemon.frontPicture)
         }  
-    }, [singlePokeData, score, singlePokemon])
+    }, [singlePokeData, lives, score, singlePokemon])
 
     //set final score
     useEffect(() => {
-        if(timeCount === 0) {
+        if(lives === 0) {
             setFinalScore(score);
         }
-    }, [timeCount]);
+    }, [lives]);
 
     //create quiz result object
     useEffect(() => {
         if(!finalScore) {
             setFinalSendScore(0);
         }
-        if(finalScore || timeCount === 1) {
+        if(finalScore || timeCount === 3 || lives === 0) {
             let date = new Date().toISOString();
             setFinalSendScore(finalScore);
             const obj = {
@@ -99,7 +102,7 @@ export default function QuizTimed() {
             setQuizResults(obj);
         }
         
-    }, [finalScore, timeCount])
+    }, [finalScore, timeCount, lives])
 
     //send quiz result back to server
     useEffect(() => {
@@ -155,22 +158,26 @@ export default function QuizTimed() {
      
     //Handler Functions
     function handleClick(event) {
-        if(event === singlePokemon.id){
+        if(lives > 0 && event === singlePokemon.id){
             setScore((prev)=> prev = prev + 1)
+            setAnswer(true)
             setAnswerResult("Correct!")
+        }
+        else if(lives > 0 && event !== singlePokemon.id){
+            setLives((prev)=> prev = prev - 1)
+            setAnswerResult("Good Try!")
             setAnswer(true)
         }
-        if(event !== singlePokemon.id){
-            setWrongCount((prev) => prev += 1)
-            setAnswerResult("Good Try")
-            setAnswer(true)
-        }        
+        
     }
     
     //if timer is up
     function handleTimeIsUp() {
+        if (lives > 0) {
+            setLives((prev) => prev -1);
             setTimeCount((prev) => prev + 1)
-           
+            setAnswerResult("Too slow")
+        }
     }
 
     
@@ -183,7 +190,7 @@ export default function QuizTimed() {
 
         
         <h2 className='quiztext'>Current Score: {score}</h2>
-        
+        <h3 className='quiztext'>HP: {lives}</h3>
 
 
         
@@ -193,35 +200,35 @@ export default function QuizTimed() {
             <div className='quiztext'>
                 <img src={imageUrl} alt=""/>
                 <br />
-                {singlePokemon.nameJapaneseHrkt}
+                {singlePokemon.nameEnglish}
                 <br />
-                {singlePokemon.nameJapaneseRomaji}
             </div> 
             : <div>Loading</div>}
 
           
             {singlePokeData?
             <>
-                <button className='english' id='button1' key="first" onClick={() => handleClick(names[0].id)}>{names[0].nameEnglish}</button>
-                <button className='english' id='button2' key="second" onClick={() => handleClick(names[1].id)}>{names[1].nameEnglish}</button>
-                <button className='english' id='button3' key="third" onClick={() => handleClick(names[2].id)}>{names[2].nameEnglish}</button>
-                <button className='english' id='button4' key="fourth" onClick={() => handleClick(names[3].id)}>{names[3].nameEnglish}</button>
+                <button className='language' id='button1' key="first" onClick={() => handleClick(names[0].id)}>{names[0].nameKorean}</button>
+                <button className='language' id='button2' key="second" onClick={() => handleClick(names[1].id)}>{names[1].nameKorean}</button>
+                <button className='language' id='button3' key="third" onClick={() => handleClick(names[2].id)}>{names[2].nameKorean}</button>
+                <button className='language' id='button4' key="fourth" onClick={() => handleClick(names[3].id)}>{names[3].nameKorean}</button>
                 <br/>
                 
+                <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
-
+            
 
             : <div>Loading</div>}
-        </div> 
-        <Timer time={time} onTimeUp={handleTimeIsUp} key="timerforthis" />
-        <br/>
             <br/>
-            <Link to="/home"><button>Give Up?</button></Link>
+            <br/>
+          
+        </div> 
+        <Link to="/home"><button>Give Up?</button></Link>
             {answer ?
             <>
             <div className='quiztext'>{answerResult}</div>
             </> 
-            : <div className='quiztext'></div>}
+            : <div></div>}
         </>
         : <Gameover score={finalSendScore} quizResultsSent={setQuizResultsSent}/>}
 
