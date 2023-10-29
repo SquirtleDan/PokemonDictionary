@@ -43,6 +43,8 @@ return (
     <Link to='/quizE-Chinese' ><button className='homelink'>English to Chinese</button></Link>
     <Link to='/quizE-Fre' ><button className='homelink'>English to French</button></Link>
     <Link to='/quizE-Germ' ><button className='homelink'>English to German</button></Link>
+    <Link to='/quizE-Span' ><button className='homelink'>English to Spanish</button></Link>
+    <Link to='/quizE-Ital' ><button className='homelink'>English to Italian</button></Link>
     <button className='homelink' onClick={handleClick}>Back to Home</button>
     </div> :
     
