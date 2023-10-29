@@ -23,7 +23,8 @@ export default function Quiz() {
     const [time, setTime] = useState(10);
     const [timeCount, setTimeCount] = useState(0);
     const [finalSendScore, setFinalSendScore] = useState(null);
-   
+    const [answer, setAnswer] = useState(false)
+    const [answerResult, setAnswerResult] = useState("");
 
     //Use Effects
     const playerId = useContext(playerInfo)
@@ -37,6 +38,7 @@ export default function Quiz() {
         setScore(null)
         setQuizResults(null)
         setFinalScore(null);
+        setAnswer(false);
     }, [quizResultsSent]);
 
     //Check check if data is fetched
@@ -160,9 +162,13 @@ export default function Quiz() {
     function handleClick(event) {
         if(lives > 0 && event === singlePokemon.id){
             setScore((prev)=> prev = prev + 1)
+            setAnswer(true)
+            setAnswerResult("Correct!")
         }
         else if(lives > 0 && event !== singlePokemon.id){
             setLives((prev)=> prev = prev - 1)
+            setAnswerResult("Good Try!")
+            setAnswer(true)
         }
         
     }
@@ -172,6 +178,7 @@ export default function Quiz() {
         if (lives > 0) {
             setLives((prev) => prev -1);
             setTimeCount((prev) => prev + 1)
+            setAnswerResult("Too slow")
         }
     }
 
@@ -209,14 +216,19 @@ export default function Quiz() {
                 <button className='english' id='button3' key="third" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
                 <button className='english' id='button4' key="fourth" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
                 <br/>
-                <Link to="/home"><button>Give Up?</button></Link>
                 <Timer time={time} onTimeUp={handleTimeIsUp} key={singlePokemon?.id} />
             </> 
-
-
             : <div>Loading</div>}
+            
         </div> 
-        
+        <br/>
+            <br/>
+            <Link to="/home"><button>Give Up?</button></Link>
+            {answer ?
+            <>
+            <div className='quiztext'>{answerResult}</div>
+            </> 
+            : <div></div>}
         </>
         : <Gameover score={finalSendScore} quizResultsSent={setQuizResultsSent}/>}
 
