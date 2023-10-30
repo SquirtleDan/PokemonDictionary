@@ -37,7 +37,7 @@ module.exports = {
   },
 
   // Save score data
-  saveScore (accountId, gameModeId, value, sessionDateTime) {
+  saveScore: (accountId, gameModeId, value, sessionDateTime) => {
     return knex("score").insert({
       account_id: accountId,
       game_mode_id: gameModeId,
