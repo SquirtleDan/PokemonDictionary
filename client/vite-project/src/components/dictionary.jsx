@@ -7,6 +7,7 @@ function Dictionary() {
   const [pokemons, setPokemons] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [searchBarVisible, setSearchBarVisible] = useState(true);
   const inputRef = useRef(null);  
 
   
@@ -27,14 +28,17 @@ function Dictionary() {
   const handleClearSearch = () => {
     setSearchWord('');
     setSelectedPokemon(null);
+    setSearchBarVisible(true); //changed here
   }
 
   const SearchBar = ({ value, onChange, onClear }) => {
     return (
+      searchBarVisible && ( //changed here
       <div className="dictionary-search-bar-container">
         <input className="dictionary-search-bar" ref={inputRef} type="text" value={value} placeholder="Search Pokemon" onChange={(event) => onChange(event.target.value)} />
         <button className="dictionary-search-clear" onClick={onClear}>Clear</button>
       </div>
+      )
     );
   };
 
@@ -47,7 +51,10 @@ function Dictionary() {
             key={pokemon.id}
             src={pokemon.frontPicture}
             alt={pokemon.nameJapaneseRomaji}
-            onClick={() => onClick(pokemon)}
+            onClick={() => {
+            onClick(pokemon);
+            setSearchBarVisible(false);
+            }}
           />
         ))}
       </div>
