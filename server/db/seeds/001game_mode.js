@@ -12,7 +12,7 @@ exports.seed = async function(knex) {
     }
   ]);
 };
-Collapse
+
 
 
 
