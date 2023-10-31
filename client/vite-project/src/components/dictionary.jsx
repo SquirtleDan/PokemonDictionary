@@ -7,7 +7,8 @@ function Dictionary() {
   const [pokemons, setPokemons] = useState([]);
   const [searchWord, setSearchWord] = useState('');
   const [selectedPokemon, setSelectedPokemon] = useState(null);
-  const [searchBarVisible, setSearchBarVisible] = useState(true);
+  const [searchBarVisible, setSearchBarVisible] = useState(true); // added
+  const [homeLinkVisible, setHomeLinkVisible] = useState(true); //added
   const inputRef = useRef(null);  
 
   
@@ -28,7 +29,8 @@ function Dictionary() {
   const handleClearSearch = () => {
     setSearchWord('');
     setSelectedPokemon(null);
-    setSearchBarVisible(true); //changed here
+    setSearchBarVisible(true); // added
+    setHomeLinkVisible(true); //added
   }
 
   const SearchBar = ({ value, onChange, onClear }) => {
@@ -53,7 +55,8 @@ function Dictionary() {
             alt={pokemon.nameJapaneseRomaji}
             onClick={() => {
             onClick(pokemon);
-            setSearchBarVisible(false);
+            setSearchBarVisible(false); //added
+            setHomeLinkVisible(false); //added
             }}
           />
         ))}
@@ -63,6 +66,14 @@ function Dictionary() {
 
   const PokemonDetail = ({ pokemon, back }) => {
     return (
+      <>
+      <div>
+      <button className='dictionary-home-button' onClick={() => { 
+        back(); 
+        setSearchBarVisible(true);
+        setHomeLinkVisible(true);
+        }}>Back</button>
+      </div>
       <div>
         <img className='single-poke-pic' src={pokemon.frontPicture} alt={pokemon.nameJapaneseRomaji} />
         <p className='pokePara'>No.{String(pokemon.id).padStart(4, '0')}</p>
@@ -75,17 +86,17 @@ function Dictionary() {
       <p className='pokePara'>German Name: {pokemon.nameGerman}</p>
       <p className='pokePara'>Spanish Name: {pokemon.nameSpanish}</p>
       <p className='pokePara'>Italian Name: {pokemon.nameItalian}</p>
-        <button className='link' onClick={back}>Back</button>
       </div>
+      </>
     );
   };
 //Accessibility is not perfect  if we have time Fix this
 return (
   <div className="dictionary-container">
-    <Link to="/home"><button className='dictionary-home-button'>Home</button></Link>
+    {homeLinkVisible && <Link to="/home"><button className='dictionary-home-button'>Home</button></Link>}
     <SearchBar value={searchWord} onChange={setSearchWord} onClear={handleClearSearch} />
     {selectedPokemon ? (
-      <PokemonDetail pokemon={selectedPokemon} back={() => setSelectedPokemon(null)} />
+     <PokemonDetail pokemon={selectedPokemon} back={() => setSelectedPokemon(null)} />
     ) : (
       <PokemonList pokemons={pokemons.filter(pokemon => 
         String(pokemon.id).includes(searchWord) ||
