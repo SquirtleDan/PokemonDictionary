@@ -115,7 +115,7 @@ export default function QuizTimed() {
    
     //helper function
     const getName = async function () {
-        const pokemonData = await axios.get("https://pokedictionarygamedev.onrender.com/GetAllPokemon");
+        const pokemonData = await axios.get("https://pokedictionarygamedev.onrender.com/GetAllPokemon?amount=500");
         setData(pokemonData.data);
     }
 
