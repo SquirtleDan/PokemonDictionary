@@ -38,7 +38,6 @@ module.exports = {
 
   // Save score data
   saveScore: (accountId, gameModeId, value, sessionDateTime) => {
-    console.log("entrou")
     return knex("score").insert({
       account_id: accountId,
       game_mode_id: gameModeId,
