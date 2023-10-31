@@ -7,9 +7,11 @@ function Dictionary() {
   const [pokemons, setPokemons] = useState([]);
   const [searchWord, setSearchWord] = useState("");
   const [selectedPokemon, setSelectedPokemon] = useState(null);
+  const [selectedGeneration, setSelectedGeneration] =
+    useState("All Generation");
   const [searchBarVisible, setSearchBarVisible] = useState(true); // added
   const [homeLinkVisible, setHomeLinkVisible] = useState(true); //added
-  const inputRef = useRef(null);
+  const inputRef = useRef("");
 
   useEffect(() => {
     const getName = async () => {
@@ -54,22 +56,27 @@ function Dictionary() {
     );
   };
 
-  const PokemonList = ({ pokemons, onClick }) => {
+  const PokemonList = ({ pokemons, onClick, generation }) => {
     return (
       <div>
-        {pokemons.map((pokemon) => (
-          <img
-            className="dictionary-poke-pic"
-            key={pokemon.id}
-            src={pokemon.frontPicture}
-            alt={pokemon.nameJapaneseRomaji}
-            onClick={() => {
-              onClick(pokemon);
-              setSearchBarVisible(false); //added
-              setHomeLinkVisible(false); //added
-            }}
-          />
-        ))}
+        {pokemons
+          .filter((pokemon) => {
+            if (generation === "All Generation") return true;
+            return pokemon.generation === generation;
+          })
+          .map((pokemon) => (
+            <img
+              className="dictionary-poke-pic"
+              key={pokemon.id}
+              src={pokemon.frontPicture}
+              alt={pokemon.nameJapaneseRomaji}
+              onClick={() => {
+                onClick(pokemon);
+                setSearchBarVisible(false); //added
+                setHomeLinkVisible(false); //added
+              }}
+            />
+          ))}
       </div>
     );
   };
@@ -117,9 +124,30 @@ function Dictionary() {
   return (
     <div className="dictionary-container">
       {homeLinkVisible && (
-        <Link to="/home">
-          <button className="dictionary-home-button">Home</button>
-        </Link>
+        <>
+          <div className="buttonContainer">
+            <Link to="/home">
+              <button className="dictionary-home-button">Home</button>
+            </Link>
+            <select
+              className="dictionary-home-button selectField"
+              name="gen"
+              id="gen"
+              onChange={(e) => {
+                setSelectedGeneration(e.target.value);
+              }}
+            >
+              <option value={"All Generation"}> All Generation</option>
+              <option value="generation-i">Gen I</option>
+              <option value="generation-ii">Gen II</option>
+              <option value="generation-iii">Gen III</option>
+              <option value="generation-iv">Gen IV</option>
+              <option value="generation-v">Gen V</option>
+              <option value="generation-vi">Gen VI</option>
+              Select
+            </select>
+          </div>
+        </>
       )}
       <SearchBar
         value={searchWord}
@@ -133,6 +161,7 @@ function Dictionary() {
         />
       ) : (
         <PokemonList
+          generation={selectedGeneration}
           pokemons={pokemons.filter(
             (pokemon) =>
               String(pokemon.id).includes(searchWord) ||
