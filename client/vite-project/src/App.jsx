@@ -10,17 +10,17 @@ import Graph from './components/Graph';
 import Leaderboard from './components/Leaderboard';
 import Timer from './components/Timer';
 import QuizTimed from './components/QuizTimed';
-import QuizEtoJ from './components/QuizEtoJ';
-import QuizEtoKorean from './components/QuizEtoKorean';
-import QuizEtoChinese from './components/QuizEtoChinese';
-import QuizEtoFrench from './components/QuizEtoFrench';
-import QuizEtoGerman from './components/QuizEtoGerman';
-import QuizEtoSpanish from './components/QuiztoSpanish';
-import QuizEtoItalian from './components/QuiztoItallian';
+import React, { useState} from 'react'
 
 
 function App() {
+  const [languageSelection, setLanguageSelection] = useState(["quiz", "answers"]);
  
+  function callback(data) {
+    console.log(languageSelection)
+    setLanguageSelection(data)
+    
+  }
 
   return (
 
@@ -29,16 +29,10 @@ function App() {
   
       <Route path='/' element={ <LoginForm /> } />
       <Route path="/registration" element={ <RegistrationForm/> } />
-      <Route path="home" element={ <Homepage/> }/>
+      <Route path="home" element={ <Homepage setLanguageCallback={callback}/> }/>
       <Route path="/dictionary" element= { <Dictionary /> } />
-      <Route path="/quizJ-E" element= {<Quiz/>}  />
-      <Route path="/quizE-J" element= {<QuizEtoJ/>}  />
-      <Route path="/quizE-Kor" element= {<QuizEtoKorean/>}  />
-      <Route path="/quizE-Chinese" element= {<QuizEtoChinese/>}  />
-      <Route path="/quizE-Fre" element= {<QuizEtoFrench/>}  />
-      <Route path="/quizE-Germ" element= {<QuizEtoGerman/>}  />
-      <Route path="/quizE-Span" element= {<QuizEtoSpanish/>}  />
-      <Route path="/quizE-Ital" element= {<QuizEtoItalian/>}  />
+      <Route path="/quizJ-E" element= {<Quiz isChallengeMode={false} languageQuiz={languageSelection[0]} languageAnswers={languageSelection[1]}/>}/>
+      
       <Route path="/gameover" element= {<Gameover />}/>
       <Route path='/graph' element={ <Graph/>}/>
       <Route path='/leaderboard' element={ <Leaderboard/>}/>

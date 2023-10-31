@@ -1,10 +1,17 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Homepage.css'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Avatar from './Avatar';
+import React from 'react'
 
-export default function Homepage() {
+export default function Homepage(props) {
+  const { setLanguageCallback } = props;
+
   const [hamburger, setHamburger] = useState(false);
+  const answerRef = useRef(null);
+  const quizRef = useRef(null);
+
+  const navigate = useNavigate();
 
   function handleClick() {
     setHamburger((prev) => !prev)
@@ -43,14 +50,35 @@ return (
     </div>
     :
     <div className='homedesign'>
-    <Link to='/quizJ-E' ><button className='homelink'>Japanese to English</button></Link>
-    <Link to='/quizE-Kor' ><button className='homelink'>English to Korean</button></Link>
-    <Link to='/quizE-J' ><button className='homelink'>English to Japanese</button></Link>
-    <Link to='/quizE-Chinese' ><button className='homelink'>English to Chinese</button></Link>
-    <Link to='/quizE-Fre' ><button className='homelink'>English to French</button></Link>
-    <Link to='/quizE-Germ' ><button className='homelink'>English to German</button></Link>
-    <Link to='/quizE-Span' ><button className='homelink'>English to Spanish</button></Link>
-    <Link to='/quizE-Ital' ><button className='homelink'>English to Italian</button></Link>
+       <label>
+      Select quiz language:
+      <select name="selectedQuiz" ref={quizRef}>
+        <option value="nameJapaneseHrkt">Japanese</option>
+        <option value="nameEnglish">English</option>
+        <option value="nameChineseTraditional">Chinese</option>
+        <option value="nameFrench">French</option>
+        <option value="nameGerman">German</option>
+        <option value="nameSpanish">Spanish</option>
+        <option value="nameItalian">Italian</option>
+      </select>
+    </label>
+    <label>
+      Select answers language:
+      <select name="selectedAnswers" ref={answerRef}>
+        <option value="nameJapaneseHrkt">Japanese</option>
+        <option value="nameEnglish">English</option>
+        <option value="nameChineseTraditional">Chinese</option>
+        <option value="nameFrench">French</option>
+        <option value="nameGerman">German</option>
+        <option value="nameSpanish">Spanish</option>
+        <option value="nameItalian">Italian</option>
+      </select>
+    </label>
+    <button className='homelink' onClick={() => {
+      console.log(setLanguageCallback)
+      setLanguageCallback([quizRef.current.value, answerRef.current.value])
+     // navigate('/quizJ-E');
+      }}>Start</button>
     <button className='homelinkback' onClick={handleClick}>Close Menu</button>
     </div>
     }
