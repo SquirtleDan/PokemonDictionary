@@ -19,7 +19,7 @@ export default function QuizTimed() {
     const [finalScore, setFinalScore] = useState(null);
     const [quizResults, setQuizResults] = useState(null);
     const [quizResultsSent, setQuizResultsSent] = useState(false);
-    const [time, setTime] = useState(120);
+    const [time, setTime] = useState(10);
     const [wrongCount, setWrongCount] = useState(0)
     const [timeCount, setTimeCount] = useState(0);
     const [finalSendScore, setFinalSendScore] = useState(null);
@@ -87,11 +87,11 @@ export default function QuizTimed() {
     useEffect(() => {
         if(finalScore || timeCount === 1) {
             let date = new Date().toISOString();
-            setFinalSendScore(finalScore);
+            setFinalSendScore(score);
             const obj = {
                 accountId: playerId,
                 gameModeId: 1,
-                value: finalScore,
+                value: score,
                 sessionDateTime: date
             }
             setQuizResults(obj);
