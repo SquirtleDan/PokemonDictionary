@@ -11,7 +11,7 @@ module.exports = {
         // If query is invalid throw error
         if (isNaN(specifiedAmount)) throw new Error("Invalid query");
         amount = specifiedAmount;
-      } else amount = 400;
+      } else amount = 721;
       // assign 100 pokemon if no amount is specified
 
       // Fetch pokemon data
