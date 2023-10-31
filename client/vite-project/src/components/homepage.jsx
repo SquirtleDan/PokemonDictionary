@@ -42,17 +42,36 @@ return (
     <img className='home-pic' src="https://i.ibb.co/ZV0zg0k/for-upload.png" alt="pokedictionary" />
     </div>
     :
-    <div className='homedesign'>
-    <Link to='/quizJ-E' ><button className='homelink'>Japanese to English</button></Link>
-    <Link to='/quizE-Kor' ><button className='homelink'>English to Korean</button></Link>
-    <Link to='/quizE-J' ><button className='homelink'>English to Japanese</button></Link>
-    <Link to='/quizE-Chinese' ><button className='homelink'>English to Chinese</button></Link>
-    <Link to='/quizE-Fre' ><button className='homelink'>English to French</button></Link>
-    <Link to='/quizE-Germ' ><button className='homelink'>English to German</button></Link>
-    <Link to='/quizE-Span' ><button className='homelink'>English to Spanish</button></Link>
-    <Link to='/quizE-Ital' ><button className='homelink'>English to Italian</button></Link>
-    <button className='homelinkback' onClick={handleClick}>Close Menu</button>
-    </div>
+<div className='homedesign'>
+  <ul className='menu-list'>
+    <li>
+      <Link to='/quizJ-E'>Japanese to English</Link>
+    </li>
+    <li>
+      <Link to='/quizE-Kor'>English to Korean</Link>
+    </li>
+    <li>
+      <Link to='/quizE-J'>English to Japanese</Link>
+    </li>
+    <li>
+      <Link to='/quizE-Chinese'>English to Chinese</Link>
+    </li>
+    <li>
+      <Link to='/quizE-Fre'>English to French</Link>
+    </li>
+    <li>
+      <Link to='/quizE-Germ'>English to German</Link>
+    </li>
+    <li>
+      <Link to='/quizE-Span'>English to Spanish</Link>
+    </li>
+    <li>
+      <Link to='/quizE-Ital'>English to Italian</Link>
+    </li>
+  </ul>
+  <button className='homelinkback' onClick={handleClick}>Close Menu</button>
+</div>
+
     }
 
 

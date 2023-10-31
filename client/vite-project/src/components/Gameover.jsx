@@ -20,11 +20,6 @@ export default function Gameover(props) {
         <div className="gameover">
           Game Over
           <br />
-          <img
-            className="gameover-pic"
-            src="https://i.ibb.co/L514Ttn/gameover.jpg"
-            alt="GameOver"
-          />
         </div>
       </div>
       <br />
@@ -32,12 +27,6 @@ export default function Gameover(props) {
       <div className="gameover">
         Final Score: {score}
         <br />
-        <br />
-        <img
-          className="gameover-pic"
-          src="https://i.ibb.co/7JgMBZC/xpup.jpg"
-          alt="FinalScore"
-        />
       </div>
       <br />
       <br />

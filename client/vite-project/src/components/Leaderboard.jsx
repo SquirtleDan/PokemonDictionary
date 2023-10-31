@@ -27,6 +27,7 @@ export default function Leaderboard() {
             1: createRanking(response.data[0]),
             2: createRanking(response.data[1])
           };
+          console.log(rankingsData)
           setRankings(rankingsData);
         } catch (error) {
           console.error('Failed to get ranking data:', error);

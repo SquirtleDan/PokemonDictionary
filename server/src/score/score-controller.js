@@ -20,6 +20,7 @@ module.exports = {
   },
   //save scores
   async saveScore(req, res) {
+    console.log("entrou")
     try {
       await scoreModel.saveScore(
         req.body.accountId,

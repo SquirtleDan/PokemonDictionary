@@ -30,3 +30,12 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  li {
+    list-style-type: none;
+    text-decoration: none;
+    transition: transform 0.3s; 
+  }
+  li:hover {
+    transform: translateY(-4px); 
+}
