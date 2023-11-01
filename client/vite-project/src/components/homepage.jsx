@@ -26,7 +26,6 @@ export default function Homepage(props) {
   return (
     <>
       <div className="homedesign">
-        <Avatar></Avatar>
         <Link to="/dictionary">
           <button className="homelink">Dictionary</button>
         </Link>
