@@ -39,7 +39,7 @@ function App() {
       <Route path='/graph' element={ <Graph/>}/>
       <Route path='/leaderboard' element={ <Leaderboard/>}/>
       <Route path='/timer' element= { <Timer/>}/>
-      <Route path="/quiztime" element= {<QuizTimed/>}  />
+      <Route path="/quiztime" element= {<QuizTimed gameMode={gameMode} languageQuiz={languageSelection[0]} languageAnswers={languageSelection[1]}/>}  />
       </Routes>
   </Router>
   );
