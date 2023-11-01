@@ -69,7 +69,12 @@ export default function Quiz(props) {
             let newData = [];
             setSinglePokeData(true);
             newData= data.filter(element => element.id !== singlePokemon.id);
-            setData(newData);
+            if(newData.length > 0) {
+                setData(newData);
+              }else {
+                setFinalScore(score); //End the game if no more pokemon to show
+              }
+            
         }
     }, [singlePokemon]);
 

@@ -18,7 +18,7 @@ export default function QuizTimed() {
   const [finalScore, setFinalScore] = useState(null);
   const [quizResults, setQuizResults] = useState(null);
   const [quizResultsSent, setQuizResultsSent] = useState(false);
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(100);
   const [wrongCount, setWrongCount] = useState(0);
   const [timeCount, setTimeCount] = useState(0);
   const [finalSendScore, setFinalSendScore] = useState(null);
@@ -54,7 +54,12 @@ export default function QuizTimed() {
       let newData = [];
       setSinglePokeData(true);
       newData = data.filter((element) => element.id !== singlePokemon.id);
-      setData(newData);
+      if(newData.length > 0) {
+        setData(newData);
+      }else {
+        setTimeCount(1) //End the game if no more pokemon to show
+      }
+      
     }
   }, [singlePokemon]);
   //get image
