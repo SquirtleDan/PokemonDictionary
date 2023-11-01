@@ -1,22 +1,22 @@
-.homelink{
-    background-color: #3b4cca;
-    color: #ffffff;
-    margin: 2%;
-   
-    height: fit-content;
-    width: fit-content;
-  }
+.homelink {
+  background-color: #3b4cca;
+  color: #ffffff;
+  margin: 2%;
+  margin-bottom: 5%;
+  height: 100%;
+  width: 100%;
+}
 
-  .homelinkback{
-    background-color: #3b4cca;
-    color: #FFDE00;
-    margin: 2%;
-   
-    height: fit-content;
-    width: fit-content;
-  }
+.homelinkback {
+  background-color: #3b4cca;
+  color: #ffde00;
+  margin: 2%;
 
-  /* .homelink img{
+  height: fit-content;
+  width: fit-content;
+}
+
+/* .homelink img{
     
   } */
 .home-pic {
@@ -24,14 +24,19 @@
   width: 150px;
   object-fit: contain;
 }
-  .homedesign{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-  }
 
-  #gameButtonContainer {
+.homedesign {
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (min-width: 900px) {
+  #root {
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: start;
   }
+}

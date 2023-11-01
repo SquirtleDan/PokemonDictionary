@@ -8,11 +8,16 @@ export default function Homepage(props) {
   const { setLanguageCallback, setGameModeCallback } = props;
 
   const [hamburger, setHamburger] = useState(false);
+  const [playIsClicked, setPlayIsClicked] = useState(false);
   const answerRef = useRef(null);
   const quizRef = useRef(null);
   const modeRef = useRef(null);
 
   const navigate = useNavigate();
+
+  function handlePlayClick() {
+    setPlayIsClicked(!playIsClicked);
+  }
 
   function handleClick() {
     setHamburger((prev) => !prev);
@@ -21,10 +26,7 @@ export default function Homepage(props) {
   return (
     <>
       <div className="homedesign">
-        <br />
-
         <Avatar></Avatar>
-        <br />
         <Link to="/dictionary">
           <button className="homelink">Dictionary</button>
         </Link>
@@ -34,16 +36,25 @@ export default function Homepage(props) {
           alt="pokedictionary"
         />
       </div>
-      <br />
-      <br />
-
-      <div className="homedesign">
-      <img
+      {!playIsClicked ? (
+        <div className="homedesign">
+          <button className="homelink" onClick={handlePlayClick}>
+            Play
+          </button>
+          <img
+            src="https://i.ibb.co/jWSnj91/pikachu.png"
+            alt="pikachu"
+            className="home-pic"
+          />
+        </div>
+      ) : (
+        <div className="homedesign">
+          <img
             className="home-pic"
             src="https://i.ibb.co/ZV0zg0k/for-upload.png"
             alt="pokedictionary"
           />
-      <label>
+          <label>
             Game Mode:
             <select name="selectedMode" ref={modeRef}>
               <option value="normal">Normal</option>
@@ -76,55 +87,45 @@ export default function Homepage(props) {
             </select>
           </label>
           <div className="homedesign" id="gameButtonContainer">
-          <button
-            className="homelink"
-            onClick={ async () => {
-              await setLanguageCallback([
-                quizRef.current.value,
-                answerRef.current.value,
-              ]);
-              await setGameModeCallback(modeRef.current.value)
-              navigate("/quizJ-E");
-            }}
-          >
-            Timed Quiz
-          </button>
-          <button
-            className="homelink"
-            onClick={ async () => {
-              await setLanguageCallback([
-                quizRef.current.value,
-                answerRef.current.value,
-              ]);
-              await setGameModeCallback(modeRef.current.value)
-              navigate("/quizJ-E");
-            }}
-          >
-          Language Quiz
-          </button>
+            <button
+              className="homelink"
+              onClick={async () => {
+                await setLanguageCallback([
+                  quizRef.current.value,
+                  answerRef.current.value,
+                ]);
+                await setGameModeCallback(modeRef.current.value);
+                navigate("/quizJ-E");
+              }}
+            >
+              Timed Quiz
+            </button>
+            <button
+              className="homelink"
+              onClick={async () => {
+                await setLanguageCallback([
+                  quizRef.current.value,
+                  answerRef.current.value,
+                ]);
+                await setGameModeCallback(modeRef.current.value);
+                navigate("/quizJ-E");
+              }}
+            >
+              Language Quiz
+            </button>
+            <button className="homelink" onClick={handlePlayClick}>
+              Cancel
+            </button>
           </div>
-         
-         
-        
-      </div>
-      <br />
-      <br />
-
-      <br />
-      <br />
-      <Link to="/graph">
-        <button className="homelink">Tracker</button>
-      </Link>
-      <br />
-      <br />
-
+        </div>
+      )}
       <div className="homedesign">
         <Link to="/leaderboard">
           <button className="homelink">Leaderboard</button>
         </Link>
         <img
           className="home-pic"
-          src="https://i.ibb.co/72wCKVs/highscoreupdated.png"
+          src="https://i.ibb.co/W22vpm7/pokemon.png"
           alt="pokedictionary"
         />
       </div>
