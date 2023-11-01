@@ -137,7 +137,7 @@ function Dictionary() {
                 setSelectedGeneration(e.target.value);
               }}
             >
-              <option value={"All Generation"}> All Generation</option>
+              <option value={"All Generation"}> All Generations</option>
               <option value="generation-i">Gen I</option>
               <option value="generation-ii">Gen II</option>
               <option value="generation-iii">Gen III</option>
