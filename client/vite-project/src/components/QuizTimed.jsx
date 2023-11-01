@@ -6,7 +6,9 @@ import Timer from "./Timer";
 import { playerInfo, username } from "./LoginForm";
 import "./QuizTimed.css";
 ("use strict");
-export default function QuizTimed() {
+export default function QuizTimed(props) {
+  const { gameMode, languageAnswers, languageQuiz} = props;
+
   //State Variables
   const [data, setData] = useState(null);
   const [dataFetched, setDataFetched] = useState(false);
@@ -144,6 +146,17 @@ export default function QuizTimed() {
   function handleTimeIsUp() {
     setTimeCount((prev) => prev + 1);
   }
+
+  //img style for shadow mode
+  const shadowModeStyle = {
+    filter: "brightness(0%)"
+  };
+
+  const shadowContainerStyle = {
+    backgroundColor: "white",
+    margin: "10px"
+  }
+  
   return (
     <>
       {!quizResultsSent ? (
@@ -152,13 +165,14 @@ export default function QuizTimed() {
           <h2 className="quiztext">Current Score: {score}</h2>
           <div className="question-card">
             {singlePokeData ? (
-              <div className="quiztext">
-                <img src={imageUrl} alt="" />
-                <br />
-                {singlePokemon.nameJapaneseHrkt}
-                <br />
-                {singlePokemon.nameJapaneseRomaji}
-              </div>
+             <div className='quiztext'>
+             {gameMode == "normal" ? <img src={imageUrl} alt=""/> : <></>}
+             {gameMode == "shadow" ? <div style={shadowContainerStyle}> <img src={imageUrl} alt="" style={shadowModeStyle}/> </div>: <></>}
+             <br />
+             {singlePokemon[languageQuiz]}
+             <br />
+             {languageQuiz === "nameJapaneseHrkt" ? <>{singlePokemon.nameJapaneseRomaji}</> : <></>}
+         </div> 
             ) : (
               <div>Loading</div>
             )}
@@ -172,7 +186,7 @@ export default function QuizTimed() {
                   key="first"
                   onClick={() => handleClick(names[0].id)}
                 >
-                  {names[0].nameEnglish}
+                  {names[0][languageAnswers]}
                 </button>
                 <button
                   className="english"
@@ -180,7 +194,7 @@ export default function QuizTimed() {
                   key="second"
                   onClick={() => handleClick(names[1].id)}
                 >
-                  {names[1].nameEnglish}
+                  {names[1][languageAnswers]}
                 </button>
                 <button
                   className="english"
@@ -188,7 +202,7 @@ export default function QuizTimed() {
                   key="third"
                   onClick={() => handleClick(names[2].id)}
                 >
-                  {names[2].nameEnglish}
+                  {names[2][languageAnswers]}
                 </button>
                 <button
                   className="english"
@@ -196,7 +210,7 @@ export default function QuizTimed() {
                   key="fourth"
                   onClick={() => handleClick(names[3].id)}
                 >
-                  {names[3].nameEnglish}
+                  {names[3][languageAnswers]}
                 </button>
                 <br />
               </>

@@ -38,14 +38,26 @@ export default function Homepage(props) {
       <br />
 
       <div className="homedesign">
-        <Link to="/quiztime">
-          <button className="homelink">Timed Quiz</button>
+        
+          <button
+            className="homelink"
+            onClick={ async () => {
+              await setLanguageCallback([
+                quizRef.current.value,
+                answerRef.current.value,
+              ]);
+              await setGameModeCallback(modeRef.current.value)
+              navigate("/quizJ-E");
+            }}
+          >
+            Timed Quiz
+          </button>
           <img
             className="home-pic"
             src="https://i.ibb.co/ZV0zg0k/for-upload.png"
             alt="pokedictionary"
           />
-        </Link>
+        
       </div>
       <br />
       <br />
