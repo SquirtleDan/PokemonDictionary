@@ -6,7 +6,6 @@ import Timer from "./Timer";
 import { playerInfo, username } from "./LoginForm";
 import "./QuizTimed.css";
 ("use strict");
-
 export default function QuizTimed() {
   //State Variables
   const [data, setData] = useState(null);
@@ -25,11 +24,9 @@ export default function QuizTimed() {
   const [finalSendScore, setFinalSendScore] = useState(null);
   const [answerResult, setAnswerResult] = useState("");
   const [answer, setAnswer] = useState(false);
-
   //Use Effects
   const playerId = useContext(playerInfo);
   // const playerUsername = useContext(username)
-
   useEffect(() => {
     getName();
     setScore(null);
@@ -37,14 +34,12 @@ export default function QuizTimed() {
     setFinalScore(null);
     setAnswer(false);
   }, [quizResultsSent]);
-
   //Check check if data is fetched
   useEffect(() => {
     if (data) {
       setDataFetched(true);
     }
   }, [data]);
-
   //get random pokemon
   useEffect(() => {
     if (dataFetched) {
@@ -53,7 +48,6 @@ export default function QuizTimed() {
       setNames(randPoke);
     }
   }, [dataFetched, score, wrongCount]);
-
   //get single pokemon
   useEffect(() => {
     if (singlePokemon) {
@@ -63,21 +57,18 @@ export default function QuizTimed() {
       setData(newData);
     }
   }, [singlePokemon]);
-
   //get image
   useEffect(() => {
     if (singlePokeData) {
       setImageUrl(singlePokemon.frontPicture);
     }
   }, [singlePokeData, score, singlePokemon]);
-
   //set final score
   useEffect(() => {
     if (timeCount === 0) {
       setFinalScore(score);
     }
   }, [timeCount]);
-
   //create quiz result object
   useEffect(() => {
     if (finalScore || timeCount === 1) {
@@ -92,7 +83,6 @@ export default function QuizTimed() {
       setQuizResults(obj);
     }
   }, [finalScore, timeCount]);
-
   //send quiz result back to server
   useEffect(() => {
     if (quizResults) {
@@ -100,9 +90,7 @@ export default function QuizTimed() {
       setQuizResultsSent(true);
     }
   }, [quizResults]);
-
   useEffect(() => {}, [quizResultsSent]);
-
   //helper function
   const getName = async function () {
     const pokemonData = await axios.get(
@@ -110,24 +98,20 @@ export default function QuizTimed() {
     );
     setData(pokemonData.data);
   };
-
   //helper function to send data to server
   const sendResults = async () => {
     console.log(quizResults)
     const url = "https://pokedictionarygamedev.onrender.com/score/save";
     const returnedData = await axios.post(url, quizResults);
   };
-
   //Makes random array of 4 pokemon
   function getRandomPokemon() {
     const array = [];
     const dict = {};
     let count = 0;
-
     for (let j = 0; j < data.length; j++) {
       dict[data[j].id] = false;
     }
-
     while (count < 4) {
       let randomIndex = Math.floor(Math.random() * data.length);
       if (!dict[data[randomIndex]]) {
@@ -136,10 +120,8 @@ export default function QuizTimed() {
         count++;
       }
     }
-
     return array;
   }
-
   //Handler Functions
   function handleClick(event) {
     if (event === singlePokemon.id) {
@@ -153,20 +135,16 @@ export default function QuizTimed() {
       setAnswer(true);
     }
   }
-
   //if timer is up
   function handleTimeIsUp() {
     setTimeCount((prev) => prev + 1);
   }
-
   return (
     <>
       {!quizResultsSent ? (
         <>
           <h1 className="quiztext">Quiz</h1>
-
           <h2 className="quiztext">Current Score: {score}</h2>
-
           <div className="question-card">
             {singlePokeData ? (
               <div className="quiztext">
@@ -179,7 +157,6 @@ export default function QuizTimed() {
             ) : (
               <div>Loading</div>
             )}
-
             <br />
             <br />
             {singlePokeData ? (
