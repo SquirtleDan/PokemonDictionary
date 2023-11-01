@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './LoginForm.css'
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Homepage from './homepage';
 import { createContext } from 'react';
@@ -16,12 +16,15 @@ export default function LoginForm() {
     const [correctStatusCode, setCorrectStatusCode] = useState(false);
     const [playerUsername, setPlayerUsername] = useState(null)
 
+    const navigate = useNavigate();
+
      playerInfo = createContext(playerId);
      username = createContext(playerUsername);
 
     useEffect(() => {
         if(statusCode === 200){
           setCorrectStatusCode(true);
+            navigate("/home");
         }       
       
     }, [statusCode])

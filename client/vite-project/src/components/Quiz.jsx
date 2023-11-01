@@ -9,7 +9,7 @@ import { playerInfo, username } from './LoginForm';
 
 export default function Quiz(props) {
     //props
-    const { isChallengeMode, languageAnswers, languageQuiz} = props;
+    const { gameMode, languageAnswers, languageQuiz} = props;
 
 
     //State Variables
@@ -51,8 +51,6 @@ export default function Quiz(props) {
             setDataFetched(true);
             
         }
-       
-        
     }, [data]);
 
     //get random pokemon
@@ -187,6 +185,15 @@ export default function Quiz(props) {
         }
     }
 
+    //img style for shadow mode
+    const shadowModeStyle = {
+        filter: "brightness(0%)"
+      };
+
+      const shadowContainerStyle = {
+        backgroundColor: "white",
+        margin: "10px"
+      }
     
     return (
         <>
@@ -205,7 +212,8 @@ export default function Quiz(props) {
            
             {singlePokeData? 
             <div className='quiztext'>
-                {!isChallengeMode ? <img src={imageUrl} alt=""/> : <></>}
+                {gameMode == "normal" ? <img src={imageUrl} alt=""/> : <></>}
+                {gameMode == "shadow" ? <div style={shadowContainerStyle}> <img src={imageUrl} alt="" style={shadowModeStyle}/> </div>: <></>}
                 <br />
                 {singlePokemon[languageQuiz]}
                 <br />
