@@ -8,23 +8,23 @@ import "./QuizTimed.css"
 'use strict';
 
 export default function QuizTimed() {
-    //State Variables
-    const [data, setData] = useState(null);
-    const [dataFetched, setDataFetched] = useState(false);
-    const [singlePokemon, setSinglePokemon] = useState(null);
-    const [singlePokeData, setSinglePokeData] = useState(false);
-    const [names, setNames] = useState(null);
-    const [score, setScore] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
-    const [finalScore, setFinalScore] = useState(null);
-    const [quizResults, setQuizResults] = useState(null);
-    const [quizResultsSent, setQuizResultsSent] = useState(false);
-    const [time, setTime] = useState(120);
-    const [wrongCount, setWrongCount] = useState(0)
-    const [timeCount, setTimeCount] = useState(0);
-    const [finalSendScore, setFinalSendScore] = useState(null);
-    const [answerResult, setAnswerResult] = useState("");
-    const [answer, setAnswer] = useState(false)
+  //State Variables
+  const [data, setData] = useState(null);
+  const [dataFetched, setDataFetched] = useState(false);
+  const [singlePokemon, setSinglePokemon] = useState(null);
+  const [singlePokeData, setSinglePokeData] = useState(false);
+  const [names, setNames] = useState(null);
+  const [score, setScore] = useState(null);
+  const [imageUrl, setImageUrl] = useState(null);
+  const [finalScore, setFinalScore] = useState(null);
+  const [quizResults, setQuizResults] = useState(null);
+  const [quizResultsSent, setQuizResultsSent] = useState(false);
+  const [time, setTime] = useState(10);
+  const [wrongCount, setWrongCount] = useState(0);
+  const [timeCount, setTimeCount] = useState(0);
+  const [finalSendScore, setFinalSendScore] = useState(null);
+  const [answerResult, setAnswerResult] = useState("");
+  const [answer, setAnswer] = useState(false);
 
     //Use Effects
     const playerId = useContext(playerInfo)
@@ -76,12 +76,20 @@ export default function QuizTimed() {
         }  
     }, [singlePokeData, score, singlePokemon])
 
-    //set final score
-    useEffect(() => {
-        if(timeCount === 0) {
-            setFinalScore(score);
-        }
-    }, [timeCount]);
+  //create quiz result object
+  useEffect(() => {
+    if (finalScore || timeCount === 1) {
+      let date = new Date().toISOString();
+      setFinalSendScore(score);
+      const obj = {
+        accountId: playerId,
+        gameModeId: 1,
+        value: score,
+        sessionDateTime: date,
+      };
+      setQuizResults(obj);
+    }
+  }, [finalScore, timeCount]);
 
     //create quiz result object
     useEffect(() => {
@@ -112,11 +120,21 @@ export default function QuizTimed() {
         
     }, [quizResultsSent])
 
-   
-    //helper function
-    const getName = async function () {
-        const pokemonData = await axios.get("https://pokedictionarygamedev.onrender.com/GetAllPokemon");
-        setData(pokemonData.data);
+  //helper function to send data to server
+  const sendResults = async () => {
+    console.log(quizResults)
+    const url = "https://pokedictionarygamedev.onrender.com/score/save";
+    const returnedData = await axios.post(url, quizResults);
+  };
+
+  //Makes random array of 4 pokemon
+  function getRandomPokemon() {
+    const array = [];
+    const dict = {};
+    let count = 0;
+
+    for (let j = 0; j < data.length; j++) {
+      dict[data[j].id] = false;
     }
 
     //helper function to send data to server
