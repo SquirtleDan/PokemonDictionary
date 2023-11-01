@@ -7,13 +7,17 @@ import Timer from './Timer';
 import { playerInfo, username } from './LoginForm';
 'use strict';
 
-export default function Quiz() {
+export default function Quiz(props) {
+    //props
+    const { gameMode, languageAnswers, languageQuiz} = props;
+
+
     //State Variables
     const [data, setData] = useState(null);
     const [dataFetched, setDataFetched] = useState(false);
     const [singlePokemon, setSinglePokemon] = useState(null);
     const [singlePokeData, setSinglePokeData] = useState(false);
-    const [englishNames, setEnglishNames] = useState(null);
+    const [names, setNames] = useState(null);
     const [score, setScore] = useState(null);
     const [lives, setLives] = useState(3)
     const [imageUrl, setImageUrl] = useState(null);
@@ -47,8 +51,6 @@ export default function Quiz() {
             setDataFetched(true);
             
         }
-       
-        
     }, [data]);
 
     //get random pokemon
@@ -56,7 +58,7 @@ export default function Quiz() {
         if (dataFetched) {
             let randPoke = getRandomPokemon();
             setSinglePokemon(randPoke[Math.floor(Math.random() * randPoke.length)]);
-            setEnglishNames(randPoke)
+            setNames(randPoke)
           }
         
     }, [dataFetched, score, lives]);
@@ -67,7 +69,12 @@ export default function Quiz() {
             let newData = [];
             setSinglePokeData(true);
             newData= data.filter(element => element.id !== singlePokemon.id);
-            setData(newData);
+            if(newData.length > 0) {
+                setData(newData);
+              }else {
+                setFinalScore(score); //End the game if no more pokemon to show
+              }
+            
         }
     }, [singlePokemon]);
 
@@ -117,6 +124,11 @@ export default function Quiz() {
         
     }, [quizResultsSent])
 
+    //Initalize language mode
+    useEffect(() => {
+       // handleLanguage(); 
+    }, []);
+
    
     //helper function
     const getName = async function () {
@@ -154,9 +166,7 @@ export default function Quiz() {
       
         return array
     }
-        
-     
-    //Handler Functions
+
     function handleClick(event) {
         if(lives > 0 && event === singlePokemon.id){
             setScore((prev)=> prev = prev + 1)
@@ -180,6 +190,15 @@ export default function Quiz() {
         }
     }
 
+    //img style for shadow mode
+    const shadowModeStyle = {
+        filter: "brightness(0%)"
+      };
+
+      const shadowContainerStyle = {
+        backgroundColor: "white",
+        margin: "10px"
+      }
     
     return (
         <>
@@ -198,11 +217,12 @@ export default function Quiz() {
            
             {singlePokeData? 
             <div className='quiztext'>
-                <img src={imageUrl} alt=""/>
+                {gameMode == "normal" ? <img src={imageUrl} alt=""/> : <></>}
+                {gameMode == "shadow" ? <div style={shadowContainerStyle}> <img src={imageUrl} alt="" style={shadowModeStyle}/> </div>: <></>}
                 <br />
-                {singlePokemon.nameJapaneseHrkt}
+                {singlePokemon[languageQuiz]}
                 <br />
-                {singlePokemon.nameJapaneseRomaji}
+                {languageQuiz === "nameJapaneseHrkt" ? <>{singlePokemon.nameJapaneseRomaji}</> : <></>}
             </div> 
             : <div>Loading</div>}
             <br/>
@@ -210,10 +230,10 @@ export default function Quiz() {
           
             {singlePokeData?
             <>
-                <button className='language' id='button1' key="first" onClick={() => handleClick(englishNames[0].id)}>{englishNames[0].nameEnglish}</button>
-                <button className='language' id='button2' key="second" onClick={() => handleClick(englishNames[1].id)}>{englishNames[1].nameEnglish}</button>
-                <button className='language' id='button3' key="third" onClick={() => handleClick(englishNames[2].id)}>{englishNames[2].nameEnglish}</button>
-                <button className='language' id='button4' key="fourth" onClick={() => handleClick(englishNames[3].id)}>{englishNames[3].nameEnglish}</button>
+                <button className='language' id='button1' key="first" onClick={() => handleClick(names[0].id)}>{names[0][languageAnswers]}</button>
+                <button className='language' id='button2' key="second" onClick={() => handleClick(names[1].id)}>{names[1][languageAnswers]}</button>
+                <button className='language' id='button3' key="third" onClick={() => handleClick(names[2].id)}>{names[2][languageAnswers]}</button>
+                <button className='language' id='button4' key="fourth" onClick={() => handleClick(names[3].id)}>{names[3][languageAnswers]}</button>
                 <br/>
                 <br/>
                
