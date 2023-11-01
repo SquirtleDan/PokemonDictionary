@@ -38,44 +38,12 @@ export default function Homepage(props) {
       <br />
 
       <div className="homedesign">
-        
-          <button
-            className="homelink"
-            onClick={ async () => {
-              await setLanguageCallback([
-                quizRef.current.value,
-                answerRef.current.value,
-              ]);
-              await setGameModeCallback(modeRef.current.value)
-              navigate("/quizJ-E");
-            }}
-          >
-            Timed Quiz
-          </button>
-          <img
+      <img
             className="home-pic"
             src="https://i.ibb.co/ZV0zg0k/for-upload.png"
             alt="pokedictionary"
           />
-        
-      </div>
-      <br />
-      <br />
-
-      {!hamburger ? (
-        <div className="homedesign">
-          <button className="homelink" onClick={handleClick}>
-            Language Quiz
-          </button>
-          <img
-            className="home-pic"
-            src="https://i.ibb.co/ZV0zg0k/for-upload.png"
-            alt="pokedictionary"
-          />
-        </div>
-      ) : (
-        <div className="homedesign">
-           <label>
+      <label>
             Game Mode:
             <select name="selectedMode" ref={modeRef}>
               <option value="normal">Normal</option>
@@ -107,6 +75,7 @@ export default function Homepage(props) {
               <option value="nameItalian">Italian</option>
             </select>
           </label>
+          <div className="homedesign" id="gameButtonContainer">
           <button
             className="homelink"
             onClick={ async () => {
@@ -118,13 +87,28 @@ export default function Homepage(props) {
               navigate("/quizJ-E");
             }}
           >
-            Start
+            Timed Quiz
           </button>
-          <button className="homelinkback" onClick={handleClick}>
-            Close Menu
+          <button
+            className="homelink"
+            onClick={ async () => {
+              await setLanguageCallback([
+                quizRef.current.value,
+                answerRef.current.value,
+              ]);
+              await setGameModeCallback(modeRef.current.value)
+              navigate("/quizJ-E");
+            }}
+          >
+          Language Quiz
           </button>
-        </div>
-      )}
+          </div>
+         
+         
+        
+      </div>
+      <br />
+      <br />
 
       <br />
       <br />

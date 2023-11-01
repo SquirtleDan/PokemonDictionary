@@ -30,3 +30,8 @@
     align-items: center;
     justify-content: space-between;
   }
+
+  #gameButtonContainer {
+    display: flex;
+    flex-direction: row;
+  }
